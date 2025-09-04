@@ -1,16 +1,16 @@
 //  Diffusion Client Library for iOS, tvOS and OS X / macOS
 //
-//  Copyright (c) 2018, 2020 Push Technology Ltd., All Rights Reserved.
+//  Copyright (c) 2018 - 2023 DiffusionData Ltd., All Rights Reserved.
 //
-//  Use is subject to license terms.
+//  Use is subject to licence terms.
 //
 //  NOTICE: All information contained herein is, and remains the
-//  property of Push Technology. The intellectual and technical
-//  concepts contained herein are proprietary to Push Technology and
+//  property of DiffusionData. The intellectual and technical
+//  concepts contained herein are proprietary to DiffusionData and
 //  may be covered by U.S. and Foreign Patents, patents in process, and
 //  are protected by trade secret or copyright law.
 
-@import Foundation;
+#import <Foundation/Foundation.h>
 #import <Diffusion/PTDiffusionStreamDelegate.h>
 
 @class PTDiffusionSessionId;
@@ -41,41 +41,6 @@ NS_ASSUME_NONNULL_BEGIN
 -(void)diffusionStream:(PTDiffusionStream *)stream
        didReceiveError:(NSError *)error
          fromSessionId:(PTDiffusionSessionId *)sessionId;
-
-/**
- The stream closed prematurely.
-
- @param stream The stream that closed.
-
- @param error The reason why the stream closed.
-
- @note No further messages will be sent to the delegate for this stream.
-
- @since 5.6
-
- @deprecated since 6.6 this method is no longer called; in a future
- release, PTDiffusionSessionResponseStreamDelegate will no longer extend
- PTDiffusionStreamDelegate
- */
--(void)diffusionStream:(PTDiffusionStream *)stream
-      didFailWithError:(NSError *)error
-__deprecated_msg("Will be removed in a future release.");
-
-/**
- The stream closed normally.
-
- @param stream The stream that closed.
-
- @note No further messages will be sent to the delegate for this stream.
-
- @since 5.6
-
- @deprecated since 6.6 this method is no longer called; in a future
- release, PTDiffusionSessionResponseStreamDelegate will no longer extend
- PTDiffusionStreamDelegate
- */
--(void)diffusionDidCloseStream:(PTDiffusionStream *)stream
-__deprecated_msg("Will be removed in a future release.");
 
 
 @end

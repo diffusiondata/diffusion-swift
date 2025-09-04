@@ -1,16 +1,16 @@
 //  Diffusion Client Library for iOS, tvOS and OS X / macOS
 //
-//  Copyright (c) 2015, 2020 Push Technology Ltd., All Rights Reserved.
+//  Copyright (c) 2015 - 2025 DiffusionData Ltd., All Rights Reserved.
 //
-//  Use is subject to license terms.
+//  Use is subject to licence terms.
 //
 //  NOTICE: All information contained herein is, and remains the
-//  property of Push Technology. The intellectual and technical
-//  concepts contained herein are proprietary to Push Technology and
+//  property of DiffusionData. The intellectual and technical
+//  concepts contained herein are proprietary to DiffusionData and
 //  may be covered by U.S. and Foreign Patents, patents in process, and
 //  are protected by trade secret or copyright law.
 
-@import Foundation;
+#import <Foundation/Foundation.h>
 #import <Diffusion/PTDiffusionTopicUpdateFeature.h>
 #import <Diffusion/PTDiffusionTopicUnsubscriptionReason.h>
 
@@ -22,12 +22,10 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /**
- @brief The Topics feature provides a client session with the capability to receive streamed
- topic updates and/or fetch the state of topics.
+ @brief Subscription to topics and fetching topic data.
 
  This feature allows a client session to subscribe to topics to receive
- streamed topic updates, fetch the state of topics and/or update topics with
- new values.
+ streamed topic updates, fetch the state of topics and/or update topics with new values.
 
  Specifically, the feature provides the ability to:
  <ul>
@@ -39,22 +37,22 @@ NS_ASSUME_NONNULL_BEGIN
 
  ###Subscription and unsubscription
 
- A session can issue requests to subscribe to topics at any time, even if the
- topics do not exist at the server. Each subscription request provides a
- topic selector that is evaluated by the server to
- select matching topics. The session will be subscribed to any topics that
- match the selector unless they are already subscribed, or the session has
- insufficient permission. The subscription request is also retained at the
- server and the session will be automatically subscribed to newly created
- topics that match the selector (unless a subsequent unsubscription cancels
- the request).
+ A session can issue requests to subscribe to topics at any time, even if the topics
+ do not exist at the server.
+ Each subscription request provides a topic selector that is evaluated by the server
+ to select matching topics.
+ The session will be subscribed to any topics that match the selector unless they are
+ already subscribed, or the session has insufficient permission.
+ The subscription request is also retained at the server and the session will be automatically
+ subscribed to newly created topics that match the selector (unless a subsequent unsubscription
+ cancels the request).
 
- Sessions receive notifications from topics that they are subscribed to via
- <em>subscription streams</em> (see below). When a session is subscribed to a
- topic, all matching streams will first receive a subscription notification
- that provides details about the topic. If the server has a value for the
- topic, the value will be delivered to the streams before any other
- notifications.
+ Sessions receive notifications from topics that they are subscribed to via subscription streams
+ (see below).
+ When a session is subscribed to a topic, all matching streams will first receive a subscription
+ notification that provides details about the topic.
+ If the server has a value for the topic, the value will be delivered to the streams before
+ any other notifications.
 
  A session can unsubscribe from topics at any time. This is also specified
  using a topic selector. On unsubscription, matching streams are notified via
@@ -63,43 +61,65 @@ NS_ASSUME_NONNULL_BEGIN
  the server, or topic removal).
 
  Subscriptions and unsubscriptions can occur for reasons other than requests
- from the session. A session can be subscribed to or unsubscribed from a topic
- by another session using the `PTDiffusionSubscriptionControlFeature`. The removal
- of a topic also automatically causes unsubscription for subscribed sessions.
+ from the session.
+ A session can be subscribed to or unsubscribed from a topic by another session
+ using the `PTDiffusionSubscriptionControlFeature`.
+ The removal of a topic also automatically causes unsubscription for subscribed sessions.
 
- Subscription requests are subject to authorization checks. The session must
- have `PTDiffusionPathPermission#selectTopic` permission for the
- topic selector used to subscribe. Matching topics will be further filtered to
- those for which the session has `PTDiffusionPathPermission#readTopic`
- permission.
+ Subscription requests are subject to authorization checks.
+ The session must have `PTDiffusionPathPermission#selectTopic` permission for the
+ topic selector used to subscribe.
+ Matching topics will be further filtered to those for which the session
+ has `PTDiffusionPathPermission#readTopic` permission.
+
+ ###Topic selection scopes
+
+ Topic selection scopes allow an application with multiple components to use a single Diffusion session.
+ An application component can use a topic selection scope to manage a set of selectors that is unaffected
+ by unsubscriptions performed by other application components.
+ The session will be subscribed to all topics with paths matching a selector in any scope.
+ The unsubscribe operation removes a selector from specific scopes.
+
+ A scope may be specified to a `subscribe:withSelectionScope:completionHandler:` or
+ `unsubscribe:withSelectionScope:completionHandler:` method, indicating that the selection
+ only applies to that scope.
+ The server manages scopes to ensure that unsubscriptions applied to one scope do not affect another.
+
+ Scope names are case sensitive.
+ A scope name may not begin with the character `$` as this is reserved for internal use.
+
+ Unsubscription using a wildcard selector that indicates all topics effectively removes the scope.
+ An application can request unsubscription from all scopes using `unsubscribeFromAllScopes:completionHandler:`.
+ The `defaultSelectionScope` is used for all methods that do not explicitly specify a scope.
+
 
  ###Subscription streams
 
  A session can listen to subscription events and updates for a selection of
- topics by adding one or more streams. A stream is registered using a topic
- selector which specifies the topics that the stream applies to. When an
- update is received for a topic then it will be routed to every stream that
- matches both the topic selector and the stream's value type. If more than one
- stream matches, all will receive the update; the order in which they are
+ topics by adding one or more streams.
+ A stream is registered using a topic selector which specifies the topics that the
+ stream applies to.
+ When an update is received for a topic then it will be routed to every stream that
+ matches both the topic selector and the stream's value type.
+ If more than one stream matches, all will receive the update; the order in which they are
  notified is not defined.
 
- A stream can be added several times for different selectors. If the same
- stream is registered for
- several selectors that match an event, the stream will only be notified of
- the event once. The mapping of topic selectors to streams is maintained
- locally in the client process.
+ A stream can be added several times for different selectors.
+ If the same stream is registered for several selectors that match an event,
+ the stream will only be notified of the event once.
+ The mapping of topic selectors to streams is maintained locally in the client process.
 
  It is also possible to add one or more <em>fallback</em> streams which will
- receive updates that do not match any stream registered with a selector. This
- is useful for default processing or simply to catch unprocessed updates. A
- fallback stream can be added using `PTDiffusionTopicsFeature#addFallbackStream:error:`.
- Zero, one, or more fallback streams may be assigned. If
- no fallback stream is specified, any updates that are not routed to any other
+ receive updates that do not match any stream registered with a selector.
+ This is useful for default processing or simply to catch unprocessed updates.
+ A fallback stream can be added using `PTDiffusionTopicsFeature#addFallbackStream:error:`.
+ Zero, one, or more fallback streams may be assigned.
+ If no fallback stream is specified, any updates that are not routed to any other
  stream will simply be discarded.
 
  If the session is already subscribed to a topic when a matching stream is
- added, the stream will immediately receive a subscription notification. For
- most topic types, the latest value is locally cached and will be provided to
+ added, the stream will immediately receive a subscription notification.
+ For most topic types, the latest value is locally cached and will be provided to
  the stream following the subscription notification.
 
  A stream will receive a `PTDiffusionStreamDelegate#diffusionDidCloseStream:`
@@ -109,14 +129,14 @@ NS_ASSUME_NONNULL_BEGIN
  ###Value streams
 
  A `PTDiffusionValueStream` receives values for matching topics as and
- when updates are received from the server. Delta updates received from the
- server are automatically applied to locally cached values so that the stream
- always receives full values for each update.
+ when updates are received from the server.
+ Delta updates received from the server are automatically applied to locally
+ cached values so that the stream always receives full values for each update.
 
  Value streams are typed to a specified value class and only updates for
- compatible topics will be routed to the stream. The following table shows how
- the value class maps to compatible topic types that will be routed to the
- stream:
+ compatible topics will be routed to the stream.
+ The following table shows how the value class maps to compatible topic types
+ that will be routed to the stream:
 
  <table>
     <tr>
@@ -156,13 +176,12 @@ NS_ASSUME_NONNULL_BEGIN
     </tr>
  </table>
 
- Value stream implementations can be added using
- `PTDiffusionTopicsFeature#addStream:withSelector:error`.
+ Value stream implementations can be added using `PTDiffusionTopicsFeature#addStream:withSelector:error`.
 
- A value stream can be added to received updates from time
- series topics. The following table shows how the value class specified
- when adding the stream maps to the event value class of time series topics
- that will be routed to the stream:
+ A value stream can be added to received updates from time series topics.
+ The following table shows how the value class specified when adding
+ the stream maps to the event value class of time series topics that will
+ be routed to the stream:
 
  <table>
     <tr>
@@ -202,28 +221,28 @@ NS_ASSUME_NONNULL_BEGIN
     </tr>
  </table>
 
+
  ###Fetch
 
  A session can issue a request to fetch details of a topic or topics (subject
- to authorization) at any time. The topics required are specified using a
- topic selector.
+ to authorization) at any time.
+ The topics required are specified using a topic selector.
 
- The results of a fetch will return the topic path and type of each selected
- topic. The results may also optionally return the topic values and/or
- properties.
+ The results of a fetch will return the topic path and type of each selected topic.
+ The results may also optionally return the topic values and/or properties.
 
  A new request can be created using `PTDiffusionTopicsFeature.fetchRequest` and modified to
- specify additional requirements of the fetch operation. The request is issued
- to the server using the `PTDiffusionFetchRequest#fetchWithTopicSelectorExpression:completionHandler:]`
- method on the request. This will return the results via a `completionHandler`.
+ specify additional requirements of the fetch operation.
+ The request is issued to the server using the `PTDiffusionFetchRequest#fetchWithTopicSelectorExpression:completionHandler:]`
+ method on the request.
+ This will return the results via a `completionHandler`.
 
  ###Access control
 
- A session must have `PTDiffusionPathPermission.selectTopic`
- permission for the path prefix of the topic selector used to
- subscribe or fetch.
- The topics that result from a subscription or fetch request are further
- filtered using the `PTDiffusionPathPermission.readTopic` permission.
+ A session must have `PTDiffusionPathPermission.selectTopic` permission for the path
+ prefix of the topic selector used to subscribe or fetch.
+ The topics that result from a subscription or fetch request are further filtered
+ using the `PTDiffusionPathPermission.readTopic` permission.
 
  No access control restrictions are applied to unsubscription.
 
@@ -242,19 +261,87 @@ NS_ASSUME_NONNULL_BEGIN
 @interface PTDiffusionTopicsFeature : PTDiffusionTopicUpdateFeature
 
 /**
- Request subscription to topics.
+ @brief Request subscription to topics using a scope selection.
 
- The session will become subscribed to each existing topic matching
- the selector unless the session is already subscribed to the topic,
- or the session does not have `READ_TOPIC` permission for the topic
- path. For each topic to which the session becomes subscribed, a
- subscription notification and initial value (if any) will be
- delivered to registered value streams before the completion handler
- is called.
+ The session will become subscribed to each existing topic matching the selector unless
+ the session is already subscribed to the topic, or the session does not have `PTDiffusionPathPermission#readTopic`
+ permission for the topic path.
+ For each topic to which the session becomes subscribed, a subscription notification and
+ initial value (if any) will be delivered to registered value streams.
 
- The subscription request is also retained at the server and the session
- will be automatically subscribed to newly created topics that match the
- selector (unless a subsequent unsubscription cancels the request).
+ The subscription request is also retained at the server and the session will be automatically
+ subscribed to newly created topics that match the selector (unless a subsequent unsubscription
+ cancels the request).
+
+ @param expression The @ref md_topic_selectors "topic selector" expression to be
+ evaluated by the server.
+
+ @param selectionScope specifies the scope of the selection.
+
+ @param completionHandler Block to be called asynchronously on success or failure.
+ If the operation was successful, the `error` argument passed to the block will be `nil`.
+ The completion handler will be called asynchronously on the main dispatch queue.
+ 
+ @return error if any supplied arguments are `nil` or invalid. `nil` otherwise.
+
+ @since 6.12
+*/
+-(nullable NSError *) subscribe:(NSString *)expression
+             withSelectionScope:(NSString *)selectionScope
+              completionHandler:(void (^)(NSError * _Nullable error))completionHandler;
+
+
+/**
+ @brief Unsubscribe topics from all topic selection scopes.
+
+ This can be used at any time whilst connected to reduce the set of topics
+ to which the session is subscribed or negate earlier subscription
+ requests and will apply to all scopes in use.
+
+ @param expression The @ref md_topic_selectors "topic selector" expression to be
+ evaluated by the server.
+
+ @param completionHandler Block to be called asynchronously on success or failure.
+ If the operation was successful, the `error` argument passed to the block will be `nil`.
+ The completion handler will be called asynchronously on the main dispatch queue.
+ 
+ @return error if any supplied arguments are `nil` or invalid. `nil` otherwise.
+
+ @since 6.12
+*/
+-(nullable NSError *) unsubscribeAll:(NSString *)expression
+                   completionHandler:(void (^)(NSError * _Nullable error))completionHandler;
+
+
+/**
+ @brief Unsubscribe from topics using a selection scope.
+
+ This can be used at any time whilst connected to reduce the set of topics
+ to which the session is subscribed or negate earlier subscription requests.
+
+ @param expression The @ref md_topic_selectors "topic selector" expression to be
+ evaluated by the server.
+
+ @param selectionScope specifies the scope of the selection.
+
+ @param completionHandler Block to be called asynchronously on success or failure.
+ If the operation was successful, the `error` argument passed to the block will be `nil`.
+ The completion handler will be called asynchronously on the main dispatch queue.
+ 
+ @return error if any supplied arguments are `nil` or invalid. `nil` otherwise.
+
+ @since 6.12
+*/
+-(nullable NSError *) unsubscribe:(NSString *)expression
+               withSelectionScope:(NSString *)selectionScope
+                completionHandler:(void (^)(NSError * _Nullable error))completionHandler;
+
+
+/**
+ @brief Request subscription to topic.
+
+ This is the equivalent of calling `subscribe:withSelectionScope:completionHandler:`
+ specifiying `PTDiffusionTopicsFeature.defaultSelectionScope`.
 
  @param expression The @ref md_topic_selectors "topic selector" expression to be
  evaluated by the server.
@@ -263,15 +350,17 @@ NS_ASSUME_NONNULL_BEGIN
  If the operation was successful, the `error` argument passed to the block will be `nil`.
  The completion handler will be called asynchronously on the main dispatch queue.
 
- @exception NSInvalidArgumentException Raised if any supplied arguments are `nil`.
-
  @since 5.6
  */
 -(void)subscribeWithTopicSelectorExpression:(NSString *)expression
                           completionHandler:(void (^)(NSError * _Nullable error))completionHandler;
 
+
 /**
- Request unsubscription from topics.
+ @brief Request unsubscription from topics.
+ 
+ This is the equivalent of calling `unsubscribe:withSelectionScope:completionHandler:`
+ specifiying `PTDiffusionTopicsFeature.defaultSelectionScope`.
 
  @param expression The @ref md_topic_selectors "topic selector" expression to be
  evaluated by the server.
@@ -287,30 +376,64 @@ NS_ASSUME_NONNULL_BEGIN
 -(void)unsubscribeFromTopicSelectorExpression:(NSString *)expression
                             completionHandler:(void (^)(NSError * _Nullable error))completionHandler;
 
+
 /**
- When a matching update is received from the server for a topic, it will be
- passed on to all value streams that have been added with matching selectors.
- If no value stream is registered with a matching selector, the fallback value
- streams that have been registered using this method will be called instead.
+ Request subscription to topics.
 
- Zero, one, or many fallback value streams can be set.
- If there is no fallback value stream, updates that match no other will be
- discarded.
+ The session will become subscribed to each existing topic matching
+ the selector unless the session is already subscribed to the topic,
+ or the session does not have `READ_TOPIC` permission for the topic
+ path. For each topic to which the session becomes subscribed, a
+ subscription notification and initial value (if any) will be
+ delivered to registered value streams before the completion handler
+ is called.
 
- @param stream Handler of value stream events not handled by an explicitly
- registered topic selector.
- The delegate associated with this stream will be sent messages asynchronously
- on the main dispatch queue.
+ The subscription request is also retained at the server and the session
+ will be automatically subscribed to newly created topics that match the
+ selector (unless a subsequent unsubscription cancels the request).
 
- @exception NSInvalidArgumentException Raised if the supplied `stream` argument
- is `nil`.
+ @param selector The @ref md_topic_selectors "topic selector" to be
+ evaluated by the server.
 
- @since 5.9
+ @param completionHandler Block to be called asynchronously on success or failure.
+ If the operation was successful, the `error` argument passed to the block will be `nil`.
+ The completion handler will be called asynchronously on the main dispatch queue.
 
- @deprecated since 6.5 Use `addFallBackStream:error:`
+ @param error Populated in case of an invalid argument passed to the method.
+
+ @exception NSInvalidArgumentException Raised if any supplied arguments are `nil`.
+
+ @return true is arguments are valid, false otherwise.
+
+ @since 6.11
  */
--(void)addFallbackStream:(PTDiffusionValueStream *)stream
-__deprecated_msg("Will be removed in a future release.");
+-(BOOL)subscribeWithTopicSelector:(PTDiffusionTopicSelector *)selector
+                completionHandler:(void (^)(NSError * _Nullable))completionHandler
+                            error:(NSError *__autoreleasing *const)error;
+
+
+/**
+ Request unsubscription from topics.
+
+ @param selector The @ref md_topic_selectors "topic selector" to be
+ evaluated by the server.
+
+ @param completionHandler Block to be called asynchronously on success or failure.
+ If the operation was successful, the `error` argument passed to the block will be `nil`.
+ The completion handler will be called asynchronously on the main dispatch queue.
+
+ @param error Populated in case of an invalid argument passed to the method.
+
+ @exception NSInvalidArgumentException Raised if any supplied arguments are `nil`.
+
+ @return true is arguments are valid, false otherwise.
+
+ @since 6.11
+ */
+-(BOOL)unsubscribeFromTopicSelector:(PTDiffusionTopicSelector *)selector
+                  completionHandler:(void (^ const)(NSError *))completionHandler
+                              error:(NSError *__autoreleasing *const)error;
+
 
 /**
  When a matching update is received from the server for a topic, it will be
@@ -339,31 +462,6 @@ __deprecated_msg("Will be removed in a future release.");
 -(BOOL)addFallbackStream:(PTDiffusionValueStream *)stream
                    error:(NSError **)error;
 
-/**
- Add a value stream to receive topic updates for topics that match the given
- topic selector.
-
- When a value update is received from the server, it will be passed to all
- streams that have been added with matching selectors.
- If there is more than one match, the order in which the streams are called is
- not defined.
- If there is no matching stream, the fallback stream(s) will be called instead.
-
- @param stream Handler of value stream events against this selector.
- The delegate associated with this stream will be sent messages asynchronously
- on the main dispatch queue.
-
- @param selector The @ref md_topic_selectors "topic selector" to be evaluated locally.
-
- @exception NSInvalidArgumentException Raised if any supplied arguments are `nil`.
-
- @since 5.9
-
- @deprecated since 6.5 Use `addStream:withSelector:error:`
- */
--(void)addStream:(PTDiffusionValueStream *)stream
-    withSelector:(PTDiffusionTopicSelector *)selector
-__deprecated_msg("Will be removed in a future release.");
 
 /**
  Add a value stream to receive topic updates for topics that match the given
@@ -392,30 +490,6 @@ __deprecated_msg("Will be removed in a future release.");
 -(BOOL)addStream:(PTDiffusionValueStream *)stream
     withSelector:(PTDiffusionTopicSelector *)selector
            error:(NSError **)error;
-
-/**
- Add a value stream to receive topic updates for topics that match the given
- topic selector expression.
-
- This convenience method calls addStream:withSelector: having constructed a
- PTDiffusionTopicSelector instance using the given expression.
-
- @param stream Handler of value stream events against this selector.
- The delegate associated with this stream will be sent messages asynchronously
- on the main dispatch queue.
-
- @param expression The @ref md_topic_selectors "topic selector" expression to be
- evaluated locally.
-
- @exception NSInvalidArgumentException Raised if any supplied arguments are `nil`.
-
- @since 6.0
-
- @deprecated since 6.5 Use `addStream:withSelectorExpression:error:`
- */
--(void)          addStream:(PTDiffusionValueStream *)stream
-    withSelectorExpression:(NSString *)expression
-__deprecated_msg("Will be removed in a future release.");
 
 /**
  Add a value stream to receive topic updates for topics that match the given
@@ -484,6 +558,15 @@ __deprecated_msg("Will be removed in a future release.");
  @since 6.2
  */
 -(PTDiffusionFetchRequest *)fetchRequest;
+
+
+/**
+ @brief Default selection scope
+ 
+ @since 6.12
+ */
++(NSString *)defaultSelectionScope;
+
 
 @end
 

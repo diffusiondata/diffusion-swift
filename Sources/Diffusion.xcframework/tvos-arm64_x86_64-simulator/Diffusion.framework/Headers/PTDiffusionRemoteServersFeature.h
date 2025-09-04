@@ -1,16 +1,16 @@
 //  Diffusion Client Library for iOS, tvOS and OS X / macOS
 //
-//  Copyright (c) 2020, 2021 Push Technology Ltd., All Rights Reserved.
+//  Copyright (c) 2020 - 2023 DiffusionData Ltd., All Rights Reserved.
 //
-//  Use is subject to license terms.
+//  Use is subject to licence terms.
 //
 //  NOTICE: All information contained herein is, and remains the
-//  property of Push Technology. The intellectual and technical
-//  concepts contained herein are proprietary to Push Technology and
+//  property of DiffusionData. The intellectual and technical
+//  concepts contained herein are proprietary to DiffusionData and
 //  may be covered by U.S. and Foreign Patents, patents in process, and
 //  are protected by trade secret or copyright law.
 
-@import Foundation;
+#import <Foundation/Foundation.h>
 #import <Diffusion/PTDiffusionFeature.h>
 
 @class PTDiffusionCredentials;
@@ -101,94 +101,6 @@ NS_ASSUME_NONNULL_BEGIN
 -(void)createRemoteServer:(PTDiffusionRemoteServer *const)remoteServer
         completionHandler:(void (^)(PTDiffusionCreateRemoteServerResult * _Nullable result,
                                     NSError * _Nullable error))completionHandler;
-
-
-/**
- @brief Create a new remote server instance with default connection options.
-
- If a remote server with the same name already exists an error will be returned.
-
- @param name the name of the remote server
-
- @param url the URL used to connect to the primary server
-
- @param principal the name of a principal used by the remote server to
- connect to the primary server. A zero length string may be
- supplied to indicate an anonymous connection
-
- @param credentials used for connecting to the primary server
-
- @param completionHandler a completion handler that returns when a response is
- received from the server, returning a full definition of the remote server created
- by the operation.
- If the remote server definition is nil, this could mean an error has occurred.
- These may include:
- <ul>
-    <li>{@link PTDiffusionError_RemoteServerExists} - if a remote server with the given name already exists
-    <li>{@link PTDiffusionError_ClusterRouting} or {@link PTDiffusionError_ClusterRepartition} -
-        if a transient cluster error occurred
-    <li>{@link PTDiffusionError_AccessDenied} - if the calling session does not have
-        {@link PTDiffusionGlobalPermission#controlServer CONTROL_SERVER} permission
-    <li>{@link PTDiffusionError_SessionClosed} - if the session is closed
- </ul>
-
- @since 6.5
-
- @deprecated since 6.7 Use {@link createRemoteServer:completionHandler:} in preference.
- This method will be removed in a future release.
- */
--(void)createRemoteServer:(NSString *const)name
-                  withURL:(NSString *const)url
-                principal:(NSString *const)principal
-              credentials:(PTDiffusionCredentials *const)credentials
-        completionHandler:(void (^)(PTDiffusionCreateRemoteServerResult * _Nullable result,
-                                    NSError * _Nullable error))completionHandler __deprecated_msg("Will be removed in a future release.");
-
-
-/**
- @brief Create a new remote server instance.
-
- If a remote server with the same name already exists an error will be returned.
-
- @param name the name of the remote server
-
- @param url the URL used to connect to the primary server
-
- @param principal the name of a principal used by the remote server to
- connect to the primary server. A zero length string may be
- supplied to indicate an anonymous connection
-
- @param credentials used for connecting to the primary server
-
- @param connectionOptions map of connection option settings. Any options
- not supplied will take their default values
-
- @param completionHandler a completion handler that returns when a response is
- received from the server, returning a full definition of the remote server
- created by the operation.
- If the remote server definition is nil, this could mean an error has occurred.
- These may include:
- <ul>
-    <li>{@link PTDiffusionError_RemoteServerExists} - if a remote server with the given name already exists
-    <li>{@link PTDiffusionError_ClusterRouting} or {@link PTDiffusionError_ClusterRepartition} -
-        if a transient cluster error occurred
-    <li>{@link PTDiffusionError_AccessDenied} - if the calling session does not have
-        {@link PTDiffusionGlobalPermission#controlServer CONTROL_SERVER} permission
-    <li>{@link PTDiffusionError_SessionClosed} - if the session is closed
- </ul>
-
- @since 6.5
-
- @deprecated since 6.7 Use {@link createRemoteServer:completionHandler:} in preference.
- This method will be removed in a future release.
- */
--(void)createRemoteServer:(NSString *const)name
-                  withURL:(NSString *const)url
-                principal:(NSString *const)principal
-              credentials:(PTDiffusionCredentials *const)credentials
-        connectionOptions:(NSDictionary<PTDiffusionRemoteServerConnectionOption *, NSString *> const*)connectionOptions
-        completionHandler:(void (^)(PTDiffusionCreateRemoteServerResult * _Nullable result,
-                                    NSError * _Nullable error))completionHandler __deprecated_msg("Will be removed in a future release.");
 
 
 

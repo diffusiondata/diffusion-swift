@@ -1,16 +1,16 @@
 //  Diffusion Client Library for iOS, tvOS and OS X / macOS
 //
-//  Copyright (c) 2015, 2020 Push Technology Ltd., All Rights Reserved.
+//  Copyright (c) 2015 - 2025 DiffusionData Ltd., All Rights Reserved.
 //
-//  Use is subject to license terms.
+//  Use is subject to licence terms.
 //
 //  NOTICE: All information contained herein is, and remains the
-//  property of Push Technology. The intellectual and technical
-//  concepts contained herein are proprietary to Push Technology and
+//  property of DiffusionData. The intellectual and technical
+//  concepts contained herein are proprietary to DiffusionData and
 //  may be covered by U.S. and Foreign Patents, patents in process, and
 //  are protected by trade secret or copyright law.
 
-@import Foundation;
+#import <Foundation/Foundation.h>
 #import <Diffusion/PTDiffusionFeature.h>
 
 @class PTDiffusionCredentials;
@@ -54,6 +54,44 @@ NS_ASSUME_NONNULL_BEGIN
 -(void)changePrincipal:(nullable NSString *)principal
            credentials:(nullable PTDiffusionCredentials *)credentials
      completionHandler:(void (^)(NSError * _Nullable error))completionHandler;
+
+
+/**
+ Re-authenticate the session.
+ 
+ This may be used to change the principal for the session, or to
+ re-authenticate the session before it expires.
+ 
+ A session may determine when it is due to expire by querying the value of
+ the `$ExpiryTime` session property using {@link PTDiffusionSession#getSessionProperties}.
+ 
+ If this property is not present the session will not expire and there is no
+ need to re-authenticate unless the principal in use is to be changed.
+ 
+ @param principal The new principal name.
+
+ @param credentials The credentials authenticating the new principal.
+ 
+ @param sesssionProperties The user-defined session properties.
+
+ @param completionHandler Block to be called asynchronously on success or
+ failure. If the operation was successful, the `error` argument passed to the
+ block will be `nil`. The completion handler will be called asynchronously on
+ the main dispatch queue.
+ 
+ @param error If this method returns `NO` to indicate that an error occurred
+ then this will be populated with the reason for that failure.
+ 
+ @return `YES` on success; or `NO` if an error occurred, in which case `*error`
+ will be populated with the failure reason.
+ 
+ @since 6.12
+ */
+-(bool)reauthenticate:(nullable NSString *)principal
+          credentials:(nullable PTDiffusionCredentials *)credentials
+    sessionProperties:(nullable NSDictionary<NSString *, NSString *> *)sessionProperties
+    completionHandler:(void (^)(BOOL success, NSError * _Nullable error))completionHandler
+                error:(NSError *__autoreleasing *const)error;
 
 /**
  Query the global permissions assigned to the calling session.

@@ -1,16 +1,16 @@
 //  Diffusion Client Library for iOS, tvOS and OS X / macOS
 //
-//  Copyright (c) 2018, 2021 Push Technology Ltd., All Rights Reserved.
+//  Copyright (c) 2018 - 2023 DiffusionData Ltd., All Rights Reserved.
 //
-//  Use is subject to license terms.
+//  Use is subject to licence terms.
 //
 //  NOTICE: All information contained herein is, and remains the
-//  property of Push Technology. The intellectual and technical
-//  concepts contained herein are proprietary to Push Technology and
+//  property of DiffusionData. The intellectual and technical
+//  concepts contained herein are proprietary to DiffusionData and
 //  may be covered by U.S. and Foreign Patents, patents in process, and
 //  are protected by trade secret or copyright law.
 
-@import Foundation;
+#import <Foundation/Foundation.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -65,35 +65,6 @@ BOOL PTDiffusionRolesFromString(NSString * string, NSSet<NSString *> *_Nullable 
  @since 6.2
  */
 NSString* PTDiffusionStringFromRoles(NSSet<NSString *> * roles);
-
-/**
- The value assigned to the `domain` property of NSError objects generated from
- some methods in the Diffusion API.
-
- @since 6.2
-
- @deprecated since 6.7 Error domains have been converged into PTDiffusion.
- */
-extern NSString *const PTDiffusionErrorDomain __deprecated_msg("Use PTDiffusion instead.");
-
-/**
- Values assigned to the `code` property of NSError objects generated from some
- methods in the Diffusion API.
-
- @since 6.2
-
- @deprecated since 6.7 Use PTDiffusionError instead.
- */
-typedef NS_ENUM(NSInteger, PTDiffusionErrorCode) {
-    /**
-     The string supplied has been encoded incorrectly.
-
-     @deprecated since 6.7 Use PTDiffusionError_MisquotedInput instead.
-
-     @since 6.2
-     */
-    PTDiffusionErrorCode_MisquotedInput __deprecated_enum_msg("Use PTDiffusionError_MisquotedInput instead.") = 1,
-};
 
 
 NS_ASSUME_NONNULL_END

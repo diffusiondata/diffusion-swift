@@ -3,13 +3,13 @@
 <plist version="1.0">
 <dict>
 	<key>BuildMachineOSBuild</key>
-	<string>20D91</string>
+	<string>22G90</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleExecutable</key>
 	<string>Diffusion</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.pushtechnology.Diffusion</string>
+	<string>-</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
@@ -17,32 +17,30 @@
 	<key>CFBundlePackageType</key>
 	<string>FMWK</string>
 	<key>CFBundleShortVersionString</key>
-	<string>6.8.0</string>
-	<key>CFBundleSignature</key>
-	<string>????</string>
+	<string>1.0</string>
 	<key>CFBundleSupportedPlatforms</key>
 	<array>
 		<string>MacOSX</string>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>6.8.0</string>
+	<string>1</string>
 	<key>DTCompiler</key>
 	<string>com.apple.compilers.llvm.clang.1_0</string>
 	<key>DTPlatformBuild</key>
-	<string>12D4e</string>
+	<string></string>
 	<key>DTPlatformName</key>
 	<string>macosx</string>
 	<key>DTPlatformVersion</key>
-	<string>11.1</string>
+	<string>14.0</string>
 	<key>DTSDKBuild</key>
-	<string>20C63</string>
+	<string>23A334</string>
 	<key>DTSDKName</key>
-	<string>macosx11.1</string>
+	<string>macosx14.0</string>
 	<key>DTXcode</key>
-	<string>1240</string>
+	<string>1500</string>
 	<key>DTXcodeBuild</key>
-	<string>12D4e</string>
+	<string>15A240d</string>
 	<key>LSMinimumSystemVersion</key>
-	<string>10.11</string>
+	<string>10.15</string>
 </dict>
 </plist>

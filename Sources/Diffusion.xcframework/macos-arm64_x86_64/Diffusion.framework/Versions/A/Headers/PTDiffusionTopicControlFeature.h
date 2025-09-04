@@ -1,16 +1,16 @@
 //  Diffusion Client Library for iOS, tvOS and OS X / macOS
 //
-//  Copyright (c) 2016, 2021 Push Technology Ltd., All Rights Reserved.
+//  Copyright (c) 2016 - 2023 DiffusionData Ltd., All Rights Reserved.
 //
-//  Use is subject to license terms.
+//  Use is subject to licence terms.
 //
 //  NOTICE: All information contained herein is, and remains the
-//  property of Push Technology. The intellectual and technical
-//  concepts contained herein are proprietary to Push Technology and
+//  property of DiffusionData. The intellectual and technical
+//  concepts contained herein are proprietary to DiffusionData and
 //  may be covered by U.S. and Foreign Patents, patents in process, and
 //  are protected by trade secret or copyright law.
 
-@import Foundation;
+#import <Foundation/Foundation.h>
 #import <Diffusion/PTDiffusionFeature.h>
 #import <Diffusion/PTDiffusionTopicType.h>
 
@@ -23,12 +23,6 @@
 
 @protocol PTDiffusionMissingTopicHandler;
 
-typedef NS_ENUM(NSInteger, PTDiffusionTopicControlFeatureErrorCode) {
-    /**
-     @deprecated since 6.7 Enumeration is unused.
-     */
-    PTDiffusionTopicControlFeatureErrorCode_ServerFailedToAddTopic __deprecated_enum_msg("Enumeration is unused.") = 1,
-};
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -256,36 +250,6 @@ extern NSString *const PTDiffusionTopicControlFeatureErrorDomain __deprecated_ms
 -(void)addTopicWithPath:(NSString *)path
           specification:(PTDiffusionTopicSpecification *)specification
       completionHandler:(void (^)(PTDiffusionAddTopicResult * _Nullable result, NSError * _Nullable error))completionHandler;
-
-/**
- Send a request to remove one or more topics.
-
- All topics that match the provided topic selector that the caller has
- permission to remove will be removed.
-
- The selector's descendant pattern qualifier (a trailing `/` or `//`), can be
- used to remove descendant topics. If a single `/` qualifier is specified, all
- descendants of the matched topic paths will be removed. If `//` is specified,
- the matched paths and all descendants of the matched paths (complete branches)
- will be removed.
-
- @param expression The @ref md_topic_selectors "topic selector" expression to be
- evaluated by the server.
-
- @param completionHandler Block to be called asynchronously on success or failure.
- If the operation was successful, the `error` argument passed to the block will be `nil`.
- The completion handler will be called asynchronously on the main dispatch queue.
-
- @exception NSInvalidArgumentException If any argument is `nil`.
-
- @since 5.9
-
- @deprecated since 6.6. Use {@link PTDiffusionTopicControlFeature#removeTopicsWithTopicSelectorExpression:completionHandler:
- removeTopicsWithTopicSelectorExpression} instead.
- */
--(void)removeDiscreteWithTopicSelectorExpression:(NSString *)expression
-                               completionHandler:(void (^)(NSError * _Nullable error))completionHandler
-__deprecated_msg("Will be removed in a future release");
 
 
 /**

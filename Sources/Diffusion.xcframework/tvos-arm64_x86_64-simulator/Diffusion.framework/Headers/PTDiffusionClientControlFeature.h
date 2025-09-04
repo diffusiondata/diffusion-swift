@@ -1,16 +1,16 @@
 //  Diffusion Client Library for iOS, tvOS and OS X / macOS
 //
-//  Copyright (c) 2020, 2021 Push Technology Ltd., All Rights Reserved.
+//  Copyright (c) 2020 - 2025 DiffusionData Ltd., All Rights Reserved.
 //
-//  Use is subject to license terms.
+//  Use is subject to licence terms.
 //
 //  NOTICE: All information contained herein is, and remains the
-//  property of Push Technology. The intellectual and technical
-//  concepts contained herein are proprietary to Push Technology and
+//  property of DiffusionData. The intellectual and technical
+//  concepts contained herein are proprietary to DiffusionData and
 //  may be covered by U.S. and Foreign Patents, patents in process, and
 //  are protected by trade secret or copyright law.
 
-@import Foundation;
+#import <Foundation/Foundation.h>
 #import <Diffusion/PTDiffusionFeature.h>
 
 @protocol PTDiffusionSessionPropertiesDelegate;
@@ -36,13 +36,14 @@ NS_ASSUME_NONNULL_BEGIN
 
  A session must have `PTDiffusionGlobalPermission#viewSession` permission to be able
  to listen for notifications using `#addSessionPropertiesListener:forProperties:completionHandler:`
- or `#getSessionProperties:forSession:completionHandler:` of other sessions
- or listen for queue events. In addition, `PTDiffusionGlobalPermission#registerHandler`
+ or `#getSessionProperties:forSession:completionHandler:` of sessions
+ or listen for queue events.
+
+ In addition, `PTDiffusionGlobalPermission#registerHandler`
  permission is required to set a session properties listener or queue event handler.
 
  In order to perform operations that change a session's state (such as throttling,
- conflating, or closing the session, or changing roles), both
- `PTDiffusionGlobalPermission#viewSession` and PTDiffusionGlobalPermission#modifySession`
+ conflating, or closing the session, or changing roles), PTDiffusionGlobalPermission#modifySession`
  permission is required.
 
 
@@ -179,8 +180,7 @@ NS_ASSUME_NONNULL_BEGIN
         Otherwise, the `error` will contain an error.
         Common reasons for failure:
         - NoSuchSession, if the identified session was closed before the response was delivered
-        - Security, if the calling session does not have `PTDiffusionGlobalPermission.modifySession`
-          and `PTDiffusionGlobalPermission.viewSession` permission
+        - Security, if the calling session does not have `PTDiffusionGlobalPermission.modifySession` permission
         - SessionClosed, if the calling session is closed.
 
  @since 6.5
@@ -224,8 +224,7 @@ NS_ASSUME_NONNULL_BEGIN
         If `matches` is -1, an `error` has occurred.
         These are the common reasons for failure:
         - NoSuchSession, if the identified session was closed before the response was delivered
-        - Security, if the calling session does not have `PTDiffusionGlobalPermission.modifySession`
-          and `PTDiffusionGlobalPermission.viewSession` permission
+        - Security, if the calling session does not have `PTDiffusionGlobalPermission.modifySession` permission
         - SessionClosed, if the calling session is closed.
 
  @since 6.5
@@ -248,8 +247,7 @@ NS_ASSUME_NONNULL_BEGIN
         Otherwise, the `error` will contain an error.
         These are the common reasons for failure:
         - NoSuchSession, if the identified session was closed before the response was delivered
-        - Security, if the calling session does not have `PTDiffusionGlobalPermission.modifySession`
-          and `PTDiffusionGlobalPermission.viewSession` permission
+        - Security, if the calling session does not have `PTDiffusionGlobalPermission.modifySession` permission
         - SessionClosed, if the calling session is closed.
 
  @since 6.6
@@ -272,8 +270,7 @@ NS_ASSUME_NONNULL_BEGIN
         Otherwise, the `error` will contain an error.
         These are the common reasons for failure:
         - NoSuchSession, if the identified session was closed before the response was delivered
-        - Security, if the calling session does not have `PTDiffusionGlobalPermission.modifySession`
-          and `PTDiffusionGlobalPermission.viewSession` permission
+        - Security, if the calling session does not have `PTDiffusionGlobalPermission.modifySession` permission
         - SessionClosed, if the calling session is closed.
 
  @since 6.6
@@ -306,8 +303,7 @@ NS_ASSUME_NONNULL_BEGIN
         Otherwise, the `error` will contain an error.
         These are the common reasons for failure:
         - NoSuchSession, if the identified session was closed before the response was delivered
-        - Security, if the calling session does not have `PTDiffusionGlobalPermission.modifySession`
-          and `PTDiffusionGlobalPermission.viewSession` permission
+        - Security, if the calling session does not have `PTDiffusionGlobalPermission.modifySession` permission
         - SessionClosed, if the calling session is closed.
 
  @since 6.6
@@ -342,8 +338,7 @@ NS_ASSUME_NONNULL_BEGIN
         Otherwise, the `error` will contain an error.
         These are the common reasons for failure:
         - NoSuchSession, if the identified session was closed before the response was delivered
-        - Security, if the calling session does not have `PTDiffusionGlobalPermission.modifySession`
-          and `PTDiffusionGlobalPermission.viewSession` permission
+        - Security, if the calling session does not have `PTDiffusionGlobalPermission.modifySession` permission
         - SessionClosed, if the calling session is closed.
 
  @since 6.6
