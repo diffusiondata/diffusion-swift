@@ -15,10 +15,12 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /**
+ @ingroup PublicAPI_Ping
+
  @brief Details returned in response to a ping to the server.
- 
+
  A ping details object is immutable.
- 
+
  @see PTDiffusionPingsFeature
 
  @since 5.7

@@ -18,6 +18,9 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /**
+ @ingroup PublicAPI_TopicUpdate
+ @ingroup PublicAPI_TopicDatatypes_Binary
+
  @brief An update stream that provides the ability for updating topics with
  binary values.
 

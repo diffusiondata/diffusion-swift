@@ -19,6 +19,8 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /**
+ @ingroup PublicAPI_ClientControl
+
  @brief Listener for client message queue events from the server.
 
  @see PTDiffusionClientControlFeature

@@ -19,6 +19,8 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /**
+ @ingroup PublicAPI_TopicDatatypes_RecordV2
+
  @brief Methods implemented by classes handling RecordV2 messaging requests.
 
  @see PTDiffusionRecordV2
@@ -30,11 +32,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  Called when a record request has been received.
- 
+
  @param stream The stream that received the request.
 
  @param record The request that was received.
- 
+
  @param responder Responder object to be used for responding to the request.
 
  @since 6.0

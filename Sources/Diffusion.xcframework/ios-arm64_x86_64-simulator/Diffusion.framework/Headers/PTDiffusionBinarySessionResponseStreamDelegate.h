@@ -18,6 +18,8 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /**
+ @ingroup PublicAPI_TopicDatatypes_Binary
+
  @brief Methods implemented by classes handling Binary messaging responses from
  individual sessions.
 

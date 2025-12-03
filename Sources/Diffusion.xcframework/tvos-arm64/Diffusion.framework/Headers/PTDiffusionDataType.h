@@ -16,7 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  @brief Methods implemented by classes providing data type implementations.
- 
+
  A data type is specified for a particular class (its value class). It provides
  methods to convert values of the value class to and from binary. Diffusion
  provides several data type implementations.
@@ -25,7 +25,7 @@ NS_ASSUME_NONNULL_BEGIN
  by one or more types of delta.
 
  @see PTDiffusionDataTypes
- 
+
  @since 6.0
  */
 @protocol PTDiffusionDataType

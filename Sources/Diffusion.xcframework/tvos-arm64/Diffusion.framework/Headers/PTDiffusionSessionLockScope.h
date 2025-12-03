@@ -15,6 +15,8 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /**
+ @ingroup PublicAPI_TopicUpdate
+
  @brief Scope specifying when a session lock should be releaed.
 
  @see PTDiffusionSession#lockWithName:scope:completionHandler:

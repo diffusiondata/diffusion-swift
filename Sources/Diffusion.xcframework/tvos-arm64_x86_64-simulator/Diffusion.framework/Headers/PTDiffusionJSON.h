@@ -47,6 +47,8 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /**
+ @ingroup PublicAPI_TopicDatatypes_JSON
+
  @brief An immutable JSON value with support for both binary and JSON deltas.
 
  JSON is "JavaScript Object Notation", a lightweight data-interchange format.

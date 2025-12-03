@@ -17,6 +17,8 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /**
+ @ingroup PublicAPI_ClientControl
+
  @brief Common protocol for delegates that establish a server side control presence for the
  client session at a particular set of session properties.
 

@@ -15,6 +15,8 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /**
+ @ingroup PublicAPI_TopicViews
+
  @brief Description of a topic view that has been created.
 
  @see PTDiffusionTopicViewsFeature

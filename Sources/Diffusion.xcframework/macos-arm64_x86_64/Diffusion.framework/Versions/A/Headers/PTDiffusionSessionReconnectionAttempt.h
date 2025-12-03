@@ -15,8 +15,10 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /**
+ @ingroup PublicAPI_Session
+
  @brief A session reconnection attempt can either be started or aborted.
- 
+
  @see PTDffusionSessionReconnectionStrategy
 
  @since 5.6

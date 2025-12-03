@@ -17,6 +17,8 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /**
+ @ingroup PublicAPI_Session
+
  @brief The stream delegate protocol defines the methods to be implemented by
  classes wishing to receive streaming updates.
 

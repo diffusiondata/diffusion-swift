@@ -15,6 +15,8 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /**
+ @ingroup PublicAPI_SessionTrees
+
  @brief A session tree branch mapping.
 
  Branch mappings belong to {@link PTDiffusionBranchMappingTable branch mapping tables}.

@@ -18,6 +18,9 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /**
+ @ingroup PublicAPI_TimeSeries
+ @ingroup PublicAPI_FetchRequest
+
  @brief Encapsulates the result from a time series fetch operation for a single
  selected topic.
 

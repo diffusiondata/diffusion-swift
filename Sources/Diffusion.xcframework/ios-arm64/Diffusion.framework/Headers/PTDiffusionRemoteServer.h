@@ -25,6 +25,8 @@ typedef NS_ENUM(SInt8, PTDiffusionRemoteServerType) {
 };
 
 /**
+ @ingroup PublicAPI_RemoteServers
+
  @brief Base Interface for a remote server.
 
  This is used by the Remote Servers feature.

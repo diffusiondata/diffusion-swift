@@ -17,6 +17,8 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /**
+ @ingroup PublicAPI_FetchRequest
+
  @brief A parameterised query that can be used to search the topic tree.
 
  A new request can be created using the `fetchRequest`
@@ -201,7 +203,7 @@ NS_ASSUME_NONNULL_BEGIN
  @return a new fetch request derived from this fetch request,
  additionally specifying that unpublished reference topics
  should be included in the results
- 
+
  @since 6.5
  */
 -(instancetype)withUnpublishedDelayedTopics;

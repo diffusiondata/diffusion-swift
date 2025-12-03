@@ -18,6 +18,9 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /**
+ @ingroup PublicAPI_FetchRequest
+ @ingroup PublicAPI_TopicDatatypes_String
+
  @brief Encapsulates the results from a string fetch operation issued to the
  server.
 

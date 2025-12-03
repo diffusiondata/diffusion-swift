@@ -18,6 +18,8 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /**
+ @ingroup PublicAPI_TopicUpdate
+
  @brief A constraint to be applied to an update operation or the creation of an
  update stream.
 

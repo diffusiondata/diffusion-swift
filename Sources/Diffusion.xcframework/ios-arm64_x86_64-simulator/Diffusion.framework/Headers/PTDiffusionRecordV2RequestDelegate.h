@@ -20,6 +20,8 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /**
+ @ingroup PublicAPI_TopicDatatypes_RecordV2
+
  @brief Methods implemented by classes handling record messaging requests with a
  handler registered at the server.
 
@@ -32,14 +34,14 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  Called when a record request has been received.
- 
+
  @param registration The topic tree registration for which this handler applies.
 
  @param record The request that was received.
- 
+
  @param context Context object that provides the session ID of the session that
  sent the request along with the path and any requested session properties.
- 
+
  @param responder Responder object to be used for responding to the request.
 
  @since 6.0

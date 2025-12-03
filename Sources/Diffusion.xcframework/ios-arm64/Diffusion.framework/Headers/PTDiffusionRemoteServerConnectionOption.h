@@ -16,6 +16,8 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /**
+ @ingroup PublicAPI_RemoteServers
+
  @brief Connection option key for a remote server
 
  This is used by the Remote Servers feature

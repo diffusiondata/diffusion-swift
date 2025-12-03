@@ -15,8 +15,10 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /**
+ @ingroup PublicAPI_TopicDatatypes_Binary
+
  @brief An immutable delta describing the differences between two binary values.
- 
+
  A `diff` of two binary values creates a binary delta. The binary delta can
  later `apply` to the first value to calculate the second value.
 

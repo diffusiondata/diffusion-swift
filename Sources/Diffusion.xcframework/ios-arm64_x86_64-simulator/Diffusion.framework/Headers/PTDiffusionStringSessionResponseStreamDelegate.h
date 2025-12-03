@@ -16,6 +16,8 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /**
+ @ingroup PublicAPI_TopicDatatypes_String
+
  @brief Methods implemented by classes handling string messaging responses from
  individual sessions.
 

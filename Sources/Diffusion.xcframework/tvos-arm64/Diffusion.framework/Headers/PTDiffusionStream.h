@@ -17,6 +17,8 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /**
+ @ingroup PublicAPI_Session
+
  @brief A stream represents an asynchronous, variable length feed of updates from the
  Diffusion server.
 

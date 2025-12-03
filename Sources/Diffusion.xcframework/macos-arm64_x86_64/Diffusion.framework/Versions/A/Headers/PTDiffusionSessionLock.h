@@ -17,6 +17,8 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /**
+ @ingroup PublicAPI_TopicUpdate
+
  @brief A server-managed resource that can be used to coordinate exclusive
  access to shared resources across sessions.
 

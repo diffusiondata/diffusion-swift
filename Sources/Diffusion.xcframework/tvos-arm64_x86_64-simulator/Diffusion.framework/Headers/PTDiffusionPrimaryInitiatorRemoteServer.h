@@ -18,6 +18,8 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /**
+ @ingroup PublicAPI_RemoteServers
+
  @brief A Primary Initiator Remote Server.
 
  This type makes a connection from a primary server (cluster) to a

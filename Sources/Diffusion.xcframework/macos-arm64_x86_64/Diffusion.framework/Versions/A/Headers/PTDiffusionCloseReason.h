@@ -16,6 +16,8 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /**
+ @ingroup PublicAPI_ClientControl
+
  @brief Specifies the reason why a session has been closed
 
  This is used by the Client Control feature
@@ -236,7 +238,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  The session had an $ExpiryTime specified which expired before the session re-authenticated.
- 
+
  @since 6.12
  */
 +(instancetype)expired;
@@ -244,7 +246,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  The session's authentication was revoked by a privileged user.
- 
+
  @since 6.12
  */
 +(instancetype)revoked;
@@ -253,7 +255,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  The session was closed to make way for another session.
  Only relevant to MQTT Sessions.
- 
+
  @since 6.12
  */
 +(instancetype)sessionTakenOver;

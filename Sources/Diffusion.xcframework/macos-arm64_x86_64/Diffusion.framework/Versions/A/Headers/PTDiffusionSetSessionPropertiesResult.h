@@ -15,8 +15,9 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /**
- @brief Encapsulates the result of a querying the server for the
-        session properties of a particular session ID or session filter
+ @ingroup PublicAPI_ClientControl
+
+ @brief Encapsulates the result of a querying the server for the session properties of a particular session ID or session filter
 
  @since 6.5
  */

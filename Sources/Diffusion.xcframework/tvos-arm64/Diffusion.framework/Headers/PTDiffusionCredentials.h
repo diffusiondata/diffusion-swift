@@ -15,8 +15,10 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /**
+ @ingroup PublicAPI_Session
+
  @brief Credentials contain the proof material to support an authentication request.
- 
+
  The server passes the credentials through to the configured authentication
  handlers for interpretation.
 
@@ -61,7 +63,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  The data defining the receiver.
- 
+
  @since 5.6
  */
 @property(nonatomic, readonly) NSData *data;

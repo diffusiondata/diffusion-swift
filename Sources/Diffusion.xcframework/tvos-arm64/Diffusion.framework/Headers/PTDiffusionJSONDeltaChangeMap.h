@@ -17,6 +17,8 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /**
+ @ingroup PublicAPI_TopicDatatypes_JSON
+
  @brief An immutable map describing the changes to a JSON value.
 
  The map contains an entry for each change, as follows:

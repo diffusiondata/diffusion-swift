@@ -16,6 +16,9 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /**
+ @ingroup PublicAPI_FetchRequest
+ @ingroup PublicAPI_TopicDatatypes_Number
+
  @brief Encapsulates the result from a numeric fetch operation for a single
  selected topic.
 

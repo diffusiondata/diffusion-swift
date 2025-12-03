@@ -22,6 +22,8 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /**
+ @ingroup PublicAPI_Topics
+
  @brief Subscription to topics and fetching topic data.
 
  This feature allows a client session to subscribe to topics to receive
@@ -35,7 +37,7 @@ NS_ASSUME_NONNULL_BEGIN
     <li>By extending the topic views feature, manage topic views.
  </ul>
 
- ###Subscription and unsubscription
+ ### Subscription and unsubscription
 
  A session can issue requests to subscribe to topics at any time, even if the topics
  do not exist at the server.
@@ -72,7 +74,7 @@ NS_ASSUME_NONNULL_BEGIN
  Matching topics will be further filtered to those for which the session
  has `PTDiffusionPathPermission#readTopic` permission.
 
- ###Topic selection scopes
+ ### Topic selection scopes
 
  Topic selection scopes allow an application with multiple components to use a single Diffusion session.
  An application component can use a topic selection scope to manage a set of selectors that is unaffected
@@ -93,7 +95,7 @@ NS_ASSUME_NONNULL_BEGIN
  The `defaultSelectionScope` is used for all methods that do not explicitly specify a scope.
 
 
- ###Subscription streams
+ ### Subscription streams
 
  A session can listen to subscription events and updates for a selection of
  topics by adding one or more streams.
@@ -126,7 +128,7 @@ NS_ASSUME_NONNULL_BEGIN
  callback when unregistered and a `PTDiffusionStreamDelegate#diffusionStream:didFailWithError:`
  callback if the session is closed.
 
- ###Value streams
+ ### Value streams
 
  A `PTDiffusionValueStream` receives values for matching topics as and
  when updates are received from the server.
@@ -222,7 +224,7 @@ NS_ASSUME_NONNULL_BEGIN
  </table>
 
 
- ###Fetch
+ ### Fetch
 
  A session can issue a request to fetch details of a topic or topics (subject
  to authorization) at any time.
@@ -237,7 +239,7 @@ NS_ASSUME_NONNULL_BEGIN
  method on the request.
  This will return the results via a `completionHandler`.
 
- ###Access control
+ ### Access control
 
  A session must have `PTDiffusionPathPermission.selectTopic` permission for the path
  prefix of the topic selector used to subscribe or fetch.
@@ -246,7 +248,7 @@ NS_ASSUME_NONNULL_BEGIN
 
  No access control restrictions are applied to unsubscription.
 
- ###Accessing the feature
+ ### Accessing the feature
 
  This feature can be obtained from a `PTDiffusionSession` as follows:
 
@@ -281,7 +283,7 @@ NS_ASSUME_NONNULL_BEGIN
  @param completionHandler Block to be called asynchronously on success or failure.
  If the operation was successful, the `error` argument passed to the block will be `nil`.
  The completion handler will be called asynchronously on the main dispatch queue.
- 
+
  @return error if any supplied arguments are `nil` or invalid. `nil` otherwise.
 
  @since 6.12
@@ -304,7 +306,7 @@ NS_ASSUME_NONNULL_BEGIN
  @param completionHandler Block to be called asynchronously on success or failure.
  If the operation was successful, the `error` argument passed to the block will be `nil`.
  The completion handler will be called asynchronously on the main dispatch queue.
- 
+
  @return error if any supplied arguments are `nil` or invalid. `nil` otherwise.
 
  @since 6.12
@@ -327,7 +329,7 @@ NS_ASSUME_NONNULL_BEGIN
  @param completionHandler Block to be called asynchronously on success or failure.
  If the operation was successful, the `error` argument passed to the block will be `nil`.
  The completion handler will be called asynchronously on the main dispatch queue.
- 
+
  @return error if any supplied arguments are `nil` or invalid. `nil` otherwise.
 
  @since 6.12
@@ -358,7 +360,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  @brief Request unsubscription from topics.
- 
+
  This is the equivalent of calling `unsubscribe:withSelectionScope:completionHandler:`
  specifiying `PTDiffusionTopicsFeature.defaultSelectionScope`.
 
@@ -562,7 +564,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  @brief Default selection scope
- 
+
  @since 6.12
  */
 +(NSString *)defaultSelectionScope;

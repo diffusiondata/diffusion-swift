@@ -25,6 +25,8 @@ NS_ASSUME_NONNULL_BEGIN
 extern NSString *const PTDiffusionUpdateStreamErrorDomain __deprecated_msg("Use PTDiffusion instead.");
 
 /**
+ @ingroup PublicAPI_TopicUpdate
+
  @brief An update stream that provides a base functionality for updating a
  specific topic.
 

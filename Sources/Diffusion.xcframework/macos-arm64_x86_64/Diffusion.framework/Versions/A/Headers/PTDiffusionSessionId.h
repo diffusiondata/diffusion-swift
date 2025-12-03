@@ -15,8 +15,10 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /**
+ @ingroup PublicAPI_Session
+
  @brief A session ID is a unique session identifier, allocated by the server.
- 
+
  @see PTDiffusionSession
 
  @since 5.6
@@ -29,7 +31,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  Returns a session ID object initialized with the given string.
- 
+
  @param string A string, previously returned by the `description` method on an
  instance of this class.
 

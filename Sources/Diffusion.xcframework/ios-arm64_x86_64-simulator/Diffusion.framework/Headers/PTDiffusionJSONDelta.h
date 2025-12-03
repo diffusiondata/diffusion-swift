@@ -18,6 +18,8 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /**
+ @ingroup PublicAPI_TopicDatatypes_JSON
+
  @brief An immutable structural delta describing the differences between two
  JSON values.
 

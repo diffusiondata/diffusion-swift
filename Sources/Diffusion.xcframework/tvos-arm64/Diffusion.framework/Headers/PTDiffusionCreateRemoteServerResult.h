@@ -17,6 +17,8 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /**
+ @ingroup PublicAPI_RemoteServers
+
  @brief Interface for the result from the creation of a remote server.
 
  This is used by the Remote Servers feature.

@@ -21,6 +21,8 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /**
+ @ingroup PublicAPI_TopicNotifications
+
  @brief The Topic Notifications feature allows a client session to receive
  notifications about changes to selected topics.
 

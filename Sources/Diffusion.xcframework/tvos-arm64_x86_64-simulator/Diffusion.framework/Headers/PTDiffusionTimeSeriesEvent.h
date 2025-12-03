@@ -20,6 +20,8 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /**
+ @ingroup PublicAPI_TimeSeries
+
  @brief An event in a time series.
 
  Two instances are equal if and only if they have identical attributes.
@@ -33,7 +35,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  If this is an edit event, returns the metadata of the original event that this
  event replaces; otherwise returns this event.
- 
+
  The result is always the metadata of an original event, never that of an edit
  event.
 
@@ -44,7 +46,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  If this is an edit event then `YES`, otherwise `NO` indicating that this is an
  original event.
- 
+
  @since 6.0
  */
 @property(nonatomic, readonly, getter=isEditEvent) BOOL editEvent;

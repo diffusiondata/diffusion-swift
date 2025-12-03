@@ -16,8 +16,10 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /**
+ @ingroup PublicAPI_TopicDatatypes_RecordV2
+
  @brief Type of field defined within a schema.
- 
+
  @since 6.0
  */
 @interface PTDiffusionRecordV2SchemaFieldType : PTDiffusionEnumeration

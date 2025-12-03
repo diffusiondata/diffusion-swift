@@ -18,6 +18,8 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /**
+ @ingroup PublicAPI_Metrics
+
  @brief A topic metric collector builder.
 
  @since 6.7

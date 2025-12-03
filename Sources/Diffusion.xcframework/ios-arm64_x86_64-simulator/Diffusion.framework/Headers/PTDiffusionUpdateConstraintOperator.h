@@ -15,6 +15,8 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /**
+ @ingroup PublicAPI_TopicUpdate
+
  @brief An operator used in a constraint comparison.
 
  @see PTDiffusionUpdateConstraint

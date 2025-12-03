@@ -15,13 +15,15 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /**
+ @ingroup PublicAPI_Session
+
  @brief Session state represents the condition a session has in respect
  of connectivity to a Diffusion server.
- 
+
  A session state object is immutable.
 
  @see PTDiffusionSessionStateChange
- 
+
  @since 5.6
  */
 @interface PTDiffusionSessionState : NSObject <NSCopying>
@@ -47,7 +49,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  `YES` if the session is closed, otherwise `NO`.
- 
+
  This might mean that the session lost its connection to the server and
  could not be recovered.
 
@@ -58,7 +60,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  If the session is closed then this property will be `nil` if the closure
  was normal and expected, otherwise it will contain the failure reason.
- 
+
  @note This property is to be considered as an auxiliary, informational
  attachment to this session state instance. As such it is not incorporated
  within the result of the hash method and is not checked on calls to isEqual:

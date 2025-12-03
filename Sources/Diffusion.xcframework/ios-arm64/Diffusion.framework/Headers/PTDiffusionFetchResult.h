@@ -17,6 +17,8 @@ NS_ASSUME_NONNULL_BEGIN
 @class PTDiffusionFetchTopicResult;
 
 /**
+ @ingroup PublicAPI_FetchRequest
+
  @brief Base class for results from fetch operations issued to the server.
 
  A fetch operation is issued using a PTDiffusionFetchRequest.
@@ -53,9 +55,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  The number of elements in the fetch result
- 
+
  @return the size of the results list
- 
+
  @since 6.5
  */
 -(NSUInteger)size;
@@ -63,9 +65,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  Return `YES` if the result contains zero elements
- 
+
  @return `YES` if result list is empty
- 
+
  @since 6.5
  */
 -(BOOL)isEmpty;

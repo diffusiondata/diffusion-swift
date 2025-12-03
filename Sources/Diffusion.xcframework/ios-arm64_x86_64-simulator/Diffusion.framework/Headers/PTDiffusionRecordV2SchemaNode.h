@@ -15,8 +15,10 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /**
+ @ingroup PublicAPI_TopicDatatypes_RecordV2
+
  @brief A node within a schema.
- 
+
  @since 6.0
  */
 @interface PTDiffusionRecordV2SchemaNode : NSObject <NSCopying>
@@ -27,14 +29,14 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  The node name.
- 
+
  @since 6.0
  */
 @property(nonatomic, readonly) NSString* name;
 
 /**
  The minimum number of occurrences of the node within its parent.
- 
+
  This may be zero for a variable multiplicity field, otherwise it will be a
  positive value.
 
@@ -44,7 +46,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  The maximum number of occurrances of the node within its parent.
- 
+
  This will be a positive value greater than or equal to the minimum value, or
  -1 to indicate an unlimited number.
 

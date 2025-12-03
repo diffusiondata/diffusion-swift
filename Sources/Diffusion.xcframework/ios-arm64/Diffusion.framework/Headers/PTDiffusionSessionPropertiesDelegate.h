@@ -20,6 +20,8 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /**
+ @ingroup PublicAPI_ClientControl
+
  @brief Listener for Session properties events from the server.
 
  @see PTDiffusionClientControlFeature

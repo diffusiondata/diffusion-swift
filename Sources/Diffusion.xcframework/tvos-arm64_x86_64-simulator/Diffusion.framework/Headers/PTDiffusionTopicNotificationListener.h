@@ -19,6 +19,8 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /**
+ @ingroup PublicAPI_TopicNotifications
+
  @brief Methods implemented by classes handling streamed topic notifications.
 
  This protocol defines methods to be implemented by classes wishing to receive

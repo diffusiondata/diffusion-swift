@@ -14,6 +14,197 @@
  @file Diffusion.h
 
  Framework umbrella header file.
+
+ @defgroup PublicAPI_Session Session management
+ Establishing sessions with the Diffusion Server.
+
+
+ @defgroup PublicAPI_PubSub Publishing and Subscribing
+ Features responsible for subscribing to topics, their datatypes and updating them.
+
+ @defgroup PublicAPI_Topics Topics
+ @ingroup PublicAPI_PubSub
+
+ @defgroup PublicAPI_TopicUpdate Topic Update
+ @ingroup PublicAPI_PubSub
+
+ @defgroup PublicAPI_TimeSeries Time Series
+ @ingroup PublicAPI_PubSub
+
+ @defgroup PublicAPI_FetchRequest Fetch Request
+ @ingroup PublicAPI_PubSub
+
+
+ @defgroup PublicAPI_TopicDatatypes Topic Datatypes
+ @ingroup PublicAPI_PubSub
+
+ @defgroup PublicAPI_TopicDatatypes_Binary Binary
+ @ingroup PublicAPI_TopicDatatypes
+
+ @defgroup PublicAPI_TopicDatatypes_Number Number
+ @ingroup PublicAPI_TopicDatatypes
+
+ @defgroup PublicAPI_TopicDatatypes_JSON JSON
+ @ingroup PublicAPI_TopicDatatypes
+
+ @defgroup PublicAPI_TopicDatatypes_RecordV2 RecordV2
+ @ingroup PublicAPI_TopicDatatypes
+
+ @defgroup PublicAPI_TopicDatatypes_String String
+ @ingroup PublicAPI_TopicDatatypes
+
+
+ @defgroup PublicAPI_Messaging Messaging
+
+
+ @defgroup PublicAPI_TopicManagement Topic Management
+ Topic creation and monitoring topic tree related events.
+
+ @defgroup PublicAPI_TopicControl Topic Control
+ @ingroup PublicAPI_TopicManagement
+
+ @defgroup PublicAPI_TopicNotifications Topic Notifications
+ @ingroup PublicAPI_TopicManagement
+
+
+ @defgroup PublicAPI_Wrangling Wrangling
+ Management of topic wrangling capabilities.
+
+ @defgroup PublicAPI_TopicViews Topic Views
+ @ingroup PublicAPI_Wrangling
+
+ @defgroup PublicAPI_SessionTrees Session Trees
+ @ingroup PublicAPI_Wrangling
+
+
+ @defgroup PublicAPI_SessionManagement Session Management
+ Management of other client sessions.
+
+ @defgroup PublicAPI_Security Security
+ @ingroup PublicAPI_SessionManagement
+
+ @defgroup PublicAPI_SubscriptionControl Subscription Control
+ @ingroup PublicAPI_SessionManagement
+
+ @defgroup PublicAPI_ClientControl Client Control
+ @ingroup PublicAPI_SessionManagement
+
+
+ @defgroup PublicAPI_ServerConfiguration Server Configuration
+ Management of server configuration.
+
+ @defgroup PublicAPI_RemoteServers Remote Servers
+ @ingroup PublicAPI_ServerConfiguration
+
+ @defgroup PublicAPI_Metrics Metrics
+ @ingroup PublicAPI_ServerConfiguration
+
+
+ @defgroup PublicAPI_Ping Ping
+
+
+
+
+ @mainpage
+
+ # Introduction
+
+ The Diffusion Apple Unified client library enables interaction with a Diffusion server
+ from iOS, tvOS and OS X / macOS applications.
+
+ The library has been developed against Apple's Foundation Framework (a.k.a. Cocoa),
+ providing support for developers targetting both desktop and mobile-derived platforms.
+ The API is the same for all platforms, there are no platform-specific interfaces.
+
+ For each platform, the library is supplied as a universal (multi-architecture) framework encapsulating API headers and dynamic library binary:
+
+ - **iOS** (iphoneos)
+ - **OS X / macOS** (macosx)
+ - **tvOS** (appletvos)
+
+ # Getting Started
+
+ For basic instructions on how to get connected to a Diffusion server see [Quickstart Guide](https://docs.diffusiondata.com/docs/quickstartguide/onprem/index-on-prem.html).
+
+
+ ---
+
+ ## Development Environment
+
+ We recommend using **Xcode 15.1**, against which this library was built. It includes:
+    - iOS 12.2 SDK
+    - macOS 10.14.4 SDK
+    - tvOS 12.2 SDK
+
+ A minimum of **Xcode 15.1** is required.
+
+ ---
+
+ ## Runtime Support
+
+ Diffusion Protocols:
+
+ URL Scheme | Protocol         | Default TCP Port
+ ---------- | ---------------- | ----------------
+ ws         | WebSocket        | 80
+ wss        | Secure WebSocket | 443
+
+
+ Minimum deployment targets:
+
+ Operating System | Version
+ ---------------- | -------
+ iOS              | 12.0
+ OS X / macOS     | 10.13
+ tvOS             | 12.0
+
+
+ Processor Architectures:
+
+ Apple SDK                         | Included arch_type slices
+ --------------------------------- | -------------------------
+ OS X / macOS (macosx)             | aarch64, x86_64
+ iOS (iphoneos)                    | arm64
+ iOS Simulator (iphonesimulator)   | x86_64
+ tvOS (appletvos)                  | arm64
+ tvOS Simulator (appletvsimulator) | x86_64
+
+ ---
+
+ # Index
+
+ ## Core functionality
+ - @ref PublicAPI_Session
+ - @ref PublicAPI_PubSub
+ - @ref PublicAPI_Messaging
+ - @ref PublicAPI_Ping
+ - @ref PublicAPI_TopicDatatypes
+
+
+ ## Advanced functionality
+ - @ref PublicAPI_Wrangling
+ - @ref PublicAPI_TopicManagement
+
+
+ ## Client control functionality
+ - @ref PublicAPI_SessionManagement
+ - @ref PublicAPI_ServerConfiguration
+
+ ---
+
+ # Links
+
+ ### Additional Documentation
+ - [Quickstart Guide](https://docs.diffusiondata.com/docs/quickstartguide/onprem/index-on-prem.html)
+ - [Latest Diffusion Release Notes](https://docs.diffusiondata.com/docs/latest/ReleaseNotice.html)
+ - [Diffusion User Manual](https://docs.diffusiondata.com/docs/latest/manual/html/index.html)
+
+
+ ### Support Links
+ - [Download Diffusion Apple SDK](https://www.diffusiondata.com/diffusion-on-premise/#apple)
+ - [DiffusionData Developer Hub](https://docs.diffusiondata.com/)
+ - [DiffusionData Homepage](https://www.diffusiondata.com/)
+
  */
 
 #import <Foundation/Foundation.h>

@@ -18,6 +18,8 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /**
+ @ingroup PublicAPI_TopicViews
+
  @brief This feature allows a client session to manage topic views.
 
  A topic view maps one part of a server's topic tree to another. It

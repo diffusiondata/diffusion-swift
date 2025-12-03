@@ -19,9 +19,11 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /**
+ @ingroup PublicAPI_TopicDatatypes_Number
+
  @brief Methods implemented by classes handling numeric messaging requests with
  a handler registered at the server.
- 
+
  @see PTDiffusionPrimitive
  @see PTDiffusionMessagingFeature
 
@@ -31,14 +33,14 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  Called when a numeric request has been received.
- 
+
  @param registration The topic tree registration for which this handler applies.
 
  @param number The request that was received.
- 
+
  @param context Context object that provides the session ID of the session that
  sent the request along with the path and any requested session properties.
- 
+
  @param responder Responder object to be used for responding to the request.
 
  @since 6.0

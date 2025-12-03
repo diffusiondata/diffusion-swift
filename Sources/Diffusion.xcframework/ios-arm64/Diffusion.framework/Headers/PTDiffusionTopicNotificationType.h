@@ -16,6 +16,8 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /**
+ @ingroup PublicAPI_TopicNotifications
+
  @brief The type of topic notification received.
 
  @see PTDiffusionTopicNotificationListener

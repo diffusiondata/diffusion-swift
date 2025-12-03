@@ -18,6 +18,8 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /**
+ @ingroup PublicAPI_TimeSeries
+
  @brief Query result providing an array of time series events.
 
  @since 6.0
@@ -30,7 +32,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  If this result includes all events selected by the query then `YES`.
- 
+
  When this property returns `YES` then the value returned by the selectedCount
  property will be the same as the count of the array returned by the events
  property.
@@ -41,7 +43,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  The number of events selected by the query.
- 
+
  This number may be greater than the count of the array returned by the events
  property due to a policy of the time series topic to limit the number of
  returned results, or the use a limit on the range query.
@@ -54,7 +56,7 @@ NS_ASSUME_NONNULL_BEGIN
  The structural properties of the events array.
 
  @see events
- 
+
  @since 6.0
  */
 @property(nonatomic, readonly) PTDiffusionTimeSeriesQueryResultEventArrayStructure* eventArrayStructure;

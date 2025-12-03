@@ -15,6 +15,8 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /**
+ @ingroup PublicAPI_Metrics
+
  @brief The common base interface for metric collectors.
 
  @since 6.7

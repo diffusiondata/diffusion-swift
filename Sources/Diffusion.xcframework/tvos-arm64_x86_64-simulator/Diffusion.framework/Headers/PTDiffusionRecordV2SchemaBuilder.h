@@ -17,6 +17,8 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /**
+ @ingroup PublicAPI_TopicDatatypes_RecordV2
+
  @brief Used to build an immutable PTDiffusionRecordV2Schema.
 
  A schema defines the records and fields that may occur in a RecordV2 topic
@@ -51,7 +53,7 @@ NS_ASSUME_NONNULL_BEGIN
  Returns an immutable schema from the current state of this builder.
 
  @return Immutable schema from the current state of this builder.
- 
+
  @exception NSInternalInconsistencyException No records have been specified yet
  for this builder instance.
 
@@ -61,7 +63,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  Add a new single occurrence record to the schema.
- 
+
  This is the equivalent to calling #addRecordWithName:occurs: with a value of
  `1` for `occurs`.
 
@@ -84,12 +86,12 @@ NS_ASSUME_NONNULL_BEGIN
  `occurs` for both `min` and `max`.
 
  @param name The record name.
- 
+
  @param occurs The number of times the record is to occur. This must be a
  positive value.
 
  @return This builder.
- 
+
  @exception NSInvalidArgumentException If `name` is `nil` or `occurs` is less
  than one.
 
@@ -265,7 +267,7 @@ NS_ASSUME_NONNULL_BEGIN
 
  @param name The field name. This must not be the same as any field already
  added to the record.
- 
+
  @param scale The scale of the field (the number of decimal places). This must
  must be a positive value.
 

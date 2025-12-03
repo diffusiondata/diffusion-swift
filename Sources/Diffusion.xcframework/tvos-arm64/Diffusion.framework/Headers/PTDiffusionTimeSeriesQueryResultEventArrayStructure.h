@@ -16,6 +16,8 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /**
+ @ingroup PublicAPI_TimeSeries
+
  @brief Describes the structural properties of the array of events presented
  by a time series query result.
 
@@ -35,7 +37,7 @@ NS_ASSUME_NONNULL_BEGIN
  - The array can have multiple edit events for the same original event.
 
  @return Instance indicating the array is presented in time series order.
- 
+
  @since 6.0
  */
 +(instancetype)editEventStream;

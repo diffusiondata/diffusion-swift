@@ -32,7 +32,7 @@ NS_ASSUME_NONNULL_BEGIN
  different properties can be derived from a default instance using the
  `[PTdiffusionTopicSpecification initWithType:properties:]` builder method.
 
- ###Topic Properties
+ ### Topic Properties
 
  Depending on the topic type, some properties must be included in the
  specification when creating a topic and some properties have no effect. The
@@ -323,7 +323,7 @@ NS_ASSUME_NONNULL_BEGIN
  'tidy on unsubscribe' option for a topic.
 
  @since 6.0
- 
+
  @deprecated since 6.12 due to typo in name. Please use {@link tidyOnUnsubscribePropertyKey}.
  */
 +(NSString *)tidyOnSubscribePropertyKey;

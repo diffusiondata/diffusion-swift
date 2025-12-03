@@ -18,9 +18,11 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /**
+ @ingroup PublicAPI_Session
+
  @brief The session reconnection strategy protocol defines the behaviour for a session when
  recovering a failed connection.
- 
+
  @see PTDiffusionSessionConfiguration
 
  @since 5.6
@@ -30,9 +32,9 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  The connection has failed when connecting or connected and the session is now in
  a recovering state.
- 
+
  @param session The session which is recovering.
- 
+
  @param attempt The reconnection attempt object providing `start` and `abort` methods
  to be used by the implementing strategy immediately or at some point in the future
  to instruct the session how to proceed.
@@ -46,7 +48,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  @brief Immediate abort is a default reconnection strategy supplied with the client library.
- 
+
  This strategy immediately aborts.
 
  @since 5.6
@@ -56,7 +58,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  @brief Delayed is a default reconnection strategy supplied with the client library.
- 
+
  This strategy attempts to reconnect after a fixed delay specified in seconds.
 
  @since 5.6
@@ -74,7 +76,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  Returns a delayed reconnection strategy initialised with the given delay.
- 
+
  @param delay The delay in seconds, after which point the receiver will call the session reconnection
  attempt's `start` method.
 
@@ -85,7 +87,7 @@ NS_ASSUME_NONNULL_BEGIN
 -(instancetype)initWithDelay:(NSTimeInterval)delay NS_DESIGNATED_INITIALIZER;
 
 /**
- The delay, in seconds, after which point the receiver will call the session reconnection 
+ The delay, in seconds, after which point the receiver will call the session reconnection
  attempt's `start` method.
 
  @since 5.6

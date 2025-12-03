@@ -20,6 +20,8 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /**
+ @ingroup PublicAPI_Security
+
  @brief This feature provides a client session with the ability to change its
  associated principal as well as to query permissions assigned to it.
 
@@ -27,14 +29,14 @@ NS_ASSUME_NONNULL_BEGIN
  `security` property.
 
  @see PTDiffusionSession
- 
+
  @since 5.6
  */
 @interface PTDiffusionSecurityFeature : PTDiffusionFeature
 
 /**
  Change the security principal associated with the current session.
- 
+
  If authentication fails, the current principal will remain valid.
 
  @param principal The new principal name.
@@ -48,7 +50,7 @@ NS_ASSUME_NONNULL_BEGIN
 
  @exception NSInvalidArgumentException Raised if the completionHandler argument
  is `nil`.
- 
+
  @since 5.6
  */
 -(void)changePrincipal:(nullable NSString *)principal
@@ -58,33 +60,33 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  Re-authenticate the session.
- 
+
  This may be used to change the principal for the session, or to
  re-authenticate the session before it expires.
- 
+
  A session may determine when it is due to expire by querying the value of
  the `$ExpiryTime` session property using {@link PTDiffusionSession#getSessionProperties}.
- 
+
  If this property is not present the session will not expire and there is no
  need to re-authenticate unless the principal in use is to be changed.
- 
+
  @param principal The new principal name.
 
  @param credentials The credentials authenticating the new principal.
- 
+
  @param sesssionProperties The user-defined session properties.
 
  @param completionHandler Block to be called asynchronously on success or
  failure. If the operation was successful, the `error` argument passed to the
  block will be `nil`. The completion handler will be called asynchronously on
  the main dispatch queue.
- 
+
  @param error If this method returns `NO` to indicate that an error occurred
  then this will be populated with the reason for that failure.
- 
+
  @return `YES` on success; or `NO` if an error occurred, in which case `*error`
  will be populated with the failure reason.
- 
+
  @since 6.12
  */
 -(bool)reauthenticate:(nullable NSString *)principal

@@ -17,14 +17,16 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /**
- The name used for session state change notifications.
+ @ingroup PublicAPI_Session
+
+ @brief The name used for session state change notifications.
 
  The notification's `userInfo` dictionary contains a PTDiffusionSessionStateChange object that describes the state change,
  accessed using #PTDiffusionSessionStateChangeUserInfoKey.
 
  @relates PTDiffusionSessionStateChange
  @see PTDiffusionSessionStateChangeUserInfoKey
- 
+
  @note Session state change notifications are notified from the main dispatch queue and are delivered after
  both KVO notifications on the session's state property and any invocations of completion callback handler blocks.
 
@@ -45,7 +47,7 @@ extern NSString *const PTDiffusionSessionStateChangeUserInfoKey;
 
 /**
  @brief A session state change represents a change in a session's state.
- 
+
  A session state change object is immutable.
 
  The @ref md_quick_start "Quick Start" guide provides an example of observing session state changes broadcast

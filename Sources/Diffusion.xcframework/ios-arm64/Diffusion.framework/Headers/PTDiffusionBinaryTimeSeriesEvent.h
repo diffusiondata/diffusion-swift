@@ -18,6 +18,9 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /**
+ @ingroup PublicAPI_TimeSeries
+ @ingroup PublicAPI_TopicDatatypes_Binary
+
  @brief An event in a time series whose value may be interpreted as Binary.
 
  @since 6.0

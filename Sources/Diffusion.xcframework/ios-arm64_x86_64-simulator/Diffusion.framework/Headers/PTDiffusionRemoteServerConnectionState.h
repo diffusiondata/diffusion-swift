@@ -16,6 +16,8 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /**
+ @ingroup PublicAPI_RemoteServers
+
  @brief Represents the current connection state of the remote server
 
  This is used by the Remote Servers feature

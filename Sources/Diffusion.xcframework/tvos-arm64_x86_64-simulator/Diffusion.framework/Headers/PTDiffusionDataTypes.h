@@ -17,6 +17,8 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /**
+ @ingroup PublicAPI_TopicDatatypes
+
  @brief Diffusion data type implementations.
 
  @since 6.0
@@ -29,11 +31,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  Data type that supports arbitrary binary data.
- 
+
  @see PTDiffusionBinary
 
  @return Data type that supports arbitrary binary data.
- 
+
  @since 6.0
  */
 +(id<PTDiffusionDataType>)binary;
@@ -77,7 +79,7 @@ NS_ASSUME_NONNULL_BEGIN
  data-interchange format, serialized as CBOR-format binary.
 
  @return Data type that supports JSON values.
- 
+
  @see PTDiffusionJSON
 
  @since 6.0
@@ -93,7 +95,7 @@ NS_ASSUME_NONNULL_BEGIN
  This data type supports binary deltas and `nil` values.
 
  @return Data type that supports string values.
- 
+
  @see PTDiffusionPrimitive
 
  @since 6.0
@@ -102,11 +104,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  Data type that supports data in the form of records and fields.
- 
+
  This data type supports binary deltas but does not support `nil` values.
 
  @return Data type that supports data in the form of records and fields.
- 
+
  @see PTDiffusionRecordV2
 
  @since 6.0

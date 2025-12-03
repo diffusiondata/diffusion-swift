@@ -18,6 +18,8 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /**
+ @ingroup PublicAPI_TopicDatatypes_RecordV2
+
  @brief A field definition within a schema.
 
  @since 6.0
@@ -26,7 +28,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  The field type.
- 
+
  @since 6.0
  */
 @property(nonatomic, readonly) PTDiffusionRecordV2SchemaFieldType* type;

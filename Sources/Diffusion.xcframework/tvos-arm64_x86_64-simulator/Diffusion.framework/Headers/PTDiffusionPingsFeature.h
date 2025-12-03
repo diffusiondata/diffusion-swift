@@ -18,28 +18,30 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /**
+ @ingroup PublicAPI_Ping
+
  @brief The Pings feature provides a client session with the ability to ping the server.
 
  The main purpose of a ping is to test, at a very basic level, the current
  network conditions that exist between the client session and the server it is
  connected to. Each ping request will return details on the latency
  experienced in the form of a round-trip time value.
- 
+
  The Pings feature for a session can be obtained from the session's `pings` property.
- 
+
  @see PTDiffusionSession
- 
+
  @since 5.7
  */
 @interface PTDiffusionPingsFeature : PTDiffusionFeature
 
 /**
  Send a ping to the server.
- 
+
  @param completionHandler Block to be called asynchronously on success or failure.
  If the operation was successful, the `error` argument passed to the block will be `nil`.
  The completion handler will be called asynchronously on the main dispatch queue.
- 
+
  @exception NSInvalidArgumentException Raised if the completionHandler is `nil`.
 
  @since 5.7

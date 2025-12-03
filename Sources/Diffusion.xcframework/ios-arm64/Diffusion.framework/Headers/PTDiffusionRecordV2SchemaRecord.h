@@ -18,17 +18,19 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /**
+ @ingroup PublicAPI_TopicDatatypes_RecordV2
+
  @brief A record definition within a schema.
- 
+
  @since 6.0
  */
 @interface PTDiffusionRecordV2SchemaRecord : PTDiffusionRecordV2SchemaNode
 
 /**
  An ordered list of the field definitions within the record.
- 
+
  There will be at least one.
- 
+
  @since 6.0
  */
 @property(nonatomic, readonly) NSArray<PTDiffusionRecordV2SchemaField *>* fields;

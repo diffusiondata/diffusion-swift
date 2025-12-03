@@ -17,6 +17,8 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /**
+ @ingroup PublicAPI_TopicDatatypes_RecordV2
+
  @brief Represents a single change between one record value and another.
 
  @since 6.0.2
@@ -29,21 +31,21 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  @brief A change contained within a record delta.
- 
+
  @since 6.0.2
  */
 @property(nonatomic, readonly) PTDiffusionRecordV2DeltaChangeType* type;
 
 /**
  The name of the affected record.
- 
+
  @since 6.0.2
  */
 @property(nonatomic, readonly) NSString* recordName;
 
 /**
  The index of the affected record.
- 
+
  This will be `0` for the first (or only) record occurrence with the given name.
 
  @since 6.0.2
@@ -52,7 +54,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  The name of the affected field.
- 
+
  This will be a zero length (empty) string if the type is
  PTDiffusionRecordV2DeltaChangeType#recordsAdded or
  PTDiffusionRecordV2DeltaChangeType#recordsRemoved.

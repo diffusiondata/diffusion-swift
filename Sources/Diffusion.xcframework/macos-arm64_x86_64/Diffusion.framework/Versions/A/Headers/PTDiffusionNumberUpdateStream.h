@@ -16,6 +16,9 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /**
+ @ingroup PublicAPI_TopicUpdate
+ @ingroup PublicAPI_TopicDatatypes_Number
+
  @brief An update stream that provides the ability for updating topics with
  numerical primitive values.
 

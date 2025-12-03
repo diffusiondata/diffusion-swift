@@ -19,6 +19,8 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /**
+ @ingroup PublicAPI_Metrics
+
  @brief This feature allows a client to configure metric collectors.
 
  Diffusion servers provide metrics which are made available in several ways:

@@ -15,6 +15,8 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /**
+ @ingroup PublicAPI_TimeSeries
+
  @brief Builder for queries that select a range of events from a time series.
 
  @since 6.0
@@ -29,7 +31,7 @@ NS_ASSUME_NONNULL_BEGIN
 
  @return a copy of the receiver configured to perform a view range query with a
  new view range that selects the entire time series.
- 
+
  @since 6.0
  */
 -(instancetype)forValues;
@@ -42,7 +44,7 @@ NS_ASSUME_NONNULL_BEGIN
 
  @return a copy of the receiver configured to perform an edit range query with a
  new view range that selects the entire time series.
- 
+
  @since 6.0
  */
 -(instancetype)forEdits;
@@ -111,7 +113,7 @@ NS_ASSUME_NONNULL_BEGIN
  range.
 
  @return a copy of the receiver with a new anchor.
- 
+
  @exception NSInvalidArgumentException if sequence is greater than `INT64_MAX`.
 
  @since 6.0
@@ -194,7 +196,7 @@ NS_ASSUME_NONNULL_BEGIN
  range.
 
  @return a copy of the receiver with a new span.
- 
+
  @exception NSInvalidArgumentException if sequence is greater than `INT64_MAX`.
 
  @since 6.0
@@ -213,7 +215,7 @@ NS_ASSUME_NONNULL_BEGIN
  <strong>Operator type:</strong> span.
 
  @return a copy of the receiver with a new span.
- 
+
  @since 6.0
  */
 -(instancetype)toStart;
@@ -227,7 +229,7 @@ NS_ASSUME_NONNULL_BEGIN
  @param date absolute time specifying the end of the range.
 
  @return a copy of the receiver with a new span.
- 
+
  @since 6.0
  */
 -(instancetype)toDate:(NSDate *)date;

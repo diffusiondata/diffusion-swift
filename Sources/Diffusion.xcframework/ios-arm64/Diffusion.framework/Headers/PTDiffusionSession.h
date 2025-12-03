@@ -40,6 +40,9 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /**
+
+ @ingroup PublicAPI_Session
+
  @brief A client session to a server (or cluster of servers).
 
  The @ref md_quick_start "Quick Start" guide provides basic instructions on how
@@ -71,7 +74,7 @@ NS_ASSUME_NONNULL_BEGIN
      <li>#topicViews
  </ul>
 
- ###Session lifecycle
+ ### Session lifecycle
 
  Each session is managed by a server. The server assigns the session a
  unique identity, and manages the session's topic subscriptions,
@@ -113,7 +116,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 
  Many operations use session filter expressions that use session properties to select sessions.
- 
+
  A session may obtain its own fixed session properties using {@link #getSessionProperties}.
 
 
@@ -409,14 +412,14 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  Returns the values of the session's fixed session properties.
- 
+
  All current fixed property values are returned, except the value of the `ROLES` property.
- 
+
  @param completionHandler Block to be called asynchronously on success or
  failure. If the operation was successful, the `error` argument passed to the
  block will be `nil`. The completion handler will be called asynchronously on
  the main dispatch queue.
- 
+
  @since 6.12
  */
 -(void)getSessionProperties:(void (^)(PTDiffusionGetSessionPropertiesResult * _Nullable result, NSError * _Nullable error)) completionHandler;

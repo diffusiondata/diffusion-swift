@@ -28,6 +28,8 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /**
+ @ingroup PublicAPI_TopicUpdate
+
  @brief An update stream builder.
 
  Builder for  {@link PTDiffusionUpdateStream update stream} to use for updating a

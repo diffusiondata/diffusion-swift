@@ -18,8 +18,9 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /**
- @brief Interface for the result of checking the state
-        of a remote server
+ @ingroup PublicAPI_RemoteServers
+
+ @brief Interface for the result of checking the state of a remote server
 
  This is used by the Remote Servers feature
 

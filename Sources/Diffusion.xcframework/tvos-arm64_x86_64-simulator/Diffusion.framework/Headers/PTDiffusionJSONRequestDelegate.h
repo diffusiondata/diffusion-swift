@@ -20,6 +20,8 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /**
+ @ingroup PublicAPI_TopicDatatypes_JSON
+
  @brief Methods implemented by classes handling JSON messaging requests with a
  handler registered at the server.
 
@@ -36,7 +38,7 @@ NS_ASSUME_NONNULL_BEGIN
  @param registration The topic tree registration for which this handler applies.
 
  @param json The request that was received.
- 
+
  @param context Context object that provides the session ID of the session that
  sent the request along with the path and any requested session properties.
 

@@ -18,6 +18,8 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /**
+ @ingroup PublicAPI_Session
+
  @brief The optional delegate for a session which may be used to receive state notifications.
 
  By default a session will not have a listener.

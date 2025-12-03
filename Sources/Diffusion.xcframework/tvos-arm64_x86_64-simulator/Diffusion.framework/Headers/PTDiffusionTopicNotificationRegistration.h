@@ -16,6 +16,8 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /**
+ @ingroup PublicAPI_TopicNotifications
+
  @brief The registration state of the associated topic notification listener
  on the server.
 

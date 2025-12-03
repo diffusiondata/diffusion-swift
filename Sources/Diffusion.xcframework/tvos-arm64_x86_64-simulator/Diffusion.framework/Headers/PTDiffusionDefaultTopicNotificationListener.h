@@ -17,6 +17,8 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /**
+ @ingroup PublicAPI_TopicNotifications
+
  @brief Default delegate implementation which may be used as an abstract base
  for sub-protocol implementations.
 

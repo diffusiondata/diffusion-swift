@@ -18,6 +18,8 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /**
+ @ingroup PublicAPI_TopicDatatypes_RecordV2
+
  @brief A description of the differences between two record values.
 
  @since 6.0.2
@@ -35,7 +37,7 @@ NS_ASSUME_NONNULL_BEGIN
  The schema supplied must comply with the data format of the delta. No
  validation takes place, so if the schema does not match the data then the
  results may be unpredictable.
- 
+
  @param schema The schema to use for interpreting this delta.
 
  @param error If this method returns `nil` to indicate that an error occurred

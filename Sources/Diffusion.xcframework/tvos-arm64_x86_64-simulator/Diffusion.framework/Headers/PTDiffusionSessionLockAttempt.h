@@ -18,6 +18,8 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /**
+ @ingroup PublicAPI_TopicUpdate
+
  @brief A handle to a session lock request.
 
  Instances of this object may be used to cancel the session lock attempt as well

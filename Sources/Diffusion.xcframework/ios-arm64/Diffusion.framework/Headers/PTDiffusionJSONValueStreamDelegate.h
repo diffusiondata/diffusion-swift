@@ -20,13 +20,15 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /**
+ @ingroup PublicAPI_TopicDatatypes_JSON
+
  @brief Methods implemented by classes handling streamed events for JSON
  value topics.
 
  This protocol defines the methods to be implemented by classes wishing to
  receive streamed events when updates are received from the server for JSON
  topics.
- 
+
  @see PTDiffusionJSON
 
  @since 5.9

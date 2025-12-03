@@ -50,6 +50,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 
 /**
+ @ingroup PublicAPI_TopicDatatypes_Binary
+
  @brief An immutable binary value with support for binary deltas.
 
  @since 5.9
@@ -154,15 +156,15 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  Creates a request handler capable of receiving Binary requests for a handler
  registered at the server.
- 
+
  @param delegate The object which will handle the incoming requests. A weak
  reference is maintained to this object by the returned handler.
- 
+
  @return An object reliant on the supplied delegate that can be registered at
  the server using the Messaging feature.
- 
+
  @exception NSInvalidArgumentException Raised if the delegate argument is `nil`.
- 
+
  @see PTDiffusionMessagingFeature
 
  @since 6.0
@@ -222,14 +224,14 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  @brief Extension adding support for responding to requests using Binary values.
- 
+
  @since 6.0
  */
 @interface PTDiffusionResponder (PTDiffusionBinary)
 
 /**
  Dispatch a response to a request.
- 
+
  @param binary The value to send in response.
 
  @exception NSInvalidArgumentException Raised if the binary argument is `nil`.
@@ -250,14 +252,14 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  Send a request for which a binary response is expected.
- 
+
  The message will be routed to an appropriately registered control handler for
  the given path.
 
  @param request The request to send.
- 
+
  @param path The path to send the request to.
- 
+
  @param completionHandler Block to be called asynchronously on success or
  failure. If the operation was successful, the `error` argument passed to the
  block will be `nil`. The completion handler will be called asynchronously on
@@ -302,20 +304,20 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  @brief Extension adding support to the Time Series feature for appending and
  editing events using binary values.
- 
+
  @since 6.0
  */
 @interface PTDiffusionTimeSeriesFeature (PTDiffusionBinary)
 
 /**
  Update a time series topic by appending a new binary value.
- 
+
  The server will add an event to the end of the time series based on the
  supplied value, with a new sequence number, timestamp, and the author set to
  the authenticated principal of the session.
- 
+
  @param topicPath The path of the time series topic to update.
- 
+
  @param value The event value.
 
  @param completionHandler Block to be called asynchronously on success or
@@ -367,13 +369,13 @@ NS_ASSUME_NONNULL_BEGIN
 
  The existing event is identified by its sequence number and must be an original
  event.
- 
+
  The server will add an edit event to the end of the time series based on the
  supplied value, with a new sequence number, timestamp, and the author set to
  the authenticated principal of the session.
 
  @param topicPath The path of the time series topic to update.
- 
+
  @param originalSequence The sequence number of the original event to edit.
 
  @param value The event value.
@@ -396,11 +398,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  Evaluate a query for a time series topic where events have binary values.
- 
+
  @param query The configured query.
- 
+
  @param topicPath The path of the time series topic to query.
- 
+
  @param completionHandler Block to be called asynchronously on success or
  failure. If the operation was successful, the `error` argument passed to the
  block will be `nil`. The completion handler will be called asynchronously on

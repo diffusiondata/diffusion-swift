@@ -19,13 +19,15 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /**
+ @ingroup PublicAPI_TopicDatatypes_String
+
  @brief Methods implemented by classes handling streamed events for string
  value topics.
 
  This protocol defines the methods to be implemented by classes wishing to
  receive streamed events when updates are received from the server for string
  topics.
- 
+
  @see PTDiffusionPrimitive
 
  @since 6.0
@@ -40,10 +42,10 @@ NS_ASSUME_NONNULL_BEGIN
  @param topicPath The topic path that was updated.
 
  @param specification The specification for the updated topic.
- 
+
  @param oldString The previous value. If `nil` then this is either the first
  value, or the previous value was `nil` indicating no value.
- 
+
  @param newString The new value derived from the last update received from the
  server, or `nil` if there is no value.
 

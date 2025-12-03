@@ -18,6 +18,9 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /**
+ @ingroup PublicAPI_TimeSeries
+ @ingroup PublicAPI_TopicDatatypes_Number
+
  @brief Query result providing an array of number time series events.
 
  @since 6.0

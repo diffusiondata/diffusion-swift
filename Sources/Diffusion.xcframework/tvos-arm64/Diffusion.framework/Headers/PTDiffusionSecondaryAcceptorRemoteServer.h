@@ -17,6 +17,8 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /**
+ @ingroup PublicAPI_RemoteServers
+
  @brief  Secondary remote server that accepts a connection from a primary server.
 
  This type accepts a connection from a {@link PTDiffusionPrimaryInitiatorRemoteServer} with the

@@ -17,6 +17,8 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /**
+ @ingroup PublicAPI_RemoteServers
+
  @brief Secondary remote server that initiates a connection to a primary server.
 
  This type makes a connection from a secondary server (or each secondary

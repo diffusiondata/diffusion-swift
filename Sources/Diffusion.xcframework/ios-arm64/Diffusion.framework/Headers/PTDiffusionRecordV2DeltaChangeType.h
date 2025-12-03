@@ -16,6 +16,8 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /**
+ @ingroup PublicAPI_TopicDatatypes_RecordV2
+
  @brief The type of change represented by a record delta.
 
  @since 6.0.2
@@ -32,7 +34,7 @@ NS_ASSUME_NONNULL_BEGIN
  field.
 
  @return Instance indicating that a field had its value changed.
- 
+
  @since 6.0.2
  */
 +(instancetype)fieldChanged;
@@ -46,7 +48,7 @@ NS_ASSUME_NONNULL_BEGIN
  the first field added.
 
  @return Instance indicating that one or more field values have been added.
- 
+
  @since 6.0.2
  */
 +(instancetype)fieldsAdded;
@@ -60,7 +62,7 @@ NS_ASSUME_NONNULL_BEGIN
  index of the first field removed.
 
  @return Instance indicating that a field value has been removed.
- 
+
  @since 6.0.2
  */
 +(instancetype)fieldsRemoved;
@@ -74,7 +76,7 @@ NS_ASSUME_NONNULL_BEGIN
  added.
 
  @return Instance indicating that one or more records have been added.
- 
+
  @since 6.0.2
  */
 +(instancetype)recordsAdded;
@@ -88,7 +90,7 @@ NS_ASSUME_NONNULL_BEGIN
  removed.
 
  @return Instance indicating that one or more records have been removed.
- 
+
  @since 6.0.2
  */
 +(instancetype)recordsRemoved;

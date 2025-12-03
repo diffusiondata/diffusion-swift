@@ -18,6 +18,9 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /**
+ @ingroup PublicAPI_TimeSeries
+ @ingroup PublicAPI_TopicDatatypes_RecordV2
+
  @brief Query result providing an array of record time series events.
 
  @since 6.0

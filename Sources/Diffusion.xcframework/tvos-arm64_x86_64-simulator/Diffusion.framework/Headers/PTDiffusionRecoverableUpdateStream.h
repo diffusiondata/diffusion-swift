@@ -16,7 +16,13 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+/**
+ @ingroup PublicAPI_TopicUpdate
 
+ @brief Update stream with recoverability capabilies regarding transient server errors.
+
+ @since 6.10
+ */
 @interface PTDiffusionRecoverableUpdateStream<ObjectType> : NSObject
 
 

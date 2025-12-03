@@ -19,6 +19,8 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /**
+ @ingroup PublicAPI_TopicDatatypes_Binary
+
  @brief Methods implemented by classes handling Binary messaging requests.
 
  @see PTDiffusionBinary
@@ -30,11 +32,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  Called when a Binary request has been received.
- 
+
  @param stream The stream that received the request.
 
  @param binary The request that was received.
- 
+
  @param responder Responder object to be used for responding to the request.
 
  @since 6.0

@@ -15,6 +15,8 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /**
+ @ingroup PublicAPI_Session
+
  @brief Defines a retry strategy.
 
  A retry strategy will be applied when an initial to attempt to open a session

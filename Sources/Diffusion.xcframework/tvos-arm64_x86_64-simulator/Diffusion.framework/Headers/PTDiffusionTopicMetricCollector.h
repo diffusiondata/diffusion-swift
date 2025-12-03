@@ -16,6 +16,8 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /**
+ @ingroup PublicAPI_Metrics
+
  @brief The definition of a topic metric collector.
 
  These can be configured to record metric data for a subset of all

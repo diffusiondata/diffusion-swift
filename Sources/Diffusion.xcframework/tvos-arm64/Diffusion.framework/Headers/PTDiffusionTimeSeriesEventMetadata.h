@@ -15,6 +15,8 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /**
+ @ingroup PublicAPI_TimeSeries
+
  @brief Metadata associated with a time series event.
 
  @see PTDiffusionTimeSeriesEvent
@@ -36,7 +38,7 @@ NS_ASSUME_NONNULL_BEGIN
  number of the preceding event plus one.
 
  @return The sequence number; never higher than `INT64_MAX`.
- 
+
  @since 6.0
  */
 @property(nonatomic, readonly) UInt64 sequence;
@@ -53,7 +55,7 @@ NS_ASSUME_NONNULL_BEGIN
 
  @return The difference, measured in milliseconds, between the time the server
  added the event to the time series and midnight, January 1, 1970 UTC.
- 
+
  @since 6.0
  */
 @property(nonatomic, readonly) SInt64 timestamp;

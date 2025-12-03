@@ -19,6 +19,8 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /**
+ @ingroup PublicAPI_TopicDatatypes_String
+
  @brief Methods implemented by classes handling string messaging requests with a
  handler registered at the server.
 
@@ -31,14 +33,14 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  Called when a string request has been received.
- 
+
  @param registration The topic tree registration for which this handler applies.
 
  @param string The request that was received.
- 
+
  @param context Context object that provides the session ID of the session that
  sent the request along with the path and any requested session properties.
- 
+
  @param responder Responder object to be used for responding to the request.
 
  @since 6.0

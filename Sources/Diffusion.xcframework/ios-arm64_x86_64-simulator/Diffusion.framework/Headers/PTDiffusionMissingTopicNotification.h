@@ -17,6 +17,8 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /**
+ @ingroup PublicAPI_TopicNotifications
+
  @brief Notification that a session has made a request using a selector that does
  not match any topics.
 
@@ -63,7 +65,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  The session properties of the session that made the request.
- 
+
  @since 6.7
  */
 @property (nonatomic, readonly) NSDictionary<NSString *, NSString *>* sessionProperties;

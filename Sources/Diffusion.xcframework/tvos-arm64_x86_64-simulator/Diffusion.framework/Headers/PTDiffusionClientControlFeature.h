@@ -25,8 +25,9 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /**
- @brief The Client Control feature provides the ability for a client session
-        to control other client sessions.
+ @ingroup PublicAPI_ClientControl
+
+ @brief The Client Control feature provides the ability for a client session to control other client sessions.
 
  It allows for notifications of client sessions starting and closing as well
  as the ability to manage client sessions (forcibly closing them etc).

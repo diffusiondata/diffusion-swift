@@ -18,9 +18,11 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /**
+ @ingroup PublicAPI_TopicNotifications
+
  @brief Handler called when a client session subscribes or fetches using a topic
  selector that matches no topics.
- 
+
  @see PTDiffusionTopicControlFeature
 
  @since 5.7

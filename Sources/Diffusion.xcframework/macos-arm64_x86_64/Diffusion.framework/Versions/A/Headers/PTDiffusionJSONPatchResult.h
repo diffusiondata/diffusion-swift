@@ -15,6 +15,8 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /**
+ @ingroup PublicAPI_TopicDatatypes_JSON
+
  @brief Result of calls to the Partial Update feature.
 
  See PTDiffusionTopicUpdateFeature::applyJsonPatch:toPath:completionHandler: and

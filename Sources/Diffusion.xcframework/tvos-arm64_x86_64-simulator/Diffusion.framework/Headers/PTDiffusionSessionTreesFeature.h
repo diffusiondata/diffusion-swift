@@ -18,6 +18,8 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /**
+ @ingroup PublicAPI_SessionTrees
+
  @brief This feature allows a client session to configure session trees.
 
  A session tree is a virtual view of the topic tree presented to a session by

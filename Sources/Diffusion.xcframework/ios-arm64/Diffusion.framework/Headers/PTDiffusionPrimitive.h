@@ -50,6 +50,8 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /**
+ @ingroup PublicAPI_TopicDatatypes
+
  @brief Support for creating value streams for primitive values including
  string and numeric types.
 
@@ -2546,7 +2548,7 @@ NS_ASSUME_NONNULL_BEGIN
 
  @since 6.3
 
- @deprecated since 6.10. Use {@link PTDiffusionPartialJSONUpdateConstraint#withDoubleValue#atPointer:comparisonOperator:error instead}.
+ @deprecated since 6.10. Use {@link PTDiffusionPartialJSONUpdateConstraint#withDoubleValue#atPointer:comparisonOperator:error} instead.
  */
 -(nullable instancetype)withDoubleValue:(double)value
                               atPointer:(NSString *)pointer
@@ -2609,7 +2611,7 @@ NS_ASSUME_NONNULL_BEGIN
 
  @since 6.3
 
- @deprecated since 6.10. Use {@link PTDiffusionPartialJSONUpdateConstraint#withDoubleFloatNumberValue#atPointer:comparisonOperator:error instead}.
+ @deprecated since 6.10. Use {@link PTDiffusionPartialJSONUpdateConstraint#withDoubleFloatNumberValue#atPointer:comparisonOperator:error} instead.
  */
 -(nullable instancetype)withDoubleFloatNumberValue:(NSNumber *)number
                                          atPointer:(NSString *)pointer
@@ -2674,7 +2676,7 @@ NS_ASSUME_NONNULL_BEGIN
 
  @since 6.3
 
- @deprecated since 6.10. Use {@link PTDiffusionPartialJSONUpdateConstraint#withLongLongValue#atPointer:comparisonOperator:error instead}.
+ @deprecated since 6.10. Use {@link PTDiffusionPartialJSONUpdateConstraint#withLongLongValue#atPointer:comparisonOperator:error} instead.
  */
 -(nullable instancetype)withLongLongValue:(long long)value
                                 atPointer:(NSString *)pointer
@@ -2736,7 +2738,7 @@ NS_ASSUME_NONNULL_BEGIN
 
  @since 6.3
 
- @deprecated since 6.10. Use {@link PTDiffusionPartialJSONUpdateConstraint#withInt64NumberValue#atPointer:comparisonOperator:error instead}.
+ @deprecated since 6.10. Use {@link PTDiffusionPartialJSONUpdateConstraint#withInt64NumberValue#atPointer:comparisonOperator:error} instead.
  */
 -(nullable instancetype)withInt64NumberValue:(NSNumber *)number
                                    atPointer:(NSString *)pointer
@@ -2803,7 +2805,7 @@ NS_ASSUME_NONNULL_BEGIN
 
  @since 6.3
 
- @deprecated since 6.10. Use {@link PTDiffusionPartialJSONUpdateConstraint#withStringValue#atPointer:comparisonOperator:error instead}.
+ @deprecated since 6.10. Use {@link PTDiffusionPartialJSONUpdateConstraint#withStringValue#atPointer:comparisonOperator:error} instead.
  */
 -(nullable instancetype)withStringValue:(NSString *)string
                               atPointer:(NSString *)pointer

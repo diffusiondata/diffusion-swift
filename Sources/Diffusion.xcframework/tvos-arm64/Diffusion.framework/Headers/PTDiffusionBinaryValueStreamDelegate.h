@@ -20,13 +20,15 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /**
+ @ingroup PublicAPI_TopicDatatypes_Binary
+
  @brief Methods implemented by classes handling streamed events for binary
  value topics.
 
  This protocol defines the methods to be implemented by classes wishing to
  receive streamed events when updates are received from the server for binary
  topics.
- 
+
  @see PTDiffusionBinary
 
  @since 5.9
@@ -41,9 +43,9 @@ NS_ASSUME_NONNULL_BEGIN
  @param topicPath The topic path that was updated.
 
  @param specification The specification for the updated topic.
- 
+
  @param oldBinary The previous value. If `nil` then this is the first value.
- 
+
  @param newBinary The new value derived from the last update received from the
  server.
 

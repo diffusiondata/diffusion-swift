@@ -23,6 +23,8 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /**
+ @ingroup PublicAPI_RemoteServers
+
  @brief This feature allows a client session to manage remote servers.
 
  A remote server provides the configuration to connect to a Diffusion server

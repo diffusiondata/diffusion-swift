@@ -16,6 +16,8 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /**
+ @ingroup PublicAPI_TopicDatatypes_RecordV2
+
  @brief A mutable data model based upon a schema.
 
  An initial version of such a model can be created from a schema using
@@ -53,7 +55,7 @@ NS_ASSUME_NONNULL_BEGIN
  will be populated with the failure reason. Reasons for failure include:
  - the last or only record is not a variable repeating record or has already
    reached the maximum number of occurrences.
- 
+
  @since 6.0
  */
 -(BOOL)addRecordError:(NSError **)error;
@@ -75,9 +77,9 @@ NS_ASSUME_NONNULL_BEGIN
    record is not a variable multiplicity field or the maximum number of
    occurrences for the field would be breached.
  - one of the values is incompatible with the field type.
- 
+
  @exception NSInvalidArgumentException If fieldValues is `nil`.
- 
+
  @note This method does nothing if fieldValues is an empty array.
 
  @since 6.0
@@ -143,7 +145,7 @@ NS_ASSUME_NONNULL_BEGIN
  will be populated with the failure reason. Reasons for failure include:
  - `recordName` is not defined in the schema.
  - `recordIndex` is out of bounds.
- 
+
  @exception NSInvalidArgumentException If recordName is `nil`, or if recordIndex
  is negative.
 
@@ -164,7 +166,7 @@ NS_ASSUME_NONNULL_BEGIN
 
  If the last or only record is not defined as variable multiplicity, calling
  this method has no effect.
- 
+
  @since 6.0
  */
 -(void)clearVariableRecords;

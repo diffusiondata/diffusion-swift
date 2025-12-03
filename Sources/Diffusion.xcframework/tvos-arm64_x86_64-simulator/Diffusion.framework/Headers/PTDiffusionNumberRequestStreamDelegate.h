@@ -18,6 +18,8 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /**
+ @ingroup PublicAPI_TopicDatatypes_Number
+
  @brief Methods implemented by classes handling Number messaging requests.
 
  @see PTDiffusionPrimitive
@@ -29,11 +31,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  Called when a numeric request has been received.
- 
+
  @param stream The stream that received the request.
 
  @param number The request that was received.
- 
+
  @param responder Responder object to be used for responding to the request.
 
  @since 6.0

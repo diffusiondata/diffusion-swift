@@ -26,8 +26,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 
 /**
+
+ @ingroup PublicAPI_Session
+
  @brief A session configuration defines behavior and policies to use when connecting to Diffusion.
- 
+
  @see PTDiffusionSession
 
  @since 5.6
@@ -55,7 +58,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  The security principal to use when opening the session.
- 
+
  A value of `nil` dictates that no principal name will be associated with the session,
  indicating anonymous authentication.
 
@@ -66,7 +69,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  The security credentials to use when opening the session.
- 
+
  A value of `nil` dictates that no credentials will be used when authenticating the session.
 
  @since 5.6
@@ -76,9 +79,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  The reconnection timeout in seconds that will be used on connection failure.
- 
+
  The reconnection timeout boxed by this number is accessed as a double representing an NSTimeInterval.
- 
+
  A value of `nil` or a negative boxed value both dictate that reconnection will be disabled.
 
  @since 5.6
@@ -88,7 +91,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  The reconnection strategy that will be used on connection failure.
- 
+
  A value of `nil` when a valid reconnectionTimeout has been set dictates that the default
  reconnection strategy will be employed.
 
@@ -114,7 +117,7 @@ NS_ASSUME_NONNULL_BEGIN
  The default recovery buffer size in messages.
 
  @return Number representing the default recovery buffer size in messages.
- 
+
  @see recoveryBufferSize
 
  @since 6.0
@@ -123,17 +126,17 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  The recovery buffer size in messages; can be zero.
- 
+
  If the server is configured to support reconnection, a session established with
  a non-zero reconnection time retains a buffer of sent messages.
  If the session disconnects and reconnects, this buffer is used to re-send
  messages that the server has not received.
- 
+
  Higher values increase the chance of successful reconnection, but increase the
  per-session memory footprint.
 
  @see defaultRecoveryBufferSize
- 
+
  @since 6.0
  */
 @property(nonatomic, readonly) NSUInteger recoveryBufferSize;
@@ -143,7 +146,7 @@ NS_ASSUME_NONNULL_BEGIN
  The default connection timeout (2 seconds).
 
  @return Time interval representing the default connection timeout.
- 
+
  @since 5.7
  */
 +(NSTimeInterval)defaultConnectionTimeout;
@@ -155,7 +158,7 @@ NS_ASSUME_NONNULL_BEGIN
  @return Number representing the lowest value in bytes that the maximum message size can be set to.
 
  @see maximumMessageSize
- 
+
  @since 6.0
  */
 +(NSUInteger)maximumMessageSizeMinimum;
@@ -171,7 +174,7 @@ NS_ASSUME_NONNULL_BEGIN
  @return Number representing the default maximum message size in bytes.
 
  @see maximumMessageSize
- 
+
  @since 6.0
  */
 +(NSUInteger)defaultMaximumMessageSize;
@@ -228,7 +231,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  The connection timeout.
- 
+
  This constrains the time taken to establish an initial connection to the server.
  The server is responsible for limiting the overall time taken to complete a connection
  once it has received the request.
@@ -241,17 +244,17 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  Security settings to be applied to the underlying transport streams for SSL/TLS
  encrypted connections.
- 
+
  A value of `nil` or an empty dictionary indicates that default settings, as
  defined by the host operating system, will be applied.
 
  Supported keys are documented by Apple under 'CFStream Property SSL Settings
  Constants' in their Core Foundation
  [CFStream Reference](https://developer.apple.com/library/ios/documentation/CoreFoundation/Reference/CFStreamConstants/#//apple_ref/doc/constant_group/CFStream_Property_SSL_Settings_Constants).
- 
+
  For example, a rudimentary approach to allowing otherwise disallowed self-signed
  certificates could be to disable validation of the certificate chain entirely:
- 
+
      configuration.sslOptions =
          [NSDictionary dictionaryWithObject:kCFBooleanFalse
                                      forKey:kCFStreamSSLValidatesCertificateChain];
@@ -278,10 +281,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  Configuration of the HTTP Proxy that should be used to make connections to the server.
- 
+
  This allows connection to a server using HTTP CONNECT tunneling through the
  specified proxy.
- 
+
  A value of `nil` dictates that a proxy is not used. This is the default.
 
  @since 6.0
@@ -402,7 +405,7 @@ NS_ASSUME_NONNULL_BEGIN
  This constrains the size of messages that may be received from the server and
  thus the size of any content that can be received. The limit protects against
  unexpectedly large messages.
- 
+
  @exception NSInvalidArgumentException On writing to this property if the
  given size is below the allowable minimum.
 
@@ -444,7 +447,7 @@ NS_ASSUME_NONNULL_BEGIN
  once it has received the request.
 
  If not explicitly set, defaultConnectionTimeout will be assumed.
- 
+
  @note If this exceeds one hour (3,600 seconds) a warning will be logged and the
  connection timeout will be constrained to one hour.
 
@@ -456,17 +459,17 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  Security settings to be applied to the underlying transport streams for SSL/TLS
  encrypted connections.
- 
+
  A value of `nil` or an empty dictionary indicates that default settings, as
  defined by the host operating system, will be applied.
- 
+
  Supported keys are documented by Apple under 'CFStream Property SSL Settings
  Constants' in their Core Foundation
  [CFStream Reference](https://developer.apple.com/library/ios/documentation/CoreFoundation/Reference/CFStreamConstants/#//apple_ref/doc/constant_group/CFStream_Property_SSL_Settings_Constants).
- 
+
  For example, a rudimentary approach to allowing otherwise disallowed self-signed
  certificates could be to disable validation of the certificate chain entirely:
- 
+
      configuration.sslOptions =
          [NSDictionary dictionaryWithObject:kCFBooleanFalse
                                      forKey:kCFStreamSSLValidatesCertificateChain];

@@ -22,6 +22,8 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /**
+ @ingroup PublicAPI_RemoteServers
+
  @brief A Remote Server builder.
 
  A builder of this type is used to create instances of {@link PTDiffusionRemoteServer}

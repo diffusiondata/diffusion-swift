@@ -16,6 +16,9 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /**
+ @ingroup PublicAPI_TimeSeries
+ @ingroup PublicAPI_TopicDatatypes_Number
+
  @brief An event in a time series whose value may be interpreted as a number.
 
  @since 6.0

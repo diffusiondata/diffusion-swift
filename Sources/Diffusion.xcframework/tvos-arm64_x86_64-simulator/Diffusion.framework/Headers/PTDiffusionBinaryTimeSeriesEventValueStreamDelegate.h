@@ -20,13 +20,16 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /**
+ @ingroup PublicAPI_TimeSeries
+ @ingroup PublicAPI_TopicDatatypes_Binary
+
  @brief Methods implemented by classes handling streamed time series events with
  binary values.
 
  This protocol defines the methods to be implemented by classes wishing to
  receive streamed time series events when updates are received from the server
  with binary values.
- 
+
  @since 6.0
  */
 @protocol PTDiffusionBinaryTimeSeriesEventValueStreamDelegate <PTDiffusionSubscriberStreamDelegate>
@@ -39,9 +42,9 @@ NS_ASSUME_NONNULL_BEGIN
  @param topicPath The topic path that was updated.
 
  @param specification The specification for the updated topic.
- 
+
  @param oldBinaryEvent The previous event. If `nil` then this is the first event.
- 
+
  @param newBinaryEvent The new event derived from the last update received from
  the server.
 

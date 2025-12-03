@@ -17,6 +17,8 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /**
+ @ingroup PublicAPI_SessionTrees
+
  @brief Builder for {@link PTDiffusionBranchMappingTable} instances.
 
  @see PTDiffusionSessionTrees
@@ -43,7 +45,7 @@ NS_ASSUME_NONNULL_BEGIN
  @brief Add a new branch mapping.
 
  @param sessionFilter the session filter
- 
+
  @param topicTreeBranch the target branch in the topic tree for sessions
  matching the session filter
 
