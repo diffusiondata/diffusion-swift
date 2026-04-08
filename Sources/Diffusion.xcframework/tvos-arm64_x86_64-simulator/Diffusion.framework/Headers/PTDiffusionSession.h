@@ -199,7 +199,7 @@ NS_ASSUME_NONNULL_BEGIN
 
  @since 5.7
  */
-@property(nonatomic, readonly) PTDiffusionSessionState* state;
+@property(atomic, readonly) PTDiffusionSessionState* state;
 
 
 /**
