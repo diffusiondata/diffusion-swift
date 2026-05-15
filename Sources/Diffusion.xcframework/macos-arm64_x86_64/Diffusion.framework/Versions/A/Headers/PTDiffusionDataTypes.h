@@ -42,7 +42,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  Data type that supports double-precision floating point numbers (Eight-byte
- IEEE 754) presented as `NSNumber` instances.
+ IEEE 754) presented as
+ <a href="https://developer.apple.com/documentation/foundation/nsnumber">NSNumber</a> instances.
 
  The integer value is serialized as CBOR-format binary. A serialized value can
  be read using the #json datatype.
@@ -58,8 +59,8 @@ NS_ASSUME_NONNULL_BEGIN
 +(id<PTDiffusionDataType>)doubleFloat;
 
 /**
- Data type that supports 64-bit, signed integer values presented as `NSNumber`
- instances.
+ Data type that supports 64-bit, signed integer values presented as
+ <a href="https://developer.apple.com/documentation/foundation/nsnumber">NSNumber</a> instances.
 
  The integer value is serialized as CBOR-format binary. A serialized value can
  be read using the #json datatype.
@@ -87,7 +88,8 @@ NS_ASSUME_NONNULL_BEGIN
 +(id<PTDiffusionDataType>)json;
 
 /**
- Data type that supports string values presented as `NSString` instances.
+ Data type that supports string values presented as
+ <a href="https://developer.apple.com/documentation/foundation/nsstring/">NSString</a> instances.
 
  The string value is serialized as CBOR-format binary. A serialized value can be
  read using the #json datatype.

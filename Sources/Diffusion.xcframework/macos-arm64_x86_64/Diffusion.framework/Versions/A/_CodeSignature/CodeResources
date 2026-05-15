@@ -222,7 +222,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			lyg6AFEcPZO8IIjMNfvTeVc9QnpimLn+72GVK5h07J4=
+			/ybv3k9qmG8ZvwgfaHCMOPHMqNCJ1W8lD0rE+HZqULw=
 			</data>
 		</dict>
 		<key>Headers/PTDiffusionDefaultSessionResponseStreamDelegate.h</key>
@@ -292,7 +292,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			u80xm6bOIqnWQrpvAEIpn+gY83m7J/lHbP+wWuhlAI0=
+			Pu2EAMSwE3AWFU1Rp6lodB3Hq/8/ak+orDPCLJkzMIc=
 			</data>
 		</dict>
 		<key>Headers/PTDiffusionFetchResult.h</key>
@@ -369,7 +369,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			hBDOg8aJ76ykpJ3/GFWBPo8UutdBG49hnomJ7K3sm9Y=
+			mJDDRM7CdYXeAAQsG+ATP4YbMSFIvFGLIUlFm1YTtfQ=
 			</data>
 		</dict>
 		<key>Headers/PTDiffusionJSONDelta.h</key>
@@ -404,7 +404,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			oaQy9xp7bfe8Z9qS7t71Hh5Sb/2Wl+v+P882x3Atp08=
+			/7pQxlzDCfIgdWaIZO9bMkCxz/pMsIA7eKkUHLch3hk=
 			</data>
 		</dict>
 		<key>Headers/PTDiffusionJSONRequestDelegate.h</key>
@@ -936,7 +936,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			sxPMootNGrT1A0HsSTtN2SujMtFvtKB2LTzH5v8RhaA=
+			7T6sctHW99vJFYUlpzjIDopgC2Acz4RkZTpRN2pN+9o=
 			</data>
 		</dict>
 		<key>Headers/PTDiffusionSessionConfiguration.h</key>

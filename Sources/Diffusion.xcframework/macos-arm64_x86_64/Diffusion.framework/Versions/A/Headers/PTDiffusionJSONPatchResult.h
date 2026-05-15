@@ -34,8 +34,8 @@ NS_ASSUME_NONNULL_BEGIN
 -(instancetype)init NS_UNAVAILABLE;
 
 /**
- @brief an optional NSNumber which if non-null, contains the index of
- the first operation which failed
+ @brief an optional <a href="https://developer.apple.com/documentation/foundation/nsnumber">NSNumber</a>
+ which if non-null, contains the index of the first operation which failed
  */
 @property(nonatomic, nullable, readonly) NSNumber *failedOperation;
 

@@ -303,7 +303,9 @@ NS_ASSUME_NONNULL_BEGIN
  must be compatible with the value class specified or the event type for time
  series topics.
 
- @param topicTypes Topic types to be selected, boxed as NSNumber instances.
+ @param topicTypes Topic types to be selected, boxed as
+ <a href="https://developer.apple.com/documentation/foundation/nsnumber">NSNumber</a>
+ instances.
 
  @return A new fetch request derived from this fetch request but specifying that
  only topics of the specified topic types should be returned.

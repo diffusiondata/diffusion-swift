@@ -78,16 +78,25 @@ NS_ASSUME_NONNULL_BEGIN
  being less restrictive than the capabilities of NSJSONSerialization.
 
  This means:
- - All objects are instances of `NSString`, `NSData`, `NSNumber`, `NSArray`,
-   `NSDictionary` or `NSNull`.
+ - All objects are instances of
+   <a href="https://developer.apple.com/documentation/foundation/nsstring/">NSString</a>
+   <a href="https://developer.apple.com/documentation/foundation/nsdata/">NSData</a>
+   <a href="https://developer.apple.com/documentation/foundation/nsnumber">NSNumber</a>
+   <a href="https://developer.apple.com/documentation/foundation/nsarray">NSArray</a>
+   <a href="https://developer.apple.com/documentation/foundation/nsdictionary/">NSDictionary</a> or
+   <a href="https://developer.apple.com/documentation/foundation/nsnull/">NSNull</a>
+
+
  - Dictionary keys may be instances of any supported type.
  - The top level object may be of any supported type.
 
  Being more permissive than NSJSONSerialization in that:
  - `NSData` instances may be used.
- - Dictionary keys are not restricted to instances of `NSString`.
- - The top level object is not restricted to being a container (`NSArray` or
-   `NSDictionary`).
+ - Dictionary keys are not restricted to instances of
+  <a href="https://developer.apple.com/documentation/foundation/nsstring/">NSString</a>.
+ - The top level object is not restricted to being a container
+  (<a href="https://developer.apple.com/documentation/foundation/nsarray">NSArray</a> or
+  <a href="https://developer.apple.com/documentation/foundation/nsdictionary/">NSDictionary</a>).
 
  Applications may take advantage of the more permissive nature of the
  underlying CBOR encoding by using these capabilities, assuming:
