@@ -1,16 +1,16 @@
-//  Diffusion Client Library for iOS, tvOS and OS X / macOS
+//  Diffusion Client Library for iOS and OS X / macOS
 //
-//  Copyright (c) 2017, 2021 Push Technology Ltd., All Rights Reserved.
+//  Copyright (c) 2017 - 2026 DiffusionData Ltd., All Rights Reserved.
 //
-//  Use is subject to license terms.
+//  Use is subject to licence terms.
 //
 //  NOTICE: All information contained herein is, and remains the
-//  property of Push Technology. The intellectual and technical
-//  concepts contained herein are proprietary to Push Technology and
+//  property of DiffusionData. The intellectual and technical
+//  concepts contained herein are proprietary to DiffusionData and
 //  may be covered by U.S. and Foreign Patents, patents in process, and
 //  are protected by trade secret or copyright law.
 
-@import Foundation;
+#import <Foundation/Foundation.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -35,6 +35,10 @@ extern NSString *const PTDiffusionUnderlyingErrorsKey;
  Remaining errors are unique to the Diffusion Apple Client SDK.
 
  @since 6.7
+ */
+
+/**
+ @brief Enumeration of error codes that can be raised by the Apple Client SDK.
  */
 typedef NS_ENUM(NSInteger, PTDiffusionError) {
     /**
@@ -1147,7 +1151,79 @@ typedef NS_ENUM(NSInteger, PTDiffusionError) {
      */
     PTDiffusionError_KeyNotFoundInDictionary = 20155,
 
+    /**
+     * Invalid argument for the method.
+     * @since 6.10
+     */
+    PTDiffusionError_InvalidArgument = 20156,
+
+    /**
+     * Update Stream recovery attempt limit has been reached.
+     * @since 6.9
+     */
+    PTDiffusionError_UpdateStreamRecoveryLimit = 20157,
+
+    /**
+     * Failed to serialise value.
+     * @since 6.9
+     */
+    PTDiffusionError_ValueSerialisation = 20158,
+
+    /**
+     * Invalid Protocol Version.
+     * @since 6.10
+     */
+    PTDiffusionError_ClientVersionDowngrade = 20159,
+
+    /**
+     * An HTTP redirect response did not include a Location header.
+     * @since 6.13
+     */
+    PTDiffusionError_RedirectMissingLocation = 20160,
+
+    /**
+     * An HTTP redirect response included a Location header that is not a
+     * ws://, wss://, http:// or https:// URL with a host and a port from 1 to
+     * 65535, or a reference relative to the redirected URL.
+     * @since 6.13
+     */
+    PTDiffusionError_InvalidRedirectLocation = 20161,
+
+    /**
+     * The number of HTTP redirects for a single connection attempt exceeded
+     * the allowed limit.
+     * @since 6.13
+     */
+    PTDiffusionError_RedirectLimitExceeded = 20162,
+
+    /**
+     * An HTTP redirect attempted to redirect to a URL already visited during
+     * the current connection attempt.
+     * @since 6.13
+     */
+    PTDiffusionError_DuplicateRedirect = 20163,
+
+    /**
+     * An HTTP redirect from a secure (wss) connection pointed to an insecure
+     * (ws or http) location.
+     * @since 6.13
+     */
+    PTDiffusionError_InsecureRedirectDowngrade = 20164,
+
+    /**
+     * Internal signal used to convey that an HTTP redirect was received
+     * during connection establishment.
+     * @since 6.13
+     */
+    PTDiffusionError_Redirected = 20165,
+
+    /**
+     * An HTTP redirect response had a status other than 301, 302, 307 or 308,
+     * which are the only redirect statuses followed.
+     * @since 6.13
+     */
+    PTDiffusionError_UnsupportedRedirectStatus = 20166,
+
 };
 
 NS_ASSUME_NONNULL_END
-

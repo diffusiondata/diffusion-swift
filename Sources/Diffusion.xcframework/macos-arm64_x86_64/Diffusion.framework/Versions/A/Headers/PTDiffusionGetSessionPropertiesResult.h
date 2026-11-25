@@ -1,22 +1,23 @@
-//  Diffusion Client Library for iOS, tvOS and OS X / macOS
+//  Diffusion Client Library for iOS and OS X / macOS
 //
-//  Copyright (c) 2020 Push Technology Ltd., All Rights Reserved.
+//  Copyright (c) 2020 - 2026 DiffusionData Ltd., All Rights Reserved.
 //
-//  Use is subject to license terms.
+//  Use is subject to licence terms.
 //
 //  NOTICE: All information contained herein is, and remains the
-//  property of Push Technology. The intellectual and technical
-//  concepts contained herein are proprietary to Push Technology and
+//  property of DiffusionData. The intellectual and technical
+//  concepts contained herein are proprietary to DiffusionData and
 //  may be covered by U.S. and Foreign Patents, patents in process, and
 //  are protected by trade secret or copyright law.
 
-@import Foundation;
+#import <Foundation/Foundation.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
 /**
- @brief Encapsulates the result of a querying the server for the
-        session properties of a particular session ID or session filter
+ @ingroup PublicAPI_ClientControl
+
+ @brief Encapsulates the result of a querying the server for the session properties of a particular session ID or session filter
 
  @since 6.5
  */
@@ -31,7 +32,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  Map of the requested session property values
- 
+
  @since 6.5
  */
 @property(nonatomic, readonly) NSDictionary<NSString *, NSString *> * properties;

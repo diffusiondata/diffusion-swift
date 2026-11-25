@@ -1,16 +1,16 @@
-//  Diffusion Client Library for iOS, tvOS and OS X / macOS
+//  Diffusion Client Library for iOS and OS X / macOS
 //
-//  Copyright (c) 2017, 2020 Push Technology Ltd., All Rights Reserved.
+//  Copyright (c) 2017 - 2026 DiffusionData Ltd., All Rights Reserved.
 //
-//  Use is subject to license terms.
+//  Use is subject to licence terms.
 //
 //  NOTICE: All information contained herein is, and remains the
-//  property of Push Technology. The intellectual and technical
-//  concepts contained herein are proprietary to Push Technology and
+//  property of DiffusionData. The intellectual and technical
+//  concepts contained herein are proprietary to DiffusionData and
 //  may be covered by U.S. and Foreign Patents, patents in process, and
 //  are protected by trade secret or copyright law.
 
-@import Foundation;
+#import <Foundation/Foundation.h>
 #import <Diffusion/PTDiffusionFetchRequest.h>
 #import <Diffusion/PTDiffusionTimeSeriesEventMetadata.h>
 
@@ -20,6 +20,8 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /**
+ @ingroup PublicAPI_TimeSeries
+
  @brief An event in a time series.
 
  Two instances are equal if and only if they have identical attributes.
@@ -33,7 +35,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  If this is an edit event, returns the metadata of the original event that this
  event replaces; otherwise returns this event.
- 
+
  The result is always the metadata of an original event, never that of an edit
  event.
 
@@ -44,7 +46,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  If this is an edit event then `YES`, otherwise `NO` indicating that this is an
  original event.
- 
+
  @since 6.0
  */
 @property(nonatomic, readonly, getter=isEditEvent) BOOL editEvent;
@@ -98,7 +100,7 @@ NS_ASSUME_NONNULL_BEGIN
  block will be `nil`. The completion handler will be called asynchronously on
  the main dispatch queue.
 
- @exception NSInvalidArgumentException Raised if any supplied arguments are `nil`.
+ @exception NSInvalidArgumentException Raised if any supplied arguments are <code>nil</code>.
 
  @since 6.3
  */

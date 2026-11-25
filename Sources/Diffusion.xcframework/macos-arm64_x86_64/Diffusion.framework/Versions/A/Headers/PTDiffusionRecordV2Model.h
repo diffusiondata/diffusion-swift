@@ -1,22 +1,24 @@
-//  Diffusion Client Library for iOS, tvOS and OS X / macOS
+//  Diffusion Client Library for iOS and OS X / macOS
 //
-//  Copyright (c) 2017, 2021 Push Technology Ltd., All Rights Reserved.
+//  Copyright (c) 2017 - 2026 DiffusionData Ltd., All Rights Reserved.
 //
-//  Use is subject to license terms.
+//  Use is subject to licence terms.
 //
 //  NOTICE: All information contained herein is, and remains the
-//  property of Push Technology. The intellectual and technical
-//  concepts contained herein are proprietary to Push Technology and
+//  property of DiffusionData. The intellectual and technical
+//  concepts contained herein are proprietary to DiffusionData and
 //  may be covered by U.S. and Foreign Patents, patents in process, and
 //  are protected by trade secret or copyright law.
 
-@import Foundation;
+#import <Foundation/Foundation.h>
 
 @class PTDiffusionRecordV2;
 
 NS_ASSUME_NONNULL_BEGIN
 
 /**
+ @ingroup PublicAPI_TopicDatatypes_RecordV2
+
  @brief A data model based upon a schema.
 
  A read only model can be created from any PTDiffusionRecordV2 object using the
@@ -24,7 +26,7 @@ NS_ASSUME_NONNULL_BEGIN
  access to the fields within the data. Fields may be accessed either by
  explicitly specifying the record and field occurrence or by specifying a key of
  the form:
- 
+
  `recordName(recordIndex).fieldName(fieldIndex)`
 
  Indexes start from 0 and if omitted then 0 is assumed. The record name may also
@@ -32,7 +34,7 @@ NS_ASSUME_NONNULL_BEGIN
  is useful when there is only one record definition.
 
  Examples of valid keys include:
- 
+
  | Key                         | Meaning                                                                       |
  | --------------------------- | ----------------------------------------------------------------------------- |
  | `Address(4).AddressLine(3)` | The 4th `AddressLine` occurrence within the 5th `Address` record.             |
@@ -43,7 +45,7 @@ NS_ASSUME_NONNULL_BEGIN
  The #recordCountWithRecordName:error: and
  #fieldCountWithRecordName:recordIndex:fieldName:error: methods are useful for
  determining the actual number of occurrences of variable multiplicity items.
- 
+
  @since 6.0
  */
 @interface PTDiffusionRecordV2Model : NSObject <NSCopying>
@@ -56,7 +58,7 @@ NS_ASSUME_NONNULL_BEGIN
  Returns an immutable record instance generated from this model; or `nil` if an
  error occurred, in which case `*error` will be populated with the failure
  reason.
- 
+
  @param error If this method returns `nil` to indicate that an error occurred
  then this will be populated with the reason for that failure.
 
@@ -89,7 +91,7 @@ NS_ASSUME_NONNULL_BEGIN
  - `recordIndex` is out of bounds.
 
  @exception NSInvalidArgumentException If either recordName or fieldName is
- `nil`, or if recordIndex is negative.
+ <code>nil</code>, or if recordIndex is negative.
 
  @since 6.0
  */
@@ -114,7 +116,7 @@ NS_ASSUME_NONNULL_BEGIN
  the failure reason. Reasons for failure include:
  - `recordName` is not defined in the schema.
 
- @exception NSInvalidArgumentException If recordName is `nil`.
+ @exception NSInvalidArgumentException If recordName is <code>nil</code>.
 
  @since 6.0
  */
@@ -141,7 +143,7 @@ NS_ASSUME_NONNULL_BEGIN
  - the key format is invalid.
  - an index is not a valid number.
 
- @exception NSInvalidArgumentException If key is `nil`.
+ @exception NSInvalidArgumentException If key is <code>nil</code>.
 
  @since 6.0
  */
@@ -166,9 +168,9 @@ NS_ASSUME_NONNULL_BEGIN
  will be populated with the failure reason. Reasons for failure include:
  - either `recordName` or `fieldName` are not defined in the schema.
  - either `recordIndex` or `fieldIndex` is out of bounds.
- 
+
  @exception NSInvalidArgumentException If either recordName or fieldName is
- `nil`, recordIndex is negative or fieldIndex is negative.
+ <code>nil</code>, recordIndex is negative or fieldIndex is negative.
 
  @since 6.0
  */

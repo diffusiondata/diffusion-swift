@@ -1,16 +1,16 @@
-//  Diffusion Client Library for iOS, tvOS and OS X / macOS
+//  Diffusion Client Library for iOS and OS X / macOS
 //
-//  Copyright (c) 2016, 2021 Push Technology Ltd., All Rights Reserved.
+//  Copyright (c) 2016 - 2026 DiffusionData Ltd., All Rights Reserved.
 //
-//  Use is subject to license terms.
+//  Use is subject to licence terms.
 //
 //  NOTICE: All information contained herein is, and remains the
-//  property of Push Technology. The intellectual and technical
-//  concepts contained herein are proprietary to Push Technology and
+//  property of DiffusionData. The intellectual and technical
+//  concepts contained herein are proprietary to DiffusionData and
 //  may be covered by U.S. and Foreign Patents, patents in process, and
 //  are protected by trade secret or copyright law.
 
-@import Foundation;
+#import <Foundation/Foundation.h>
 #import <Diffusion/PTDiffusionFeature.h>
 #import <Diffusion/PTDiffusionTopicType.h>
 
@@ -23,12 +23,6 @@
 
 @protocol PTDiffusionMissingTopicHandler;
 
-typedef NS_ENUM(NSInteger, PTDiffusionTopicControlFeatureErrorCode) {
-    /**
-     @deprecated since 6.7 Enumeration is unused.
-     */
-    PTDiffusionTopicControlFeatureErrorCode_ServerFailedToAddTopic __deprecated_enum_msg("Enumeration is unused.") = 1,
-};
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -38,6 +32,8 @@ NS_ASSUME_NONNULL_BEGIN
 extern NSString *const PTDiffusionTopicControlFeatureErrorDomain __deprecated_msg("Use PTDiffusion instead");
 
 /**
+ @ingroup PublicAPI_TopicControl
+
  @brief The Topic Control feature provides a client session with the ability to
  manage topics.
 
@@ -64,16 +60,14 @@ extern NSString *const PTDiffusionTopicControlFeatureErrorDomain __deprecated_ms
  `#addTopicWithPath:type:completionHandler:`, supplying a topic type. For example, to
  create a {@link PTDiffusionTopicType_JSON JSON} topic bound to the topic path `foo`:
 
- <pre>
-<code>
-    [topicControl addTopicWithPath:\@"foo"
-                            type:PTDiffusionTopicType_JSON
-                completionHandler:^(PTDiffusionAddTopicResult *const result, NSError *const error)
+ @code{.m}
+    [topicControl addTopicWithPath:@"foo"
+                              type:PTDiffusionTopicType_JSON
+                 completionHandler:^(PTDiffusionAddTopicResult *const result, NSError *const error)
     {
         ...
     }];
-</code>
- </pre>
+ @endcode
 
  Success or failure is reported asynchronously through the `completionHandler`
  arguments.
@@ -89,19 +83,17 @@ extern NSString *const PTDiffusionTopicControlFeatureErrorDomain __deprecated_ms
  the {@link PTDiffusionTopicSpecification#validateValuesPropertyKey validate values} property set
  to `true`:
 
- <pre>
- <code>
+ @code{.m}
     PTDiffusionTopicSpecification *topicSpecification =
         [PTDiffusionTopicSpecification alloc] initWithType:PTDiffusionTopicType_JSON
-                                                properties:\@{PTDiffusionTopicSpecification.validateValuesPropertyKey : PTDiffusionTopicSpecification.truePropertyValue}];
-    [topicControl addTopicWithPath:\@"foo"
+                                                properties:@{PTDiffusionTopicSpecification.validateValuesPropertyKey : PTDiffusionTopicSpecification.truePropertyValue}];
+    [topicControl addTopicWithPath:@"foo"
                      specification:topicSpecification
                  completionHandler:^(PTDiffusionAddTopicResult *const result, NSError *const error)
     {
         ...
     }];
- </code>
- </pre>
+ @endcode
 
  See {@link PTDiffusionTopicSpecification} for details of the available topic properties
  and their effects on the different types of topic.
@@ -132,21 +124,19 @@ extern NSString *const PTDiffusionTopicControlFeatureErrorDomain __deprecated_ms
  In the following example a topic can be created with the path `A/B/foo`
  even though there are no topics with path `A` or `A/B`:
 
- <pre>
- <code>
-    [topicControl addTopicWithPath:\@"A/B/foo"
+ @code{.m}
+    [topicControl addTopicWithPath:@"A/B/foo"
                               type:PTDiffusionTopicType_JSON
                  completionHandler:^(PTDiffusionAddTopicResult *const result, NSError *const error)
     {
         ...
     }];
- </code>
- </pre>
+ @endcode
 
  Topics bound to the paths `A` or `A/B` can be created later.
 
  Topics can be removed without affecting the topics subordinate to them in the
- topic tree using {@link #removeDiscreteWithTopicSelectorExpression:completionHandler:}
+ topic tree using {@link #removeTopicsWithTopicSelectorExpression:completionHandler:}
  providing a path topic selector. By using the `//` topic selector qualifier it
  is possible to remove a topic and all of its descendant topics, that is to
  remove whole topic tree branches.
@@ -201,7 +191,7 @@ extern NSString *const PTDiffusionTopicControlFeatureErrorDomain __deprecated_ms
  completion handler block will be called with an error, while the missing topic
  handler will receive no messages.
 
- @exception NSInvalidArgumentException If any argument is `nil`.
+ @exception NSInvalidArgumentException If any argument is <code>nil</code>.
 
  @since 5.7
  */
@@ -224,7 +214,7 @@ extern NSString *const PTDiffusionTopicControlFeatureErrorDomain __deprecated_ms
  be `nil` and `result` will be non-`nil`.
  The completion handler will be called asynchronously on the main dispatch queue.
 
- @exception NSInvalidArgumentException If any argument is `nil` or value has been
+ @exception NSInvalidArgumentException If any argument is <code>nil</code> or value has been
  supplied for a topic type that is not stateful.
 
  @since 6.1
@@ -248,7 +238,7 @@ extern NSString *const PTDiffusionTopicControlFeatureErrorDomain __deprecated_ms
  be `nil` and `result` will be non-`nil`.
  The completion handler will be called asynchronously on the main dispatch queue.
 
- @exception NSInvalidArgumentException If any argument is `nil` or value has been
+ @exception NSInvalidArgumentException If any argument is <code>nil</code> or value has been
  supplied for a topic type that is not stateful.
 
  @since 6.1
@@ -256,36 +246,6 @@ extern NSString *const PTDiffusionTopicControlFeatureErrorDomain __deprecated_ms
 -(void)addTopicWithPath:(NSString *)path
           specification:(PTDiffusionTopicSpecification *)specification
       completionHandler:(void (^)(PTDiffusionAddTopicResult * _Nullable result, NSError * _Nullable error))completionHandler;
-
-/**
- Send a request to remove one or more topics.
-
- All topics that match the provided topic selector that the caller has
- permission to remove will be removed.
-
- The selector's descendant pattern qualifier (a trailing `/` or `//`), can be
- used to remove descendant topics. If a single `/` qualifier is specified, all
- descendants of the matched topic paths will be removed. If `//` is specified,
- the matched paths and all descendants of the matched paths (complete branches)
- will be removed.
-
- @param expression The @ref md_topic_selectors "topic selector" expression to be
- evaluated by the server.
-
- @param completionHandler Block to be called asynchronously on success or failure.
- If the operation was successful, the `error` argument passed to the block will be `nil`.
- The completion handler will be called asynchronously on the main dispatch queue.
-
- @exception NSInvalidArgumentException If any argument is `nil`.
-
- @since 5.9
-
- @deprecated since 6.6. Use {@link PTDiffusionTopicControlFeature#removeTopicsWithTopicSelectorExpression:completionHandler:
- removeTopicsWithTopicSelectorExpression} instead.
- */
--(void)removeDiscreteWithTopicSelectorExpression:(NSString *)expression
-                               completionHandler:(void (^)(NSError * _Nullable error))completionHandler
-__deprecated_msg("Will be removed in a future release");
 
 
 /**
@@ -310,7 +270,7 @@ __deprecated_msg("Will be removed in a future release");
 
  The completion handler will be called asynchronously on the main dispatch queue.
 
- @exception NSInvalidArgumentException If any argument is `nil`.
+ @exception NSInvalidArgumentException If any argument is <code>nil</code>.
 
  @since 6.6
  */

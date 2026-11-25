@@ -1,21 +1,23 @@
-//  Diffusion Client Library for iOS, tvOS and OS X / macOS
+//  Diffusion Client Library for iOS and OS X / macOS
 //
-//  Copyright (c) 2017, 2021 Push Technology Ltd., All Rights Reserved.
+//  Copyright (c) 2017 - 2026 DiffusionData Ltd., All Rights Reserved.
 //
-//  Use is subject to license terms.
+//  Use is subject to licence terms.
 //
 //  NOTICE: All information contained herein is, and remains the
-//  property of Push Technology. The intellectual and technical
-//  concepts contained herein are proprietary to Push Technology and
+//  property of DiffusionData. The intellectual and technical
+//  concepts contained herein are proprietary to DiffusionData and
 //  may be covered by U.S. and Foreign Patents, patents in process, and
 //  are protected by trade secret or copyright law.
 
-@import Foundation;
+#import <Foundation/Foundation.h>
 #import <Diffusion/PTDiffusionFeature.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
 /**
+ @ingroup PublicAPI_TimeSeries
+
  @brief This feature allows a session to update and query time series topics.
 
  ## Time series topics
@@ -255,10 +257,6 @@ NS_ASSUME_NONNULL_BEGIN
     sequence=1; value=B
     sequence=3; value=Y; original event sequence=0
  </pre>
-
- The initial range of events delivered for a subscription to a time series
- topic is derived from a <em>latest edits</em> edit range query. See
- <em>Subscription Range</em>.
 
  When evaluated for a time series that has no edit events, an edit range query
  will return the same results as a similarly configured value range query.

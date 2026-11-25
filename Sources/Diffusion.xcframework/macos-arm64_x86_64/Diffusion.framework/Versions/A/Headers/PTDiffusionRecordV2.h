@@ -1,16 +1,16 @@
-//  Diffusion Client Library for iOS, tvOS and OS X / macOS
+//  Diffusion Client Library for iOS and OS X / macOS
 //
-//  Copyright (c) 2017, 2021 Push Technology Ltd., All Rights Reserved.
+//  Copyright (c) 2017 - 2026 DiffusionData Ltd., All Rights Reserved.
 //
-//  Use is subject to license terms.
+//  Use is subject to licence terms.
 //
 //  NOTICE: All information contained herein is, and remains the
-//  property of Push Technology. The intellectual and technical
-//  concepts contained herein are proprietary to Push Technology and
+//  property of DiffusionData. The intellectual and technical
+//  concepts contained herein are proprietary to DiffusionData and
 //  may be covered by U.S. and Foreign Patents, patents in process, and
 //  are protected by trade secret or copyright law.
 
-@import Foundation;
+#import <Foundation/Foundation.h>
 #import <Diffusion/PTDiffusionBytes.h>
 #import <Diffusion/PTDiffusionFetchRequest.h>
 #import <Diffusion/PTDiffusionMessagingFeature.h>
@@ -45,8 +45,10 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /**
+ @ingroup PublicAPI_TopicDatatypes_RecordV2
+
  @brief An immutable record value with support for binary deltas.
- 
+
  @since 6.0
  */
 @interface PTDiffusionRecordV2 : PTDiffusionBytes
@@ -130,7 +132,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  Compare this value with an earlier version to calculate a structural delta.
- 
+
  @param originalRecord The original value to compare with this value.
 
  @return Structural delta between the given value and the current value.
@@ -159,9 +161,7 @@ NS_ASSUME_NONNULL_BEGIN
 
  Use PTDiffusionUpdateConstraint#noValue to check if the topic has no value.
 
- This constraint is useful when changing the value of a topic. It is unsatisfied
- if no topic is present at the path, making it unsuitable for operations that
- try to add topics.
+ This constraint is unsatisfied if no topic is present at the path.
 
  @since 6.3
  */
@@ -176,7 +176,7 @@ NS_ASSUME_NONNULL_BEGIN
  @return An object reliant on the supplied delegate that can be added as a
  receiver of values using the Topics feature.
 
- @exception NSInvalidArgumentException Raised if the delegate argument is `nil`.
+ @exception NSInvalidArgumentException Raised if the delegate argument is <code>nil</code>.
 
  @see PTDiffusionTopicsFeature
 
@@ -193,7 +193,7 @@ NS_ASSUME_NONNULL_BEGIN
  @return An object reliant on the supplied delegate that can be added as a
  receiver of values using the Topics feature.
 
- @exception NSInvalidArgumentException Raised if the delegate argument is `nil`.
+ @exception NSInvalidArgumentException Raised if the delegate argument is <code>nil</code>.
 
  @see PTDiffusionTopicsFeature
 
@@ -204,15 +204,15 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  Creates a request handler capable of receiving record requests for a handler
  registered at the server.
- 
+
  @param delegate The object which will handle the incoming requests. A weak
  reference is maintained to this object by the returned handler.
- 
+
  @return An object reliant on the supplied delegate that can be registered at
  the server using the Messaging feature.
- 
- @exception NSInvalidArgumentException Raised if the delegate argument is `nil`.
- 
+
+ @exception NSInvalidArgumentException Raised if the delegate argument is <code>nil</code>.
+
  @see PTDiffusionMessagingFeature
 
  @since 6.0
@@ -228,7 +228,7 @@ NS_ASSUME_NONNULL_BEGIN
  @return An object reliant on the supplied delegate that can be set as the
  receiver of requests using the Messaging feature.
 
- @exception NSInvalidArgumentException Raised if the delegate argument is `nil`.
+ @exception NSInvalidArgumentException Raised if the delegate argument is <code>nil</code>.
 
  @see PTDiffusionMessagingFeature
 
@@ -246,7 +246,7 @@ NS_ASSUME_NONNULL_BEGIN
  @return An object reliant on the supplied delegate that can be set as the
  receiver of requests using the Messaging feature.
 
- @exception NSInvalidArgumentException Raised if the delegate argument is `nil`.
+ @exception NSInvalidArgumentException Raised if the delegate argument is <code>nil</code>.
 
  @see PTDiffusionMessagingFeature
 
@@ -273,17 +273,17 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  @brief Extension adding support for responding to requests using record values.
- 
+
  @since 6.0
  */
 @interface PTDiffusionResponder (PTDiffusionRecordV2)
 
 /**
  Dispatch a response to a request.
- 
+
  @param record The value to send in response.
 
- @exception NSInvalidArgumentException Raised if the record argument is `nil`.
+ @exception NSInvalidArgumentException Raised if the record argument is <code>nil</code>.
 
  @since 6.0
  */
@@ -301,20 +301,20 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  Send a request for which a record response is expected.
- 
+
  The message will be routed to an appropriately registered control handler for
  the given path.
 
  @param request The request to send.
- 
+
  @param path The path to send the request to.
- 
+
  @param completionHandler Block to be called asynchronously on success or
  failure. If the operation was successful, the `error` argument passed to the
  block will be `nil`. The completion handler will be called asynchronously on
  the main dispatch queue.
 
- @exception NSInvalidArgumentException Raised if any supplied arguments are `nil`.
+ @exception NSInvalidArgumentException Raised if any supplied arguments are <code>nil</code>.
 
  @since 6.0
  */
@@ -337,7 +337,7 @@ NS_ASSUME_NONNULL_BEGIN
  block will be `nil`. The completion handler will be called asynchronously on
  the main dispatch queue.
 
- @exception NSInvalidArgumentException Raised if any supplied arguments are `nil`.
+ @exception NSInvalidArgumentException Raised if any supplied arguments are <code>nil</code>.
 
  @since 6.5
  */
@@ -353,20 +353,20 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  @brief Extension adding support to the Time Series feature for appending and
  editing events using record values.
- 
+
  @since 6.0
  */
 @interface PTDiffusionTimeSeriesFeature (PTDiffusionRecordV2)
 
 /**
  Update a time series topic by appending a new record value.
- 
+
  The server will add an event to the end of the time series based on the
  supplied value, with a new sequence number, timestamp, and the author set to
  the authenticated principal of the session.
- 
+
  @param topicPath The path of the time series topic to update.
- 
+
  @param value The event value.
 
  @param completionHandler Block to be called asynchronously on success or
@@ -374,7 +374,7 @@ NS_ASSUME_NONNULL_BEGIN
  block will be `nil`. The completion handler will be called asynchronously on
  the main dispatch queue.
 
- @exception NSInvalidArgumentException Raised if any supplied arguments are `nil`.
+ @exception NSInvalidArgumentException Raised if any supplied arguments are <code>nil</code>.
 
  @since 6.0
  */
@@ -402,7 +402,7 @@ NS_ASSUME_NONNULL_BEGIN
  block will be `nil`. The completion handler will be called asynchronously on
  the main dispatch queue.
 
- @exception NSInvalidArgumentException Raised if any supplied arguments are `nil`.
+ @exception NSInvalidArgumentException Raised if any supplied arguments are <code>nil</code>.
 
  @since 6.6
  */
@@ -417,13 +417,13 @@ NS_ASSUME_NONNULL_BEGIN
 
  The existing event is identified by its sequence number and must be an original
  event.
- 
+
  The server will add an edit event to the end of the time series based on the
  supplied value, with a new sequence number, timestamp, and the author set to
  the authenticated principal of the session.
 
  @param topicPath The path of the time series topic to update.
- 
+
  @param originalSequence The sequence number of the original event to edit.
 
  @param value The event value.
@@ -434,8 +434,8 @@ NS_ASSUME_NONNULL_BEGIN
  the main dispatch queue.
 
  @exception NSInvalidArgumentException Raised if any of the topicPath, value or
- completionHandler arguments are `nil`. Also raised if the originalSequence
- argument exceeds `INT64_MAX`.
+ completionHandler arguments are <code>nil</code>. Also raised if the originalSequence
+ argument exceeds <code>INT64_MAX</code>.
 
  @since 6.0
  */
@@ -448,15 +448,15 @@ NS_ASSUME_NONNULL_BEGIN
  Evaluate a query for a time series topic where events have record values.
 
  @param query The configured query.
- 
+
  @param topicPath The path of the time series topic to query.
- 
+
  @param completionHandler Block to be called asynchronously on success or
  failure. If the operation was successful, the `error` argument passed to the
  block will be `nil`. The completion handler will be called asynchronously on
  the main dispatch queue.
 
- @exception NSInvalidArgumentException Raised if any supplied arguments are `nil`.
+ @exception NSInvalidArgumentException Raised if any supplied arguments are <code>nil</code>.
 
  @since 6.0
  */
@@ -497,7 +497,7 @@ NS_ASSUME_NONNULL_BEGIN
  block will be `nil`. The completion handler will be called asynchronously on
  the main dispatch queue.
 
- @exception NSInvalidArgumentException Raised if any supplied arguments are `nil`.
+ @exception NSInvalidArgumentException Raised if any supplied arguments are <code>nil</code>.
 
  @since 6.2
  */
@@ -526,7 +526,7 @@ NS_ASSUME_NONNULL_BEGIN
  block will be `nil`. The completion handler will be called asynchronously on
  the main dispatch queue.
 
- @exception NSInvalidArgumentException If any argument is `nil`.
+ @exception NSInvalidArgumentException If any argument is <code>nil</code>.
 
  @since 6.3
  */
@@ -549,7 +549,7 @@ NS_ASSUME_NONNULL_BEGIN
  block will be `nil`. The completion handler will be called asynchronously on
  the main dispatch queue.
 
- @exception NSInvalidArgumentException If any argument is `nil`.
+ @exception NSInvalidArgumentException If any argument is <code>nil</code>.
 
  @since 6.3
  */
@@ -579,7 +579,7 @@ NS_ASSUME_NONNULL_BEGIN
  block will be `nil` and `result` will be non-`nil`. The completion handler will
  be called asynchronously on the main dispatch queue.
 
- @exception NSInvalidArgumentException If any argument is `nil` or if the topic
+ @exception NSInvalidArgumentException If any argument is <code>nil</code> or if the topic
  type defined in the specification is incompatible with
  PTDiffusionDataTypes#recordV2.
 
@@ -615,7 +615,7 @@ NS_ASSUME_NONNULL_BEGIN
  block will be `nil` and `result` will be non-`nil`. The completion handler will
  be called asynchronously on the main dispatch queue.
 
- @exception NSInvalidArgumentException If any argument is `nil` or if the topic
+ @exception NSInvalidArgumentException If any argument is <code>nil</code> or if the topic
  type defined in the specification is incompatible with
  PTDiffusionDataTypes#recordV2.
 
@@ -644,7 +644,7 @@ NS_ASSUME_NONNULL_BEGIN
 
  @return An update stream.
 
- @exception NSInvalidArgumentException If any argument is `nil`.
+ @exception NSInvalidArgumentException If any argument is <code>nil</code>.
 
  @since 6.3
  */
@@ -670,7 +670,7 @@ NS_ASSUME_NONNULL_BEGIN
 
  @return An update stream.
 
- @exception NSInvalidArgumentException If any argument is `nil`.
+ @exception NSInvalidArgumentException If any argument is <code>nil</code>.
 
  @since 6.3
  */
@@ -696,7 +696,7 @@ NS_ASSUME_NONNULL_BEGIN
 
  @return An update stream.
 
- @exception NSInvalidArgumentException If any argument is `nil` or if the topic
+ @exception NSInvalidArgumentException If any argument is <code>nil</code> or if the topic
  type defined in the specification is incompatible with
  PTDiffusionDataTypes#recordV2.
 
@@ -727,7 +727,7 @@ NS_ASSUME_NONNULL_BEGIN
 
  @return An update stream.
 
- @exception NSInvalidArgumentException If any argument is `nil` or if the topic
+ @exception NSInvalidArgumentException If any argument is <code>nil</code> or if the topic
  type defined in the specification is incompatible with
  PTDiffusionDataTypes#recordV2.
 

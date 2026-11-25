@@ -1,20 +1,22 @@
-//  Diffusion Client Library for iOS, tvOS and OS X / macOS
+//  Diffusion Client Library for iOS and OS X / macOS
 //
-//  Copyright (c) 2017 Push Technology Ltd., All Rights Reserved.
+//  Copyright (c) 2017 - 2026 DiffusionData Ltd., All Rights Reserved.
 //
-//  Use is subject to license terms.
+//  Use is subject to licence terms.
 //
 //  NOTICE: All information contained herein is, and remains the
-//  property of Push Technology. The intellectual and technical
-//  concepts contained herein are proprietary to Push Technology and
+//  property of DiffusionData. The intellectual and technical
+//  concepts contained herein are proprietary to DiffusionData and
 //  may be covered by U.S. and Foreign Patents, patents in process, and
 //  are protected by trade secret or copyright law.
 
-@import Foundation;
+#import <Foundation/Foundation.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
 /**
+ @ingroup PublicAPI_TimeSeries
+
  @brief Builder for queries that select a range of events from a time series.
 
  @since 6.0
@@ -29,7 +31,7 @@ NS_ASSUME_NONNULL_BEGIN
 
  @return a copy of the receiver configured to perform a view range query with a
  new view range that selects the entire time series.
- 
+
  @since 6.0
  */
 -(instancetype)forValues;
@@ -42,7 +44,7 @@ NS_ASSUME_NONNULL_BEGIN
 
  @return a copy of the receiver configured to perform an edit range query with a
  new view range that selects the entire time series.
- 
+
  @since 6.0
  */
 -(instancetype)forEdits;
@@ -111,8 +113,8 @@ NS_ASSUME_NONNULL_BEGIN
  range.
 
  @return a copy of the receiver with a new anchor.
- 
- @exception NSInvalidArgumentException if sequence is greater than `INT64_MAX`.
+
+ @exception NSInvalidArgumentException if sequence is greater than <code>INT64_MAX</code>.
 
  @since 6.0
  */
@@ -161,7 +163,7 @@ NS_ASSUME_NONNULL_BEGIN
 
  @return a copy of the receiver with a new anchor.
 
- @exception NSInvalidArgumentException if count is greater than `INT64_MAX`.
+ @exception NSInvalidArgumentException if count is greater than <code>INT64_MAX</code>.
 
  @since 6.0
  */
@@ -194,8 +196,8 @@ NS_ASSUME_NONNULL_BEGIN
  range.
 
  @return a copy of the receiver with a new span.
- 
- @exception NSInvalidArgumentException if sequence is greater than `INT64_MAX`.
+
+ @exception NSInvalidArgumentException if sequence is greater than <code>INT64_MAX</code>.
 
  @since 6.0
  */
@@ -213,7 +215,7 @@ NS_ASSUME_NONNULL_BEGIN
  <strong>Operator type:</strong> span.
 
  @return a copy of the receiver with a new span.
- 
+
  @since 6.0
  */
 -(instancetype)toStart;
@@ -227,7 +229,7 @@ NS_ASSUME_NONNULL_BEGIN
  @param date absolute time specifying the end of the range.
 
  @return a copy of the receiver with a new span.
- 
+
  @since 6.0
  */
 -(instancetype)toDate:(NSDate *)date;
@@ -244,7 +246,7 @@ NS_ASSUME_NONNULL_BEGIN
 
  @return a copy of the receiver with a new span.
 
- @exception NSInvalidArgumentException if count is greater than `INT64_MAX`.
+ @exception NSInvalidArgumentException if count is greater than <code>INT64_MAX</code>.
 
  @since 6.0
  */
@@ -278,7 +280,7 @@ NS_ASSUME_NONNULL_BEGIN
 
  @return a copy of the receiver with a new span.
 
- @exception NSInvalidArgumentException if count is greater than `INT64_MAX`.
+ @exception NSInvalidArgumentException if count is greater than <code>INT64_MAX</code>.
 
  @since 6.0
  */
@@ -313,7 +315,7 @@ NS_ASSUME_NONNULL_BEGIN
 
  @return a copy of the receiver with a new span.
 
- @exception NSInvalidArgumentException if count is greater than `INT64_MAX`.
+ @exception NSInvalidArgumentException if count is greater than <code>INT64_MAX</code>.
 
  @since 6.0
  */
@@ -356,7 +358,7 @@ NS_ASSUME_NONNULL_BEGIN
 
  @return a copy of the receiver with a new limit.
 
- @exception NSInvalidArgumentException if count is greater than `INT64_MAX`.
+ @exception NSInvalidArgumentException if count is greater than <code>INT64_MAX</code>.
 
  @since 6.0
  */

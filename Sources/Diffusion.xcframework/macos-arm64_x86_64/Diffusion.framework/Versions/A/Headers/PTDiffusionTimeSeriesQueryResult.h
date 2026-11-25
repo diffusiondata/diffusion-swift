@@ -1,16 +1,16 @@
-//  Diffusion Client Library for iOS, tvOS and OS X / macOS
+//  Diffusion Client Library for iOS and OS X / macOS
 //
-//  Copyright (c) 2017 Push Technology Ltd., All Rights Reserved.
+//  Copyright (c) 2017 - 2026 DiffusionData Ltd., All Rights Reserved.
 //
-//  Use is subject to license terms.
+//  Use is subject to licence terms.
 //
 //  NOTICE: All information contained herein is, and remains the
-//  property of Push Technology. The intellectual and technical
-//  concepts contained herein are proprietary to Push Technology and
+//  property of DiffusionData. The intellectual and technical
+//  concepts contained herein are proprietary to DiffusionData and
 //  may be covered by U.S. and Foreign Patents, patents in process, and
 //  are protected by trade secret or copyright law.
 
-@import Foundation;
+#import <Foundation/Foundation.h>
 
 @class PTDiffusionTimeSeriesEvent;
 @class PTDiffusionTimeSeriesQueryResultEventArrayStructure;
@@ -18,6 +18,8 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /**
+ @ingroup PublicAPI_TimeSeries
+
  @brief Query result providing an array of time series events.
 
  @since 6.0
@@ -30,7 +32,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  If this result includes all events selected by the query then `YES`.
- 
+
  When this property returns `YES` then the value returned by the selectedCount
  property will be the same as the count of the array returned by the events
  property.
@@ -41,7 +43,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  The number of events selected by the query.
- 
+
  This number may be greater than the count of the array returned by the events
  property due to a policy of the time series topic to limit the number of
  returned results, or the use a limit on the range query.
@@ -54,7 +56,7 @@ NS_ASSUME_NONNULL_BEGIN
  The structural properties of the events array.
 
  @see events
- 
+
  @since 6.0
  */
 @property(nonatomic, readonly) PTDiffusionTimeSeriesQueryResultEventArrayStructure* eventArrayStructure;

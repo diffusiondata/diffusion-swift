@@ -1,21 +1,23 @@
-//  Diffusion Client Library for iOS, tvOS and OS X / macOS
+//  Diffusion Client Library for iOS and OS X / macOS
 //
-//  Copyright (c) 2020, 2021 Push Technology Ltd., All Rights Reserved.
+//  Copyright (c) 2020 - 2026 DiffusionData Ltd., All Rights Reserved.
 //
-//  Use is subject to license terms.
+//  Use is subject to licence terms.
 //
 //  NOTICE: All information contained herein is, and remains the
-//  property of Push Technology. The intellectual and technical
-//  concepts contained herein are proprietary to Push Technology and
+//  property of DiffusionData. The intellectual and technical
+//  concepts contained herein are proprietary to DiffusionData and
 //  may be covered by U.S. and Foreign Patents, patents in process, and
 //  are protected by trade secret or copyright law.
 
-@import Foundation;
+#import <Foundation/Foundation.h>
 #import <Diffusion/PTDiffusionEnumeration.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
 /**
+ @ingroup PublicAPI_ClientControl
+
  @brief Specifies the reason why a session has been closed
 
  This is used by the Client Control feature
@@ -205,19 +207,6 @@ NS_ASSUME_NONNULL_BEGIN
 +(instancetype)lostMessages;
 
 
-/**
- The server is closing down.
-
- The client was closed as part of the server shutdown process.
-
- @return Instance indicating the server is closing down.
-
- @deprecated since 6.6 and will be removed in a future release.
-
- @since 6.5
- */
-+(instancetype)serverClosing __deprecated_msg("Will be removed in a future release");
-
 
 /**
  Closed by a client session.
@@ -246,6 +235,39 @@ NS_ASSUME_NONNULL_BEGIN
  */
 +(instancetype)failedOver;
 
+
+/**
+ The session had an $ExpiryTime specified which expired before the session re-authenticated.
+
+ @return Instance indicating the session's $ExpiryTime expired before the
+ session re-authenticated.
+
+ @since 6.12
+ */
++(instancetype)expired;
+
+
+/**
+ The session's authentication was revoked by a privileged user.
+
+ @return Instance indicating the session's authentication was revoked by a
+ privileged user.
+
+ @since 6.12
+ */
++(instancetype)revoked;
+
+
+/**
+ The session was closed to make way for another session.
+ Only relevant to MQTT Sessions.
+
+ @return Instance indicating the session was closed to make way for another
+ session.
+
+ @since 6.12
+ */
++(instancetype)sessionTakenOver;
 
 @end
 

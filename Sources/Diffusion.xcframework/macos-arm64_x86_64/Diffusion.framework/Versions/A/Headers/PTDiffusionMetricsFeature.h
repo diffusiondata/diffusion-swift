@@ -1,16 +1,16 @@
-//  Diffusion Client Library for iOS, tvOS and OS X / macOS
+//  Diffusion Client Library for iOS and OS X / macOS
 //
-//  Copyright (c) 2021 Push Technology Ltd., All Rights Reserved.
+//  Copyright (c) 2021 - 2026 DiffusionData Ltd., All Rights Reserved.
 //
-//  Use is subject to license terms.
+//  Use is subject to licence terms.
 //
 //  NOTICE: All information contained herein is, and remains the
-//  property of Push Technology. The intellectual and technical
-//  concepts contained herein are proprietary to Push Technology and
+//  property of DiffusionData. The intellectual and technical
+//  concepts contained herein are proprietary to DiffusionData and
 //  may be covered by U.S. and Foreign Patents, patents in process, and
 //  are protected by trade secret or copyright law.
 
-@import Foundation;
+#import <Foundation/Foundation.h>
 #import <Diffusion/PTDiffusionFeature.h>
 
 @class PTDiffusionSessionMetricCollector;
@@ -19,6 +19,8 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /**
+ @ingroup PublicAPI_Metrics
+
  @brief This feature allows a client to configure metric collectors.
 
  Diffusion servers provide metrics which are made available in several ways:
@@ -88,12 +90,12 @@ NS_ASSUME_NONNULL_BEGIN
   </ul>
 
   ### Accessing the feature
-  This feature may be obtained from a {@link Session session} as follows:
-  <pre>
+  This feature may be obtained from a {@link PTDiffusionSession session} as follows:
+  @code{.m}
     PTDiffusionMetricsFeature *const metrics = session.metrics;
-  </pre>
+  @endcode
 
- @author Push Technology Limited
+ @author DiffusionData Limited
 
  @since 6.7
  */

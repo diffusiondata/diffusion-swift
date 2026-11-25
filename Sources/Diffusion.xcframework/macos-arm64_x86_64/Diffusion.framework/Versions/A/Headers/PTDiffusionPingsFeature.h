@@ -1,16 +1,16 @@
-//  Diffusion Client Library for iOS, tvOS and OS X / macOS
+//  Diffusion Client Library for iOS and OS X / macOS
 //
-//  Copyright (c) 2016 Push Technology Ltd., All Rights Reserved.
+//  Copyright (c) 2016 - 2026 DiffusionData Ltd., All Rights Reserved.
 //
-//  Use is subject to license terms.
+//  Use is subject to licence terms.
 //
 //  NOTICE: All information contained herein is, and remains the
-//  property of Push Technology. The intellectual and technical
-//  concepts contained herein are proprietary to Push Technology and
+//  property of DiffusionData. The intellectual and technical
+//  concepts contained herein are proprietary to DiffusionData and
 //  may be covered by U.S. and Foreign Patents, patents in process, and
 //  are protected by trade secret or copyright law.
 
-@import Foundation;
+#import <Foundation/Foundation.h>
 #import <Diffusion/PTDiffusionFeature.h>
 
 @class PTDiffusionPingDetails;
@@ -18,29 +18,31 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /**
+ @ingroup PublicAPI_Ping
+
  @brief The Pings feature provides a client session with the ability to ping the server.
 
  The main purpose of a ping is to test, at a very basic level, the current
  network conditions that exist between the client session and the server it is
  connected to. Each ping request will return details on the latency
  experienced in the form of a round-trip time value.
- 
+
  The Pings feature for a session can be obtained from the session's `pings` property.
- 
+
  @see PTDiffusionSession
- 
+
  @since 5.7
  */
 @interface PTDiffusionPingsFeature : PTDiffusionFeature
 
 /**
  Send a ping to the server.
- 
+
  @param completionHandler Block to be called asynchronously on success or failure.
  If the operation was successful, the `error` argument passed to the block will be `nil`.
  The completion handler will be called asynchronously on the main dispatch queue.
- 
- @exception NSInvalidArgumentException Raised if the completionHandler is `nil`.
+
+ @exception NSInvalidArgumentException Raised if the completionHandler is <code>nil</code>.
 
  @since 5.7
  */

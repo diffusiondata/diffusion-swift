@@ -1,22 +1,23 @@
-//  Diffusion Client Library for iOS, tvOS and OS X / macOS
+//  Diffusion Client Library for iOS and OS X / macOS
 //
-//  Copyright (c) 2016, 2021 Push Technology Ltd., All Rights Reserved.
+//  Copyright (c) 2016 - 2026 DiffusionData Ltd., All Rights Reserved.
 //
-//  Use is subject to license terms.
+//  Use is subject to licence terms.
 //
 //  NOTICE: All information contained herein is, and remains the
-//  property of Push Technology. The intellectual and technical
-//  concepts contained herein are proprietary to Push Technology and
+//  property of DiffusionData. The intellectual and technical
+//  concepts contained herein are proprietary to DiffusionData and
 //  may be covered by U.S. and Foreign Patents, patents in process, and
 //  are protected by trade secret or copyright law.
 
-@import Foundation;
+#import <Foundation/Foundation.h>
 #import <Diffusion/PTDiffusionBytes.h>
 #import <Diffusion/PTDiffusionFetchRequest.h>
 #import <Diffusion/PTDiffusionMessagingFeature.h>
 #import <Diffusion/PTDiffusionResponder.h>
 #import <Diffusion/PTDiffusionTimeSeriesFeature.h>
 #import <Diffusion/PTDiffusionTopicUpdateFeature.h>
+#import <Diffusion/PTDiffusionPartialJSONUpdateConstraint.h>
 
 @class PTDiffusionBinaryDelta;
 @class PTDiffusionBinaryFetchResult;
@@ -33,6 +34,7 @@
 @class PTDiffusionTopicSpecification;
 @class PTDiffusionUpdateConstraint;
 @class PTDiffusionValueStream;
+@class PTDiffusionUpdateConstraintOperator;
 
 @protocol PTDiffusionBinaryRequestDelegate;
 @protocol PTDiffusionBinaryRequestStreamDelegate;
@@ -48,6 +50,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 
 /**
+ @ingroup PublicAPI_TopicDatatypes_Binary
+
  @brief An immutable binary value with support for binary deltas.
 
  @since 5.9
@@ -66,7 +70,7 @@ NS_ASSUME_NONNULL_BEGIN
  @return The new binary value or `nil` if there was a failure when applying the
  delta (e.g. either the delta is invalid).
 
- @exception NSInvalidArgumentException Raised if the delta argument is `nil`.
+ @exception NSInvalidArgumentException Raised if the delta argument is <code>nil</code>.
 
  @since 5.9
  */
@@ -83,7 +87,7 @@ NS_ASSUME_NONNULL_BEGIN
  @return A binary delta representing the difference between binary and the
  receiver.
 
- @exception NSInvalidArgumentException Raised if the binary argument is `nil`.
+ @exception NSInvalidArgumentException Raised if the binary argument is <code>nil</code>.
 
  @since 5.9
  */
@@ -109,9 +113,7 @@ NS_ASSUME_NONNULL_BEGIN
 
  Use PTDiffusionUpdateConstraint#noValue to check if the topic has no value.
 
- This constraint is useful when changing the value of a topic. It is unsatisfied
- if no topic is present at the path, making it unsuitable for operations that
- try to add topics.
+ This constraint is unsatisfied if no topic is present at the path.
 
  @since 6.3
  */
@@ -126,7 +128,7 @@ NS_ASSUME_NONNULL_BEGIN
  @return An object reliant on the supplied delegate that can be added as a
  receiver of values using the Topics feature.
 
- @exception NSInvalidArgumentException Raised if the delegate argument is `nil`.
+ @exception NSInvalidArgumentException Raised if the delegate argument is <code>nil</code>.
 
  @see PTDiffusionTopicsFeature
 
@@ -143,7 +145,7 @@ NS_ASSUME_NONNULL_BEGIN
  @return An object reliant on the supplied delegate that can be added as a
  receiver of values using the Topics feature.
 
- @exception NSInvalidArgumentException Raised if the delegate argument is `nil`.
+ @exception NSInvalidArgumentException Raised if the delegate argument is <code>nil</code>.
 
  @see PTDiffusionTopicsFeature
 
@@ -154,15 +156,15 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  Creates a request handler capable of receiving Binary requests for a handler
  registered at the server.
- 
+
  @param delegate The object which will handle the incoming requests. A weak
  reference is maintained to this object by the returned handler.
- 
+
  @return An object reliant on the supplied delegate that can be registered at
  the server using the Messaging feature.
- 
- @exception NSInvalidArgumentException Raised if the delegate argument is `nil`.
- 
+
+ @exception NSInvalidArgumentException Raised if the delegate argument is <code>nil</code>.
+
  @see PTDiffusionMessagingFeature
 
  @since 6.0
@@ -178,7 +180,7 @@ NS_ASSUME_NONNULL_BEGIN
  @return An object reliant on the supplied delegate that can be set as the
  receiver of requests using the Messaging feature.
 
- @exception NSInvalidArgumentException Raised if the delegate argument is `nil`.
+ @exception NSInvalidArgumentException Raised if the delegate argument is <code>nil</code>.
 
  @see PTDiffusionMessagingFeature
 
@@ -196,7 +198,7 @@ NS_ASSUME_NONNULL_BEGIN
  @return An object reliant on the supplied delegate that can be set as the
  receiver of requests using the Messaging feature.
 
- @exception NSInvalidArgumentException Raised if the delegate argument is `nil`.
+ @exception NSInvalidArgumentException Raised if the delegate argument is <code>nil</code>.
 
  @see PTDiffusionMessagingFeature
 
@@ -222,17 +224,17 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  @brief Extension adding support for responding to requests using Binary values.
- 
+
  @since 6.0
  */
 @interface PTDiffusionResponder (PTDiffusionBinary)
 
 /**
  Dispatch a response to a request.
- 
+
  @param binary The value to send in response.
 
- @exception NSInvalidArgumentException Raised if the binary argument is `nil`.
+ @exception NSInvalidArgumentException Raised if the binary argument is <code>nil</code>.
 
  @since 6.0
  */
@@ -250,20 +252,20 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  Send a request for which a binary response is expected.
- 
+
  The message will be routed to an appropriately registered control handler for
  the given path.
 
  @param request The request to send.
- 
+
  @param path The path to send the request to.
- 
+
  @param completionHandler Block to be called asynchronously on success or
  failure. If the operation was successful, the `error` argument passed to the
  block will be `nil`. The completion handler will be called asynchronously on
  the main dispatch queue.
 
- @exception NSInvalidArgumentException Raised if any supplied arguments are `nil`.
+ @exception NSInvalidArgumentException Raised if any supplied arguments are <code>nil</code>.
 
  @since 6.0
  */
@@ -286,7 +288,7 @@ NS_ASSUME_NONNULL_BEGIN
  block will be `nil`. The completion handler will be called asynchronously on
  the main dispatch queue.
 
- @exception NSInvalidArgumentException Raised if any supplied arguments are `nil`.
+ @exception NSInvalidArgumentException Raised if any supplied arguments are <code>nil</code>.
 
  @since 6.5
  */
@@ -302,20 +304,20 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  @brief Extension adding support to the Time Series feature for appending and
  editing events using binary values.
- 
+
  @since 6.0
  */
 @interface PTDiffusionTimeSeriesFeature (PTDiffusionBinary)
 
 /**
  Update a time series topic by appending a new binary value.
- 
+
  The server will add an event to the end of the time series based on the
  supplied value, with a new sequence number, timestamp, and the author set to
  the authenticated principal of the session.
- 
+
  @param topicPath The path of the time series topic to update.
- 
+
  @param value The event value.
 
  @param completionHandler Block to be called asynchronously on success or
@@ -323,7 +325,7 @@ NS_ASSUME_NONNULL_BEGIN
  block will be `nil`. The completion handler will be called asynchronously on
  the main dispatch queue.
 
- @exception NSInvalidArgumentException Raised if any supplied arguments are `nil`.
+ @exception NSInvalidArgumentException Raised if any supplied arguments are <code>nil</code>.
 
  @since 6.0
  */
@@ -352,7 +354,7 @@ NS_ASSUME_NONNULL_BEGIN
  block will be `nil`. The completion handler will be called asynchronously on
  the main dispatch queue.
 
- @exception NSInvalidArgumentException Raised if any supplied arguments are `nil`.
+ @exception NSInvalidArgumentException Raised if any supplied arguments are <code>nil</code>.
 
  @since 6.6
  */
@@ -367,13 +369,13 @@ NS_ASSUME_NONNULL_BEGIN
 
  The existing event is identified by its sequence number and must be an original
  event.
- 
+
  The server will add an edit event to the end of the time series based on the
  supplied value, with a new sequence number, timestamp, and the author set to
  the authenticated principal of the session.
 
  @param topicPath The path of the time series topic to update.
- 
+
  @param originalSequence The sequence number of the original event to edit.
 
  @param value The event value.
@@ -384,8 +386,8 @@ NS_ASSUME_NONNULL_BEGIN
  the main dispatch queue.
 
  @exception NSInvalidArgumentException Raised if any of the topicPath, value or
- completionHandler arguments are `nil`. Also raised if the originalSequence
- argument exceeds `INT64_MAX`.
+ completionHandler arguments are <code>nil</code>. Also raised if the originalSequence
+ argument exceeds <code>INT64_MAX</code>.
 
  @since 6.0
  */
@@ -396,17 +398,17 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  Evaluate a query for a time series topic where events have binary values.
- 
+
  @param query The configured query.
- 
+
  @param topicPath The path of the time series topic to query.
- 
+
  @param completionHandler Block to be called asynchronously on success or
  failure. If the operation was successful, the `error` argument passed to the
  block will be `nil`. The completion handler will be called asynchronously on
  the main dispatch queue.
 
- @exception NSInvalidArgumentException Raised if any supplied arguments are `nil`.
+ @exception NSInvalidArgumentException Raised if any supplied arguments are <code>nil</code>.
 
  @since 6.0
  */
@@ -446,7 +448,7 @@ NS_ASSUME_NONNULL_BEGIN
  block will be `nil`. The completion handler will be called asynchronously on
  the main dispatch queue.
 
- @exception NSInvalidArgumentException Raised if any supplied arguments are `nil`.
+ @exception NSInvalidArgumentException Raised if any supplied arguments are <code>nil</code>.
 
  @since 6.2
  */
@@ -475,7 +477,7 @@ NS_ASSUME_NONNULL_BEGIN
  block will be `nil`. The completion handler will be called asynchronously on
  the main dispatch queue.
 
- @exception NSInvalidArgumentException If any argument is `nil`.
+ @exception NSInvalidArgumentException If any argument is <code>nil</code>.
 
  @since 6.3
  */
@@ -498,7 +500,7 @@ NS_ASSUME_NONNULL_BEGIN
  block will be `nil`. The completion handler will be called asynchronously on
  the main dispatch queue.
 
- @exception NSInvalidArgumentException If any argument is `nil`.
+ @exception NSInvalidArgumentException If any argument is <code>nil</code>.
 
  @since 6.3
  */
@@ -528,7 +530,7 @@ NS_ASSUME_NONNULL_BEGIN
  block will be `nil` and `result` will be non-`nil`. The completion handler will
  be called asynchronously on the main dispatch queue.
 
- @exception NSInvalidArgumentException If any argument is `nil` or if the topic
+ @exception NSInvalidArgumentException If any argument is <code>nil</code> or if the topic
  type defined in the specification is incompatible with
  PTDiffusionDataTypes#binary.
 
@@ -564,7 +566,7 @@ NS_ASSUME_NONNULL_BEGIN
  block will be `nil` and `result` will be non-`nil`. The completion handler will
  be called asynchronously on the main dispatch queue.
 
- @exception NSInvalidArgumentException If any argument is `nil` or if the topic
+ @exception NSInvalidArgumentException If any argument is <code>nil</code> or if the topic
  type defined in the specification is incompatible with
  PTDiffusionDataTypes#binary.
 
@@ -593,7 +595,7 @@ NS_ASSUME_NONNULL_BEGIN
 
  @return An update stream.
 
- @exception NSInvalidArgumentException If any argument is `nil`.
+ @exception NSInvalidArgumentException If any argument is <code>nil</code>.
 
  @since 6.3
  */
@@ -619,7 +621,7 @@ NS_ASSUME_NONNULL_BEGIN
 
  @return An update stream.
 
- @exception NSInvalidArgumentException If any argument is `nil`.
+ @exception NSInvalidArgumentException If any argument is <code>nil</code>.
 
  @since 6.3
  */
@@ -645,7 +647,7 @@ NS_ASSUME_NONNULL_BEGIN
 
  @return An update stream.
 
- @exception NSInvalidArgumentException If any argument is `nil` or if the topic
+ @exception NSInvalidArgumentException If any argument is <code>nil</code> or if the topic
  type defined in the specification is incompatible with
  PTDiffusionDataTypes#binary.
 
@@ -676,7 +678,7 @@ NS_ASSUME_NONNULL_BEGIN
 
  @return An update stream.
 
- @exception NSInvalidArgumentException If any argument is `nil` or if the topic
+ @exception NSInvalidArgumentException If any argument is <code>nil</code> or if the topic
  type defined in the specification is incompatible with
  PTDiffusionDataTypes#binary.
 
@@ -687,6 +689,45 @@ NS_ASSUME_NONNULL_BEGIN
                                                   constraint:(PTDiffusionUpdateConstraint *)constraint;
 
 @end
+
+
+
+/**
+ @brief Extension adding support to partial JSON update constraints for
+ requiring primitive values at locations referenced with a JSON pointer.
+
+ @since 6.10
+ */
+@interface PTDiffusionPartialJSONUpdateConstraint (PTDiffusionBinary)
+
+
+/**
+ Compares a location within the JSON topic value to a specified value.
+
+ If there is no value found at the specified pointer position, the
+ constraint will be unsatisfied.
+
+ Only the operator {@link PTDiffusionUpdateConstraintOperator#is IS}
+ can be used with binary values.
+
+ @param value               The value to be compared against the topic value.
+ @param pointer             A [JSON Pointer](https://tools.ietf.org/html/rfc6901) syntax
+                            reference locating the value in the JSON object.
+ @param comparisonOperator  The comparison operator. See {@link PTDiffusionUpdateConstraintOperator}.
+ @param error               Location to store a reason in case of failure. May be `nil`.
+
+ @return                    The new constraint, or `nil` on failure.
+
+ @since 6.10
+ */
+-(nullable instancetype)withBinaryValue:(nonnull NSData *)value
+                              atPointer:(nonnull NSString *)pointer
+                     comparisonOperator:(nonnull PTDiffusionUpdateConstraintOperator *)comparisonOperator
+                                  error:(NSError *__autoreleasing *const)error;
+
+
+@end
+
 
 NS_ASSUME_NONNULL_END
 

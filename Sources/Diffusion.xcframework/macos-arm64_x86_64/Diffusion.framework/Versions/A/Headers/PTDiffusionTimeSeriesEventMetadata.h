@@ -1,20 +1,22 @@
-//  Diffusion Client Library for iOS, tvOS and OS X / macOS
+//  Diffusion Client Library for iOS and OS X / macOS
 //
-//  Copyright (c) 2017 Push Technology Ltd., All Rights Reserved.
+//  Copyright (c) 2017 - 2026 DiffusionData Ltd., All Rights Reserved.
 //
-//  Use is subject to license terms.
+//  Use is subject to licence terms.
 //
 //  NOTICE: All information contained herein is, and remains the
-//  property of Push Technology. The intellectual and technical
-//  concepts contained herein are proprietary to Push Technology and
+//  property of DiffusionData. The intellectual and technical
+//  concepts contained herein are proprietary to DiffusionData and
 //  may be covered by U.S. and Foreign Patents, patents in process, and
 //  are protected by trade secret or copyright law.
 
-@import Foundation;
+#import <Foundation/Foundation.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
 /**
+ @ingroup PublicAPI_TimeSeries
+
  @brief Metadata associated with a time series event.
 
  @see PTDiffusionTimeSeriesEvent
@@ -36,7 +38,7 @@ NS_ASSUME_NONNULL_BEGIN
  number of the preceding event plus one.
 
  @return The sequence number; never higher than `INT64_MAX`.
- 
+
  @since 6.0
  */
 @property(nonatomic, readonly) UInt64 sequence;
@@ -53,7 +55,7 @@ NS_ASSUME_NONNULL_BEGIN
 
  @return The difference, measured in milliseconds, between the time the server
  added the event to the time series and midnight, January 1, 1970 UTC.
- 
+
  @since 6.0
  */
 @property(nonatomic, readonly) SInt64 timestamp;

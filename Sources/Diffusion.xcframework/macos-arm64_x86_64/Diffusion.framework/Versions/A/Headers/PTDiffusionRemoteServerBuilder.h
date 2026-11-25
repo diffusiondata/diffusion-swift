@@ -1,24 +1,29 @@
-//  Diffusion Client Library for iOS, tvOS and OS X / macOS
+//  Diffusion Client Library for iOS and OS X / macOS
 //
-//  Copyright (c) 2021 Push Technology Ltd., All Rights Reserved.
+//  Copyright (c) 2021 - 2026 DiffusionData Ltd., All Rights Reserved.
 //
-//  Use is subject to license terms.
+//  Use is subject to licence terms.
 //
 //  NOTICE: All information contained herein is, and remains the
-//  property of Push Technology. The intellectual and technical
-//  concepts contained herein are proprietary to Push Technology and
+//  property of DiffusionData. The intellectual and technical
+//  concepts contained herein are proprietary to DiffusionData and
 //  may be covered by U.S. and Foreign Patents, patents in process, and
 //  are protected by trade secret or copyright law.
 
-@import Foundation;
+#import <Foundation/Foundation.h>
 
 @class PTDiffusionRemoteServerConnectionOption;
 @class PTDiffusionRemoteServer;
 @class PTDiffusionCredentials;
+@class PTDiffusionPrimaryInitiatorRemoteServer;
+@class PTDiffusionSecondaryInitiatorRemoteServer;
+@class PTDiffusionSecondaryAcceptorRemoteServer;
 
 NS_ASSUME_NONNULL_BEGIN
 
 /**
+ @ingroup PublicAPI_RemoteServers
+
  @brief A Remote Server builder.
 
  A builder of this type is used to create instances of {@link PTDiffusionRemoteServer}
@@ -69,7 +74,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 
 /**
- Specifies a map of {@link PTDiffusionRermoteServerConnectionOption} settings.
+ Specifies a map of {@link PTDiffusionRemoteServerConnectionOption} settings.
 
  This will replace any options currently set for the builder.
 
@@ -137,20 +142,62 @@ NS_ASSUME_NONNULL_BEGIN
 
 
 /**
- Creates a remote server object using the current values known
- to this builder.
+ @brief Builds a secondary initiator using the current values known to
+        this builder.
 
- @param name the name of the remote server.
+ @param name   the remote server name. This is the name that will be
+               specified in topic views.
 
- @param url the URL to use to connect to the primary server.
+ @param url    the URL to use to connect to the primary server.
 
- @return a new remote server instance.
+ @return        a new secondary initiator remote server instance.
 
- @since 6.7
+ @since 6.10
  */
--(PTDiffusionRemoteServer *)createWithName:(NSString *)name
-                                    andURL:(NSString *)url;
+-(PTDiffusionSecondaryInitiatorRemoteServer *)createSecondaryInitiatorWithName:(NSString *)name
+                                                                        andURL:(NSString *)url;
 
+
+/**
+ @brief Builds a primary initiator using the current values known to
+        this builder.
+
+ @param name        the name of the primary initiator which must
+                    correspond to the name of a {@link PTDiffusionSecondaryAcceptorRemoteServer}
+                    defined on the secondary server.
+
+ @param urls        the list of URLs to use to initiate connections to
+                    the secondary servers.
+
+ @param connector   the name of the connector used to establish the
+                    connection with the secondary server.
+
+ @return            a new primary initiator remote server instance.
+
+ @since 6.10
+ */
+-(PTDiffusionPrimaryInitiatorRemoteServer *)createPrimaryInitiatorWithName:(NSString *)name
+                                                                      urls:(NSArray<NSString *>*)urls
+                                                              andConnector:(NSString *)connector;
+
+
+/**
+ @brief Builds a secondary acceptor using the current values known to
+        this builder.
+
+ @param name                the remote server name. A primary initiator of the
+                            same name will be able to connect to this acceptor. This
+                            is the name that will be specified in topic views.
+
+ @param primaryHostName     the primary server host name that will be
+                            used in SSL validation of the primary server.
+
+ @return                    a new secondary acceptor remote server instance.
+
+ @since 6.10
+ */
+-(PTDiffusionSecondaryAcceptorRemoteServer *)createSecondaryAcceptorWithName:(NSString *)name
+                                                          andPrimaryHostName:(NSString *)primaryHostName;
 
 @end
 

@@ -1,16 +1,16 @@
-//  Diffusion Client Library for iOS, tvOS and OS X / macOS
+//  Diffusion Client Library for iOS and OS X / macOS
 //
-//  Copyright (c) 2016, 2021 Push Technology Ltd., All Rights Reserved.
+//  Copyright (c) 2016 - 2026 DiffusionData Ltd., All Rights Reserved.
 //
-//  Use is subject to license terms.
+//  Use is subject to licence terms.
 //
 //  NOTICE: All information contained herein is, and remains the
-//  property of Push Technology. The intellectual and technical
-//  concepts contained herein are proprietary to Push Technology and
+//  property of DiffusionData. The intellectual and technical
+//  concepts contained herein are proprietary to DiffusionData and
 //  may be covered by U.S. and Foreign Patents, patents in process, and
 //  are protected by trade secret or copyright law.
 
-@import Foundation;
+#import <Foundation/Foundation.h>
 #import <Diffusion/PTDiffusionTopicType.h>
 
 NS_ASSUME_NONNULL_BEGIN
@@ -32,7 +32,7 @@ NS_ASSUME_NONNULL_BEGIN
  different properties can be derived from a default instance using the
  `[PTdiffusionTopicSpecification initWithType:properties:]` builder method.
 
- ###Topic Properties
+ ### Topic Properties
 
  Depending on the topic type, some properties must be included in the
  specification when creating a topic and some properties have no effect. The
@@ -52,7 +52,6 @@ NS_ASSUME_NONNULL_BEGIN
                                        Int64</th>
         <th style="text-align:center;">RecordV2</th>
         <th style="text-align:center;">TimeSeries</th>
-        <th style="text-align:center;">Routing</th>
     </tr>
     <tr>
         <th style="text-align:left;">COMPRESSION</th>
@@ -60,7 +59,6 @@ NS_ASSUME_NONNULL_BEGIN
         <td></td>
         <td style="text-align:center;">Optional</td>
         <td style="text-align:center;">—</td>
-        <td style="text-align:center;">Optional</td>
         <td style="text-align:center;">Optional</td>
         <td style="text-align:center;">Optional</td>
     </tr>
@@ -72,7 +70,6 @@ NS_ASSUME_NONNULL_BEGIN
         <td style="text-align:center;">Optional</td>
         <td style="text-align:center;">Optional</td>
         <td style="text-align:center;">Optional <sup>†</sup></td>
-        <td style="text-align:center;">Optional</td>
     </tr>
     <tr>
         <th style="text-align:left;">DONT_RETAIN_VALUE</th>
@@ -82,13 +79,11 @@ NS_ASSUME_NONNULL_BEGIN
         <td style="text-align:center;">Optional</td>
         <td style="text-align:center;">Optional</td>
         <td style="text-align:center;">—</td>
-        <td style="text-align:center;">— <sup>‡</sup></td>
     </tr>
     <tr>
         <th style="text-align:left;">OWNER</th>
         <td style="text-align:center;"></td>
         <td></td>
-        <td style="text-align:center;">Optional</td>
         <td style="text-align:center;">Optional</td>
         <td style="text-align:center;">Optional</td>
         <td style="text-align:center;">Optional</td>
@@ -102,13 +97,11 @@ NS_ASSUME_NONNULL_BEGIN
         <td style="text-align:center;">Optional</td>
         <td style="text-align:center;">Optional</td>
         <td style="text-align:center;">Optional</td>
-        <td style="text-align:center;">Optional</td>
     </tr>
     <tr>
         <th style="text-align:left;">PRIORITY</th>
         <td style="text-align:center;">`default`</td>
         <td></td>
-        <td style="text-align:center;">Optional</td>
         <td style="text-align:center;">Optional</td>
         <td style="text-align:center;">Optional</td>
         <td style="text-align:center;">Optional</td>
@@ -122,13 +115,11 @@ NS_ASSUME_NONNULL_BEGIN
         <td style="text-align:center;">—</td>
         <td style="text-align:center;">Optional</td>
         <td style="text-align:center;">Optional</td>
-        <td style="text-align:center;">— <sup>‡</sup></td>
     </tr>
     <tr>
         <th style="text-align:left;">REMOVAL</th>
         <td style="text-align:center;"></td>
         <td></td>
-        <td style="text-align:center;">Optional</td>
         <td style="text-align:center;">Optional</td>
         <td style="text-align:center;">Optional</td>
         <td style="text-align:center;">Optional</td>
@@ -142,13 +133,11 @@ NS_ASSUME_NONNULL_BEGIN
         <td style="text-align:center;">—</td>
         <td style="text-align:center;">Optional</td>
         <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
     </tr>
     <tr>
         <th style="text-align:left;">TIDY_ON_UNSUBSCRIBE</th>
         <td style="text-align:center;">`false`</td>
         <td></td>
-        <td style="text-align:center;">Optional</td>
         <td style="text-align:center;">Optional</td>
         <td style="text-align:center;">Optional</td>
         <td style="text-align:center;">Optional</td>
@@ -162,7 +151,6 @@ NS_ASSUME_NONNULL_BEGIN
         <td style="text-align:center;">—</td>
         <td style="text-align:center;">—</td>
         <td style="text-align:center;">Required</td>
-        <td style="text-align:center;">—</td>
     </tr>
     <tr>
         <th style="text-align:left;">TIME_SERIES_RETAINED_RANGE</th>
@@ -172,7 +160,6 @@ NS_ASSUME_NONNULL_BEGIN
         <td style="text-align:center;">—</td>
         <td style="text-align:center;">—</td>
         <td style="text-align:center;">Optional</td>
-        <td style="text-align:center;">—</td>
     </tr>
     <tr>
         <th style="text-align:left;">TIME_SERIES_SUBSCRIPTION_RANGE</th>
@@ -182,7 +169,6 @@ NS_ASSUME_NONNULL_BEGIN
         <td style="text-align:center;">—</td>
         <td style="text-align:center;">—</td>
         <td style="text-align:center;">Optional</td>
-        <td style="text-align:center;">—</td>
     </tr>
     <tr>
         <th style="text-align:left;">VALIDATE_VALUES</th>
@@ -192,21 +178,16 @@ NS_ASSUME_NONNULL_BEGIN
         <td style="text-align:center;">Optional</td>
         <td style="text-align:center;">Optional</td>
         <td style="text-align:center;">Optional</td>
-        <td style="text-align:center;">— <sup>‡</sup>
     </tr>
  </table>
 
  <dl>
     <dt>†
+    </dt>
     <dd>`TIME_SERIES` topics have restricted values for the
         `CONFLATION` property. They are only allowed to have the values
         `off` or `unsubscribe`.
-    <dt>‡
-    <dd>`ROUTING` topics (deprecated) are references to other topics, and have no value
-        of their own. Instead, they reflect the value of the appropriate source
-        topic. Observed behavior depends on the values of the
-        `DONT_RETAIN_VALUE`, `PUBLISH_VALUES_ONLY`, and
-        `VALIDATE_VALUES` properties that are set on the source topic.
+    </dd>
  </dl>
 
  @since 5.9
@@ -241,7 +222,7 @@ NS_ASSUME_NONNULL_BEGIN
  @return topic specification object initialized with the given topic type and
  properties dictionary.
 
- @exception NSInvalidArgumentException If properties is `nil`.
+ @exception NSInvalidArgumentException If properties is <code>nil</code>.
 
  @since 6.0
  */
@@ -342,8 +323,31 @@ NS_ASSUME_NONNULL_BEGIN
  'tidy on unsubscribe' option for a topic.
 
  @since 6.0
+
+ @deprecated since 6.12 due to typo in name. Please use {@link tidyOnUnsubscribePropertyKey}.
  */
 +(NSString *)tidyOnSubscribePropertyKey;
+
+
+/**
+ Key of boolean topic property that sets the 'tidy on unsubscribe' option for a
+ topic.
+
+ By default, if a session unsubscribes from a topic, it will receive any updates
+ for that topic that were previously queued but not sent.
+
+ If this property is set to `true`, when a client session unsubscribes from the
+ topic, any updates for the topic that are still queued for the session are
+ removed. There is a performance overhead to using this option as the client
+ queue must be scanned to find topic updates to remove, however it may prove
+ useful for preventing unwanted data being sent to client sessions.
+
+ @return string representing the key of boolean topic property that sets the
+ 'tidy on unsubscribe' option for a topic.
+
+ @since 6.12
+*/
++(NSString *)tidyOnUnsubscribePropertyKey;
 
 /**
  Key of the string topic property that specifies the event data type for a time
@@ -463,8 +467,8 @@ NS_ASSUME_NONNULL_BEGIN
  Key of boolean topic property that specifies a topic should not retain
  its last value.
 
- By default, a topic (other than a `ROUTING`) will retain its
- latest value. The latest value will be sent to new subscribers. Setting
+ By default, a topic will retain its latest value.
+ The latest value will be sent to new subscribers. Setting
  this property to `true` disables this behavior. New subscribers
  will not be sent an  initial value. No value will be returned for fetch
  operations that select the topic. This is useful for data streams where
@@ -519,24 +523,31 @@ NS_ASSUME_NONNULL_BEGIN
 
  The expression takes the form:
 
-     when <conditions> [remove "<selector>"]
+     when <conditions> [remove "<selection>"]
 
- At least one *condition* must be supplied. If more than one is supplied, they
+ At least one condition must be supplied. If more than one is supplied, they
  must be separated by logical operators (`and` or `or`). The natural evaluation
  order of the operators may be changed by surrounding with parentheses (e.g.
- (*condition* `and` *condition*)).
+ (_condition_ `and` _condition_)).
 
- The `remove` clause is optional. It provides a
- @ref md_topic_selectors "topic selector" expression to be evaluated by the
- server, representing the topics to be removed. If a `remove` clause is
- specified, the topic with the removal policy will only be removed if its path
- matches the selector expression. The selector must be surrounded by either
- double or single quotes.
+ The `remove` clause is optional. It specifies which topics are to be removed.
+ If omitted, the topic that the policy is attached to is removed, but this
+ clause allows other topics to be removed if required. The _selection_ can be
+ one of the following:
 
- When many topics have the same removal policy, it is better to
- set the `REMOVAL` property for one of them, using a `remove`
- clause that selects all of the topics. This is more efficient because it
- allows the server to avoid evaluating the same condition many times.
+ - A quoted (using single or double quotes) topic selector expression
+   representing the topics to be removed. All topics matching the selector,
+   that the caller has permission to remove, will be removed when the
+   conditions are satisfied.
+ - The word `branch` (case insensitive). In this case the topic that the policy
+   is applied to and all of its descendants will be removed (permissions
+   allowing). This option is a convenient way of removing a branch without
+   having to build the topic path into the removal selector.
+
+ The `remove` clause should be used rather than applying the same policy to
+ many topics, to avoid the server having to evaluate the condition many times.
+ Using the `branch` option is also far more efficient than using a topic
+ selector that defines the branch.
 
  The permissions that are applied at the time of removal are those defined by
  the roles of the principal that created the topic at the time of creation. The
@@ -727,13 +738,12 @@ NS_ASSUME_NONNULL_BEGIN
  only that when evaluated the given period of time has passed since it was last
  evaluated and found to have no matching sessions.
 
- Subscriptions is the number of subscriptions to a topic, including those that
- occur through routing topics. When monitoring across a cluster the
- `subscriptions less than` condition is first checked on the server that owns
- the topic and if satisfied there then each cluster member is queried to check
- if the condition has also been satisfied there. The topic will only be removed
- if the total number of subscriptions across the cluster is less than that
- specified in the condition.
+ Subscriptions is the number of subscriptions to a topic.
+ When monitoring across a cluster the `subscriptions less than` condition is first
+ checked on the server that owns the topic and if satisfied there then each cluster
+ member is queried to check if the condition has also been satisfied there.
+ The topic will only be removed if the total number of subscriptions across the
+ cluster is less than that specified in the condition.
 
  Automatic topic removal is supported for a topic that is replicated
  across the local cluster, and for a topic with with fanout replicas on

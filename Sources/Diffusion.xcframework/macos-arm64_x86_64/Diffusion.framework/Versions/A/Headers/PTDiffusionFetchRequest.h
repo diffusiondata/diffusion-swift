@@ -1,22 +1,24 @@
-//  Diffusion Client Library for iOS, tvOS and OS X / macOS
+//  Diffusion Client Library for iOS and OS X / macOS
 //
-//  Copyright (c) 2018, 2020 Push Technology Ltd., All Rights Reserved.
+//  Copyright (c) 2018 - 2026 DiffusionData Ltd., All Rights Reserved.
 //
-//  Use is subject to license terms.
+//  Use is subject to licence terms.
 //
 //  NOTICE: All information contained herein is, and remains the
-//  property of Push Technology. The intellectual and technical
-//  concepts contained herein are proprietary to Push Technology and
+//  property of DiffusionData. The intellectual and technical
+//  concepts contained herein are proprietary to DiffusionData and
 //  may be covered by U.S. and Foreign Patents, patents in process, and
 //  are protected by trade secret or copyright law.
 
-@import Foundation;
+#import <Foundation/Foundation.h>
 
 @class PTDiffusionFetchResult;
 
 NS_ASSUME_NONNULL_BEGIN
 
 /**
+ @ingroup PublicAPI_FetchRequest
+
  @brief A parameterised query that can be used to search the topic tree.
 
  A new request can be created using the `fetchRequest`
@@ -85,9 +87,6 @@ NS_ASSUME_NONNULL_BEGIN
  specifying a limit to the number of results using #last:. This returns up to
  the specified number of results from the end of the range, in path order. This
  is useful for paging backwards through a range of topics.
-
- Routing topics are **not** supported, and if encountered will be ignored (i.e.
- treated as if they did not exist).
 
  Instances of this class are immutable and can be safely shared and reused.
 
@@ -194,9 +193,9 @@ NS_ASSUME_NONNULL_BEGIN
 
  A reference topic in the unpublished state which matches the query
  will only be included in the fetch results if the session has
- {@code PTDiffusionPathPermission.readTopic} permission for the
- reference's source topic as well as {@code PTDiffusionPathPermission.readTopic}
- permission for the reference topic. Requiring {@code PTDiffusionPathPermission.readTopic}
+ {@link PTDiffusionPathPermission#readTopic} permission for the
+ reference's source topic as well as {@link PTDiffusionPathPermission#readTopic}
+ permission for the reference topic. Requiring {@link PTDiffusionPathPermission#readTopic}
  permission for the source topic ensures less privileged sessions
  cannot derive information from the existence of the reference topic
  before the delay time has expired.
@@ -204,7 +203,7 @@ NS_ASSUME_NONNULL_BEGIN
  @return a new fetch request derived from this fetch request,
  additionally specifying that unpublished reference topics
  should be included in the results
- 
+
  @since 6.5
  */
 -(instancetype)withUnpublishedDelayedTopics;
@@ -221,7 +220,7 @@ NS_ASSUME_NONNULL_BEGIN
  large result sets.
 
  If there are potentially more results that would satisfy the other constraints,
- then the fetch result will indicate so via the PTDiffusionFetchResult#hasMore
+ then the fetch result will indicate so via the {@link PTDiffusionFetchResult#more hasMore}
  property.
 
  Either this or #last: may be specified. This will therefore override any
@@ -233,7 +232,7 @@ NS_ASSUME_NONNULL_BEGIN
  @return A new fetch request derived from this fetch request but selecting only
  the number of topics specified from the start of the range.
 
- @exception NSInvalidArgumentException if number is greater than `INT32_MAX`.
+ @exception NSInvalidArgumentException if number is greater than <code>INT32_MAX</code>.
 
  @since 6.2
  */
@@ -257,7 +256,7 @@ NS_ASSUME_NONNULL_BEGIN
  @return A new fetch request derived from this fetch request but selecting only
  the number of topics specified from the end of the range.
 
- @exception NSInvalidArgumentException if number is greater than `-INT32_MIN`.
+ @exception NSInvalidArgumentException if number is greater than <code>INT32_MAX</code>.
 
  @since 6.2
  */
@@ -277,7 +276,7 @@ NS_ASSUME_NONNULL_BEGIN
  @return A new fetch request derived from this fetch request but constraining
  the size of the result to the specified maximum.
 
- @exception NSInvalidArgumentException if size is greater than `INT32_MAX`.
+ @exception NSInvalidArgumentException if size is greater than <code>INT32_MAX</code>.
 
  @since 6.2
  */
@@ -304,9 +303,9 @@ NS_ASSUME_NONNULL_BEGIN
  must be compatible with the value class specified or the event type for time
  series topics.
 
- PTDiffusionTopicType_Routing may not be specified.
-
- @param topicTypes Topic types to be selected, boxed as NSNumber instances.
+ @param topicTypes Topic types to be selected, boxed as
+ <a href="https://developer.apple.com/documentation/foundation/nsnumber">NSNumber</a>
+ instances.
 
  @return A new fetch request derived from this fetch request but specifying that
  only topics of the specified topic types should be returned.
@@ -343,7 +342,7 @@ NS_ASSUME_NONNULL_BEGIN
 
  Then
 
- <pre>
+ @code{.m}
  PTDiffusionFetchRequest *const request =
  [session.topics.fetchRequest limitDeepBranches:1
                                           limit:1];
@@ -351,7 +350,7 @@ NS_ASSUME_NONNULL_BEGIN
  [request fetchBinaryValuesWithTopicSelectorExpression:@"?.//"
                                      completionHandler:
  ^(PTDiffusionBinaryFetchResult *const result, NSError *const error)
- </pre>
+ @endcode
 
  will return results with the paths `x/0`, `y/y/y/y/3`,
  and `z/5`. The application can then determine the roots of the
@@ -360,7 +359,7 @@ NS_ASSUME_NONNULL_BEGIN
  The `deepBranchLimit` parameter can usefully be set to
  `0`. For example, given the same example topic tree,
 
- <pre>
+ @code{.m}
  PTDiffusionFetchRequest *const request =
  [session.topics.fetchRequest limitDeepBranches:3
                                           limit:0];
@@ -368,14 +367,14 @@ NS_ASSUME_NONNULL_BEGIN
  [request fetchBinaryValuesWithTopicSelectorExpression:@"?.//"
                                      completionHandler:
  ^(PTDiffusionBinaryFetchResult *const result, NSError *const error)
- </pre>
+ @endcode
 
  will only return results having paths with fewer than three parts;
  namely `x/0`, and `z/5`.
 
  The fetch result does not indicate whether this option caused some
  results to be filtered from deep branches. It has no affect on the
- ` result. If the result set
+ {@link PTDiffusionFetchResult#more hasMore} result. If the result set
  contains `deepBranchLimit` results for a particular deep
  branch, some topics from that branch may have been filtered.
 

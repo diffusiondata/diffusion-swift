@@ -1,21 +1,23 @@
-//  Diffusion Client Library for iOS, tvOS and OS X / macOS
+//  Diffusion Client Library for iOS and OS X / macOS
 //
-//  Copyright (c) 2017, 2021 Push Technology Ltd., All Rights Reserved.
+//  Copyright (c) 2017 - 2026 DiffusionData Ltd., All Rights Reserved.
 //
-//  Use is subject to license terms.
+//  Use is subject to licence terms.
 //
 //  NOTICE: All information contained herein is, and remains the
-//  property of Push Technology. The intellectual and technical
-//  concepts contained herein are proprietary to Push Technology and
+//  property of DiffusionData. The intellectual and technical
+//  concepts contained herein are proprietary to DiffusionData and
 //  may be covered by U.S. and Foreign Patents, patents in process, and
 //  are protected by trade secret or copyright law.
 
-@import Foundation;
+#import <Foundation/Foundation.h>
 #import <Diffusion/PTDiffusionRecordV2Model.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
 /**
+ @ingroup PublicAPI_TopicDatatypes_RecordV2
+
  @brief A mutable data model based upon a schema.
 
  An initial version of such a model can be created from a schema using
@@ -53,7 +55,7 @@ NS_ASSUME_NONNULL_BEGIN
  will be populated with the failure reason. Reasons for failure include:
  - the last or only record is not a variable repeating record or has already
    reached the maximum number of occurrences.
- 
+
  @since 6.0
  */
 -(BOOL)addRecordError:(NSError **)error;
@@ -75,9 +77,9 @@ NS_ASSUME_NONNULL_BEGIN
    record is not a variable multiplicity field or the maximum number of
    occurrences for the field would be breached.
  - one of the values is incompatible with the field type.
- 
- @exception NSInvalidArgumentException If fieldValues is `nil`.
- 
+
+ @exception NSInvalidArgumentException If fieldValues is <code>nil</code>.
+
  @note This method does nothing if fieldValues is an empty array.
 
  @since 6.0
@@ -109,7 +111,7 @@ NS_ASSUME_NONNULL_BEGIN
  - `recordIndex` is out of bounds.
 
  @exception NSInvalidArgumentException If either recordName or fieldValues is
- `nil`, or if recordIndex is negative.
+ <code>nil</code>, or if recordIndex is negative.
 
  @note This method does nothing if fieldValues is an empty array.
 
@@ -143,8 +145,8 @@ NS_ASSUME_NONNULL_BEGIN
  will be populated with the failure reason. Reasons for failure include:
  - `recordName` is not defined in the schema.
  - `recordIndex` is out of bounds.
- 
- @exception NSInvalidArgumentException If recordName is `nil`, or if recordIndex
+
+ @exception NSInvalidArgumentException If recordName is <code>nil</code>, or if recordIndex
  is negative.
 
  @since 6.0
@@ -164,7 +166,7 @@ NS_ASSUME_NONNULL_BEGIN
 
  If the last or only record is not defined as variable multiplicity, calling
  this method has no effect.
- 
+
  @since 6.0
  */
 -(void)clearVariableRecords;
@@ -191,7 +193,7 @@ NS_ASSUME_NONNULL_BEGIN
    minimum number of occurrences.
  - either `recordIndex` or `fieldIndex` is out of bounds.
 
- @exception NSInvalidArgumentException If recordName is `nil`, recordIndex is
+ @exception NSInvalidArgumentException If recordName is <code>nil</code>, recordIndex is
  negative or fieldIndex is negative.
 
  @since 6.0
@@ -247,8 +249,8 @@ NS_ASSUME_NONNULL_BEGIN
    the schema field type.
  - either `recordIndex` or `fieldIndex` is out of bounds.
 
- @exception NSInvalidArgumentException If recordName is `nil`, recordIndex is
- negative, fieldName is `nil`, fieldIndex is negative or fieldValue is `nil`.
+ @exception NSInvalidArgumentException If recordName is <code>nil</code>, recordIndex is
+ negative, fieldName is <code>nil</code>, fieldIndex is negative or fieldValue is <code>nil</code>.
 
  @since 6.0
  */
@@ -281,7 +283,7 @@ NS_ASSUME_NONNULL_BEGIN
  - the key format is invalid.
  - a specified index is not a valid number.
 
- @exception NSInvalidArgumentException If either key or fieldValue is `nil`.
+ @exception NSInvalidArgumentException If either key or fieldValue is <code>nil</code>.
 
  @since 6.0
  */

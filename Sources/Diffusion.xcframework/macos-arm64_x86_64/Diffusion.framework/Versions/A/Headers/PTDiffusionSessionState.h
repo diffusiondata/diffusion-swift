@@ -1,27 +1,29 @@
-//  Diffusion Client Library for iOS, tvOS and OS X / macOS
+//  Diffusion Client Library for iOS and OS X / macOS
 //
-//  Copyright (c) 2015, 2016 Push Technology Ltd., All Rights Reserved.
+//  Copyright (c) 2015 - 2026 DiffusionData Ltd., All Rights Reserved.
 //
-//  Use is subject to license terms.
+//  Use is subject to licence terms.
 //
 //  NOTICE: All information contained herein is, and remains the
-//  property of Push Technology. The intellectual and technical
-//  concepts contained herein are proprietary to Push Technology and
+//  property of DiffusionData. The intellectual and technical
+//  concepts contained herein are proprietary to DiffusionData and
 //  may be covered by U.S. and Foreign Patents, patents in process, and
 //  are protected by trade secret or copyright law.
 
-@import Foundation;
+#import <Foundation/Foundation.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
 /**
+ @ingroup PublicAPI_Session
+
  @brief Session state represents the condition a session has in respect
  of connectivity to a Diffusion server.
- 
+
  A session state object is immutable.
 
  @see PTDiffusionSessionStateChange
- 
+
  @since 5.6
  */
 @interface PTDiffusionSessionState : NSObject <NSCopying>
@@ -47,7 +49,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  `YES` if the session is closed, otherwise `NO`.
- 
+
  This might mean that the session lost its connection to the server and
  could not be recovered.
 
@@ -58,7 +60,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  If the session is closed then this property will be `nil` if the closure
  was normal and expected, otherwise it will contain the failure reason.
- 
+
  @note This property is to be considered as an auxiliary, informational
  attachment to this session state instance. As such it is not incorporated
  within the result of the hash method and is not checked on calls to isEqual:
@@ -79,6 +81,74 @@ NS_ASSUME_NONNULL_BEGIN
  */
 -(BOOL)isEqualToSessionState:(nullable PTDiffusionSessionState *)sessionState;
 
+
+
+/**
+ The session has been closed by the client.
+
+ @return Instance indicating the session has been closed by the client.
+
+ @since 6.11
+ */
++(instancetype)ClosedByClient;
+
+
+/**
+ The session has been closed (or rejected) by the server.
+
+ @return Instance indicating the session has been closed (or rejected) by the
+ server.
+
+ @since 6.11
+ */
++(instancetype)ClosedByServer;
+
+
+/**
+ The session has lost its connection to a server and could not be recovered.
+
+ @return Instance indicating the session has lost its connection to a server
+ and could not be recovered.
+
+ @since 6.11
+ */
++(instancetype)ClosedFailed;
+
+
+/**
+ An active connection with the server has been established.
+
+ @return Instance indicating an active connection with the server has been
+ established.
+
+ @since 6.11
+ */
++(instancetype)ConnectedActive;
+
+
+/**
+ The session is establishing its initial connection.
+
+ @return Instance indicating the session is establishing its initial
+ connection.
+
+ @since 6.11
+ */
++(instancetype)Connecting;
+
+
+/**
+ Connection with a server has been lost and the session is attempting reconnection.
+
+ @return Instance indicating connection with a server has been lost and the
+ session is attempting reconnection.
+
+ @since 6.11
+ */
++(instancetype)RecoveringReconnect;
+
+
 @end
+
 
 NS_ASSUME_NONNULL_END

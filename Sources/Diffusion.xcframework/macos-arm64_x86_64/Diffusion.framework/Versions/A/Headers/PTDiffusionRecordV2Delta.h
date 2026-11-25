@@ -1,16 +1,16 @@
-//  Diffusion Client Library for iOS, tvOS and OS X / macOS
+//  Diffusion Client Library for iOS and OS X / macOS
 //
-//  Copyright (c) 2017, 2021 Push Technology Ltd., All Rights Reserved.
+//  Copyright (c) 2017 - 2026 DiffusionData Ltd., All Rights Reserved.
 //
-//  Use is subject to license terms.
+//  Use is subject to licence terms.
 //
 //  NOTICE: All information contained herein is, and remains the
-//  property of Push Technology. The intellectual and technical
-//  concepts contained herein are proprietary to Push Technology and
+//  property of DiffusionData. The intellectual and technical
+//  concepts contained herein are proprietary to DiffusionData and
 //  may be covered by U.S. and Foreign Patents, patents in process, and
 //  are protected by trade secret or copyright law.
 
-@import Foundation;
+#import <Foundation/Foundation.h>
 
 @class PTDiffusionRecordV2DeltaChange;
 @class PTDiffusionRecordV2Schema;
@@ -18,6 +18,8 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /**
+ @ingroup PublicAPI_TopicDatatypes_RecordV2
+
  @brief A description of the differences between two record values.
 
  @since 6.0.2
@@ -35,7 +37,7 @@ NS_ASSUME_NONNULL_BEGIN
  The schema supplied must comply with the data format of the delta. No
  validation takes place, so if the schema does not match the data then the
  results may be unpredictable.
- 
+
  @param schema The schema to use for interpreting this delta.
 
  @param error If this method returns `nil` to indicate that an error occurred

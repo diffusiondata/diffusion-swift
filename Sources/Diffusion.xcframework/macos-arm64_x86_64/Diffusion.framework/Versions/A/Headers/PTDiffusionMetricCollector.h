@@ -1,20 +1,22 @@
-//  Diffusion Client Library for iOS, tvOS and OS X / macOS
+//  Diffusion Client Library for iOS and OS X / macOS
 //
-//  Copyright (c) 2021 Push Technology Ltd., All Rights Reserved.
+//  Copyright (c) 2021 - 2026 DiffusionData Ltd., All Rights Reserved.
 //
-//  Use is subject to license terms.
+//  Use is subject to licence terms.
 //
 //  NOTICE: All information contained herein is, and remains the
-//  property of Push Technology. The intellectual and technical
-//  concepts contained herein are proprietary to Push Technology and
+//  property of DiffusionData. The intellectual and technical
+//  concepts contained herein are proprietary to DiffusionData and
 //  may be covered by U.S. and Foreign Patents, patents in process, and
 //  are protected by trade secret or copyright law.
 
-@import Foundation;
+#import <Foundation/Foundation.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
 /**
+ @ingroup PublicAPI_Metrics
+
  @brief The common base interface for metric collectors.
 
  @since 6.7
@@ -48,7 +50,7 @@ NS_ASSUME_NONNULL_BEGIN
 
  Session metric collectors can {@link PTDiffusionSessionMetricCollector#groupByProperties
  group metrics by property}.
- Topic metric collectors can {@link PTDiffusionSessionTopicCollector#groupsByTopicType
+ Topic metric collectors can {@link PTDiffusionTopicMetricCollector#groupsByTopicType
  group metrics by topic type}.
  This property places an upper limit on the number of groups that will be maintained for the
  metric collector.

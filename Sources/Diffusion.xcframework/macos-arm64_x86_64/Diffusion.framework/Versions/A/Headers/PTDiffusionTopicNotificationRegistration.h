@@ -1,21 +1,23 @@
-//  Diffusion Client Library for iOS, tvOS and OS X / macOS
+//  Diffusion Client Library for iOS and OS X / macOS
 //
-//  Copyright (c) 2018 Push Technology Ltd., All Rights Reserved.
+//  Copyright (c) 2018 - 2026 DiffusionData Ltd., All Rights Reserved.
 //
-//  Use is subject to license terms.
+//  Use is subject to licence terms.
 //
 //  NOTICE: All information contained herein is, and remains the
-//  property of Push Technology. The intellectual and technical
-//  concepts contained herein are proprietary to Push Technology and
+//  property of DiffusionData. The intellectual and technical
+//  concepts contained herein are proprietary to DiffusionData and
 //  may be covered by U.S. and Foreign Patents, patents in process, and
 //  are protected by trade secret or copyright law.
 
-@import Foundation;
+#import <Foundation/Foundation.h>
 #import <Diffusion/PTDiffusionRegistration.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
 /**
+ @ingroup PublicAPI_TopicNotifications
+
  @brief The registration state of the associated topic notification listener
  on the server.
 
@@ -38,7 +40,7 @@ NS_ASSUME_NONNULL_BEGIN
  block will be `nil`. The completion handler will be called asynchronously on
  the main dispatch queue.
 
- @exception NSInvalidArgumentException Raised if any arguments are `nil`.
+ @exception NSInvalidArgumentException Raised if any arguments are <code>nil</code>.
 
  @since 6.1
  */
@@ -57,7 +59,7 @@ NS_ASSUME_NONNULL_BEGIN
  block will be `nil`. The completion handler will be called asynchronously on
  the main dispatch queue.
 
- @exception NSInvalidArgumentException Raised if any arguments are `nil`.
+ @exception NSInvalidArgumentException Raised if any arguments are <code>nil</code>.
 
  @since 6.1
  */

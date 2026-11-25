@@ -1,16 +1,16 @@
-//  Diffusion Client Library for iOS, tvOS and OS X / macOS
+//  Diffusion Client Library for iOS and OS X / macOS
 //
-//  Copyright (c) 2017, 2021 Push Technology Ltd., All Rights Reserved.
+//  Copyright (c) 2017 - 2026 DiffusionData Ltd., All Rights Reserved.
 //
-//  Use is subject to license terms.
+//  Use is subject to licence terms.
 //
 //  NOTICE: All information contained herein is, and remains the
-//  property of Push Technology. The intellectual and technical
-//  concepts contained herein are proprietary to Push Technology and
+//  property of DiffusionData. The intellectual and technical
+//  concepts contained herein are proprietary to DiffusionData and
 //  may be covered by U.S. and Foreign Patents, patents in process, and
 //  are protected by trade secret or copyright law.
 
-@import Foundation;
+#import <Foundation/Foundation.h>
 
 @class PTDiffusionMutableRecordV2Model;
 @class PTDiffusionRecordV2SchemaRecord;
@@ -18,8 +18,10 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /**
+ @ingroup PublicAPI_TopicDatatypes_RecordV2
+
  @brief A schema.
- 
+
  A schema describes data value format in terms of one or more record definitions.
  A record definition describes the layout of a record and comprises one or more
  field definitions.
@@ -36,7 +38,7 @@ NS_ASSUME_NONNULL_BEGIN
  A field may be defined as of type 'string', 'integer' or 'decimal'. A decimal
  type has a further property of 'scale' which defines the number of digits to
  the right of the decimal point.
- 
+
  @see PTDiffusionRecordV2SchemaBuilder
 
  @since 6.0
@@ -49,9 +51,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  Returns a schema object initialized from the given JSON definition.
- 
+
  @param jsonData Encoded JSON string representation of the schema.
- 
+
  @param error If this method returns `nil` to indicate that an error occurred
  then this will be populated with the reason for that failure.
 
@@ -68,7 +70,7 @@ NS_ASSUME_NONNULL_BEGIN
  Returns the schema in a JSON format.
 
  @return Schema in a JSON format.
- 
+
  @since 6.0
  */
 -(NSData *)JSONData;
@@ -83,7 +85,7 @@ NS_ASSUME_NONNULL_BEGIN
  instances for updating purposes.
 
  @return a new initialized model.
- 
+
  @since 6.0
  */
 -(PTDiffusionMutableRecordV2Model *)createMutableModel;

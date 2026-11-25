@@ -1,22 +1,24 @@
-//  Diffusion Client Library for iOS, tvOS and OS X / macOS
+//  Diffusion Client Library for iOS and OS X / macOS
 //
-//  Copyright (c) 2017, 2020 Push Technology Ltd., All Rights Reserved.
+//  Copyright (c) 2017 - 2026 DiffusionData Ltd., All Rights Reserved.
 //
-//  Use is subject to license terms.
+//  Use is subject to licence terms.
 //
 //  NOTICE: All information contained herein is, and remains the
-//  property of Push Technology. The intellectual and technical
-//  concepts contained herein are proprietary to Push Technology and
+//  property of DiffusionData. The intellectual and technical
+//  concepts contained herein are proprietary to DiffusionData and
 //  may be covered by U.S. and Foreign Patents, patents in process, and
 //  are protected by trade secret or copyright law.
 
-@import Foundation;
+#import <Foundation/Foundation.h>
 
 @class PTDiffusionRecordV2Schema;
 
 NS_ASSUME_NONNULL_BEGIN
 
 /**
+ @ingroup PublicAPI_TopicDatatypes_RecordV2
+
  @brief Used to build an immutable PTDiffusionRecordV2Schema.
 
  A schema defines the records and fields that may occur in a RecordV2 topic
@@ -51,7 +53,7 @@ NS_ASSUME_NONNULL_BEGIN
  Returns an immutable schema from the current state of this builder.
 
  @return Immutable schema from the current state of this builder.
- 
+
  @exception NSInternalInconsistencyException No records have been specified yet
  for this builder instance.
 
@@ -61,7 +63,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  Add a new single occurrence record to the schema.
- 
+
  This is the equivalent to calling #addRecordWithName:occurs: with a value of
  `1` for `occurs`.
 
@@ -69,7 +71,7 @@ NS_ASSUME_NONNULL_BEGIN
 
  @return This builder.
 
- @exception NSInvalidArgumentException If `name` is `nil`.
+ @exception NSInvalidArgumentException If <code>name</code> is <code>nil</code>.
 
  @exception NSInternalInconsistencyException If schema rules are violated.
 
@@ -84,13 +86,13 @@ NS_ASSUME_NONNULL_BEGIN
  `occurs` for both `min` and `max`.
 
  @param name The record name.
- 
+
  @param occurs The number of times the record is to occur. This must be a
  positive value.
 
  @return This builder.
- 
- @exception NSInvalidArgumentException If `name` is `nil` or `occurs` is less
+
+ @exception NSInvalidArgumentException If <code>name</code> is <code>nil</code> or <code>occurs</code> is less
  than one.
 
  @exception NSInternalInconsistencyException If schema rules are violated.
@@ -113,7 +115,7 @@ NS_ASSUME_NONNULL_BEGIN
 
  @return This builder.
 
- @exception NSInvalidArgumentException If `name` is `nil` or `max` is invalid.
+ @exception NSInvalidArgumentException If <code>name</code> is <code>nil</code> or <code>max</code> is invalid.
 
  @exception NSInternalInconsistencyException If schema rules are violated.
 
@@ -134,7 +136,7 @@ NS_ASSUME_NONNULL_BEGIN
 
  @return This builder.
 
- @exception NSInvalidArgumentException If `name` is `nil`.
+ @exception NSInvalidArgumentException If <code>name</code> is <code>nil</code>.
 
  @exception NSInternalInconsistencyException If schema rules are violated.
 
@@ -156,7 +158,7 @@ NS_ASSUME_NONNULL_BEGIN
 
  @return This builder.
 
- @exception NSInvalidArgumentException If `name` is `nil` or `occurs` is less
+ @exception NSInvalidArgumentException If <code>name</code> is <code>nil</code> or <code>occurs</code> is less
  than one.
 
  @exception NSInternalInconsistencyException If schema rules are violated.
@@ -180,7 +182,7 @@ NS_ASSUME_NONNULL_BEGIN
 
  @return This builder.
 
- @exception NSInvalidArgumentException If `name` is `nil` or `max` is invalid.
+ @exception NSInvalidArgumentException If <code>name</code> is <code>nil</code> or <code>max</code> is invalid.
 
  @exception NSInternalInconsistencyException If schema rules are violated.
 
@@ -201,7 +203,7 @@ NS_ASSUME_NONNULL_BEGIN
 
  @return This builder.
 
- @exception NSInvalidArgumentException If `name` is `nil`.
+ @exception NSInvalidArgumentException If <code>name</code> is <code>nil</code>.
 
  @exception NSInternalInconsistencyException If schema rules are violated.
 
@@ -223,7 +225,7 @@ NS_ASSUME_NONNULL_BEGIN
 
  @return This builder.
 
- @exception NSInvalidArgumentException If `name` is `nil` or `occurs` is less
+ @exception NSInvalidArgumentException If <code>name</code> is <code>nil</code> or <code>occurs</code> is less
  than one.
 
  @exception NSInternalInconsistencyException If schema rules are violated.
@@ -247,7 +249,7 @@ NS_ASSUME_NONNULL_BEGIN
 
  @return This builder.
 
- @exception NSInvalidArgumentException If `name` is `nil` or `max` is invalid.
+ @exception NSInvalidArgumentException If <code>name</code> is <code>nil</code> or <code>max</code> is invalid.
 
  @exception NSInternalInconsistencyException If schema rules are violated.
 
@@ -265,13 +267,13 @@ NS_ASSUME_NONNULL_BEGIN
 
  @param name The field name. This must not be the same as any field already
  added to the record.
- 
+
  @param scale The scale of the field (the number of decimal places). This must
  must be a positive value.
 
  @return This builder.
 
- @exception NSInvalidArgumentException If `name` is `nil` or `scale` is less
+ @exception NSInvalidArgumentException If <code>name</code> is <code>nil</code> or <code>scale</code> is less
  than one.
 
  @exception NSInternalInconsistencyException If schema rules are violated.
@@ -298,8 +300,8 @@ NS_ASSUME_NONNULL_BEGIN
 
  @return This builder.
 
- @exception NSInvalidArgumentException If `name` is `nil`, `scale` is less than
- one or `occurs` is less than one.
+ @exception NSInvalidArgumentException If <code>name</code> is <code>nil</code>, <code>scale</code> is less than
+ one or <code>occurs</code> is less than one.
 
  @exception NSInternalInconsistencyException If schema rules are violated.
 
@@ -326,7 +328,7 @@ NS_ASSUME_NONNULL_BEGIN
 
  @return This builder.
 
- @exception NSInvalidArgumentException If `name` is `nil` or `max` is invalid.
+ @exception NSInvalidArgumentException If <code>name</code> is <code>nil</code> or <code>max</code> is invalid.
 
  @exception NSInternalInconsistencyException If schema rules are violated.
 

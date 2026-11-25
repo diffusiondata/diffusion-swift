@@ -1,0 +1,789 @@
+//  Diffusion Client Library for iOS and OS X / macOS
+//
+//  Copyright (c) 2015 - 2026 DiffusionData Ltd., All Rights Reserved.
+//
+//  Use is subject to licence terms.
+//
+//  NOTICE: All information contained herein is, and remains the
+//  property of DiffusionData. The intellectual and technical
+//  concepts contained herein are proprietary to DiffusionData and
+//  may be covered by U.S. and Foreign Patents, patents in process, and
+//  are protected by trade secret or copyright law.
+
+#import <Foundation/Foundation.h>
+
+@class PTDiffusionClientControlFeature;
+@class PTDiffusionMessagingFeature;
+@class PTDiffusionPingsFeature;
+@class PTDiffusionSecurityFeature;
+@class PTDiffusionSessionConfiguration;
+@class PTDiffusionSessionId;
+@class PTDiffusionSessionLock;
+@class PTDiffusionSessionLockAttempt;
+@class PTDiffusionSessionLockScope;
+@class PTDiffusionSessionState;
+@class PTDiffusionSubscriptionControlFeature;
+@class PTDiffusionTimeSeriesFeature;
+@class PTDiffusionTopicControlFeature;
+@class PTDiffusionTopicNotificationsFeature;
+@class PTDiffusionTopicsFeature;
+@class PTDiffusionTopicUpdateFeature;
+@class PTDiffusionTopicViewsFeature;
+@class PTDiffusionRemoteServersFeature;
+@class PTDiffusionSessionTreesFeature;
+@class PTDiffusionMetricsFeature;
+@class PTDiffusionHTTPResponse;
+@class PTDiffusionGetSessionPropertiesResult;
+
+@protocol PTDiffusionErrorListener;
+
+NS_ASSUME_NONNULL_BEGIN
+
+/**
+
+ @ingroup PublicAPI_Session
+
+ @brief A client session to a server (or cluster of servers).
+
+ The @ref md_quick_start "Quick Start" guide provides basic instructions on how
+ to connect to a Diffusion server.
+
+ Also see:
+ - @ref md_session_filters "Session Filters".
+ - @ref md_session_properties "Session Properties".
+
+ A new session can be created by connecting to a server using
+ `#openWithURL:completionHandler:` specifying the server URL.
+ A `PTDiffusionSessionConfiguration` can also be configured to control
+ the behaviour of the session using `#openWithURL:configuration:completionHandler:`
+
+ The session provides a variety of operations to the application. These are
+ grouped into feature interfaces, such as Topics and Messaging,
+ exposed to the application through the following methods:
+ <ul>
+     <li>#clientControl
+     <li>#messaging
+     <li>#pings
+     <li>#remoteServers
+     <li>#security
+     <li>#subscriptionControl
+     <li>#timeSeries
+     <li>#topicControl
+     <li>#topics
+     <li>#topicUpdate
+     <li>#topicViews
+ </ul>
+
+ ### Session lifecycle
+
+ Each session is managed by a server. The server assigns the session a
+ unique identity, and manages the session's topic subscriptions,
+ security details, and session properties.
+
+ A session can be terminated using `close`. A session may also be
+ terminated by the server because of an error, a time out, or because its
+ authentication has expired. It can also be terminated by other
+ privileged sessions using the ClientControl feature.
+
+ A client can become disconnected from the server, and reconnect to the server
+ without loss of the session. Reconnection can be configured using
+ `PTDiffusionSessionConfiguration.reconnectionStrategy`. The server
+ must be configured to allow reconnection.
+
+ If a session is connected to a server that belongs to a cluster with session
+ replication enabled, and then becomes disconnected, it will attempt to
+ reconnect to the original server. A properly configured load balancer can
+ detect that the original server is unavailable and re-route the reconnection
+ request to a second server in the cluster. The second server can recover
+ session data and continue the session. This process is known as "fail over".
+ Unlike reconnection, in-flight messages can be lost during failover, and the
+ application will be unsubscribed and re-subscribed to topics.
+
+ The current state of the session can be retrieved with `state`.
+ This property is Key-Value Observable with changes being notified on
+ the main dispatch queue when the session state changes.
+
+
+ ### Session properties
+
+ For each session, the server stores a set of session properties that describe
+ various attributes of the session.
+
+
+ There are two types of session property. Fixed properties are assigned by
+ Diffusion. User-defined properties are proposed by the application, but may be
+ changed during authentication.
+
+
+ Many operations use session filter expressions that use session properties to select sessions.
+
+ A session may obtain its own fixed session properties using {@link #getSessionProperties:}.
+
+
+ A privileged client can monitor other sessions, including changes to their
+ session properties, using a session event listener. When registering to receive session properties,
+ special key values of {@link #allFixedProperties} and {@link #allUserProperties} can be used.
+
+
+ Each property is identified by a key. Most properties have a single string
+ value. The exception is the $Roles fixed property which has a set of string values.
+
+ Fixed properties are identified by keys with a '$' prefix. The available fixed session properties are:
+
+ | Key              | Description                                                                                                                                   |
+ |------------------|-----------------------------------------------------------------------------------------------------------------------------------------------|
+ | `$ClientIP`      | The Internet address of the client in string format.                                                                                          |
+ | `$ClientType`    | The client type of the session. One of `ANDROID`, `C`, `DOTNET`, `IOS`, `JAVA`, `JAVASCRIPT_BROWSER`, `MQTT`, `PYTHON`, `REST`, `OTHER`.      |
+ | `$Environment`   | The environment in which the client is running. For possible values see the <a href="https://docs.diffusiondata.com/docs/latest/manual/html/developerguide/client/basics/uci_session_properties.html">user manual.</a>    |
+ | `$ExpiryTime`    | The time at which the session is due to expire, specified in milliseconds since the epoch. This may be set by authenticators. If not present, the session will not expire. |
+ | `$Connector`     | The configuration name of the server connector that the client connected to.                                                                  |
+ | `$Country`       | The country code for the country where the client's Internet address was allocated (for example, `NZ` for New Zealand). Country codes are as defined by Locale. If the country code could not be determined, this will be a zero length string.   |
+ | `$GatewayType`   | Gateway client type. Only set for gateway client sessions. If present it indicates the type of gateway client (e.g. Kafka).                   |
+ | `$GatewayId`     | The identity of a gateway client session. Only present if the `$GatewayType` session property is present.                                     |
+ | `$Language`      | The language code for the official language of the country where the client's Internet address was allocated (for example, `en` for English). Language codes are as defined by Locale. If the language could not be determined or is not applicable, this will be a zero length string.   |
+ | `$Latitude`      | The client's latitude, if available. This will be the string representation of a floating point number and will be `NaN` if not available.    |
+ | `$Longitude`     | The client's longitude, if available. This will be the string representation of a floating point number and will be `NaN` if not available.   |
+ | `$MQQTClientId`  | The MQTT client identifier. Only set for MQTT sessions. If present, the value of the `$ClientType` session property will be `MQTT`.           |
+ | `$Principal`     | The security principal associated with the client session.                                                                                    |
+ | `$Roles`         | Authorisation roles assigned to the session. This is a set of roles represented as quoted strings (for example, `"role1","role2"`).           |
+ | `$ServerName`    | The name of the server to which the session is connected.                                                                                     |
+ | `$SessionId`     | The session identifier.                                                                                                                       |
+ | `$StartTime`     | The session's start time in milliseconds since the epoch.                                                                                     |
+ | `$Transport`     | The session transport type. One of `WEBSOCKET`, `HTTP_LONG_POLL`, `TCP`, or `OTHER`.                                                          |
+
+
+ All user-defined property keys are non-empty strings. The characters ' ', \\t, \\r, \\n, \", ', (, ) are not allowed.
+
+
+ Session properties are initially associated with a session as follows:
+ 1. When a client starts a new session or re-authenticates, it can optionally propose user-defined session properties. Session properties proposed in this way must be accepted by the authenticator. This safeguard prevents abuse by a rogue, unprivileged client.
+ 2. Diffusion allocates all fixed property values.
+ 3. The new session is authenticated by registered authenticators. An authenticator that accepts a session can veto or change the user-defined session properties and add new user-defined session properties. The authenticator can also change certain fixed properties, such as the `$ExpiryTime`.
+
+
+ Once a session is established, its user-defined session properties can be modified by clients
+ with `VIEW_SESSION` and `MODIFY_SESSION` permissions. A privileged client can also modify its own user-defined session properties.
+
+
+ If a session re-authenticates, the authenticator that allows the re-authentication can modify the user-defined
+ session properties and a subset of the fixed properties as mentioned above.
+
+
+ ### Session filters
+
+ Session filters are a mechanism of addressing a set of sessions by the values
+ of their session properties.
+
+ Session filters are specified using a Domain Specific Language (DSL). For a full and
+ detailed description of the session filters DSL see the [user manual](https://docs.diffusiondata.com/docs/latest/manual/html/developerguide/client/basics/uci_session_filtering.html).
+
+
+ ### Session locks
+
+ The actions of multiple sessions can be coordinated using session locks. See
+ PTDiffusionSession#lockWithName:completionHandler:
+
+
+ @since 5.6
+ */
+@interface PTDiffusionSession : NSObject
+
++(instancetype)new NS_UNAVAILABLE;
+
+-(instancetype)init NS_UNAVAILABLE;
+
+
+/**
+ Starts asynchronously connecting to a Diffusion server using the given session configuration.
+
+ @param url The location of the server to connect to. Encapsulates host, port and protocol to use.
+ Must be absolute, or relative to a ws or wss base URL.
+
+ @param configuration The configuration options to connect with.
+
+ @param completionHandler The completion handler to call on connection success or failure.
+ The completion handler will be called from the main dispatch queue and will only be called once.
+
+ @note Your completion handler _must_ store a strong reference to the session instance in order
+ for it to remain open.
+
+ @note The completion handler block is called after the session's state property has been set
+ to connected but before those observing through the notification center are informed.
+
+ @note HTTP redirects (301, 302, 307 and 308) are followed to a ws, wss, http, https or relative
+ location, at most 5 times per connection attempt and never from a secure connection to an
+ insecure one. The location's path and query are used as given; an empty path or / becomes
+ /diffusion. Reconnection starts again from `url`. A rejected redirect fails the connection
+ attempt, or closes a reconnecting session, with an error code from 20160 to 20164, or 20166
+ for a redirect status other than 301, 302, 307 or 308.
+
+ @since 5.6
+ */
++(void)openWithURL:(NSURL *)url
+     configuration:(PTDiffusionSessionConfiguration *)configuration
+ completionHandler:(void (^)(PTDiffusionSession * _Nullable session, NSError * _Nullable error))completionHandler;
+
+
+/**
+ Starts asynchronously connecting to a Diffusion server using the default session configuration.
+
+ @param url The location of the server to connect to. Encapsulates host, port and protocol to use.
+ Must be absolute, or relative to a ws or wss base URL.
+
+ @param completionHandler The completion handler to call on connection success or failure.
+ The completion handler will be called from the main dispatch queue and will only be called once.
+
+ @note Your completion handler _must_ store a strong reference to the session instance in order
+ for it to remain open.
+
+ @note The completion handler block is called after the session's state property has been set
+ to connected but before those observing through the notification center are informed.
+
+ @note HTTP redirects (301, 302, 307 and 308) are followed to a ws, wss, http, https or relative
+ location, at most 5 times per connection attempt and never from a secure connection to an
+ insecure one. The location's path and query are used as given; an empty path or / becomes
+ /diffusion. Reconnection starts again from `url`. A rejected redirect fails the connection
+ attempt, or closes a reconnecting session, with an error code from 20160 to 20164, or 20166
+ for a redirect status other than 301, 302, 307 or 308.
+
+ @since 5.6
+ */
++(void)openWithURL:(NSURL *)url
+ completionHandler:(void (^)(PTDiffusionSession * _Nullable session, NSError * _Nullable error))completionHandler;
+
+
+/**
+ The configuration used to open the session.
+
+ @since 5.6
+ */
+@property(nonatomic, readonly, copy) PTDiffusionSessionConfiguration* configuration;
+
+
+/**
+ The unique identifier for the session as assigned by the server it connects to.
+
+ This property is Key-Value Observable with changes being notified on the main dispatch queue.
+ */
+@property(nonatomic, readonly) PTDiffusionSessionId* sessionId;
+
+
+/**
+ The name of the security principal associated with the session.
+
+ @return The principal name. If the session has no associated principal, it is
+ known as an anonymous session, in which case the empty string
+ anonymousPrincipal will be assigned to this property.
+
+ @since 6.0
+ */
+@property(nonatomic, readonly) NSString* principal;
+
+
+/**
+ The current state of the session.
+
+ This property is Key-Value Observable with changes being notified on the main dispatch queue.
+ KVO notifications are sent before the invocation of any callback handler blocks.
+
+ @note Session state can also be observed using the notification center.
+ See PTDiffusionSessionStateChange for details.
+
+ @since 5.7
+ */
+@property(atomic, readonly) PTDiffusionSessionState* state;
+
+
+/**
+ The delegate to use to report unexpected, non-fatal errors to.
+
+ @since 6.0
+ */
+@property(nonatomic, weak) id<PTDiffusionErrorListener> errorListener;
+
+
+/**
+ Close the session. Once closed a session cannot be restarted.
+
+ @since 5.6
+ */
+-(void)close;
+
+
+/**
+ Attempt to acquire a session lock.
+
+ The completion handler block will be called with the requested lock if the
+ server assigns it to the session. Otherwise, the completion handler block will
+ be called with an error indicating why the lock could not be acquired.
+
+ Acquiring the lock can take an arbitrarily long time if other sessions are
+ competing for the lock. The server will retain the session's request for the
+ lock until it is assigned to the session, the session is closed, or the session
+ cancels the CompletableFuture.
+
+ A session can call this method multiple times. If the lock is acquired, all
+ calls will complete successfully with equal SessionLocks.
+
+ Calling cancel on the returned PTDiffusionCancellable has no effect on other
+ pending calls to acquire this lock.
+
+ Upon successful acquisition, the session owns the lock and is responsible for
+ unlocking it. When calling cancel on the returned PTDiffusionCancellable, take
+ care that it has not already completed by checking the return value. The
+ following Swift code releases the lock if the request could not be canceled.
+
+ let attempt = session.lock(withName: "my-lock") { (lock, error) in
+ / / ..
+ }
+
+ if (!attempt.cancel()) {
+    attempt.lock?.unlock() { (wasOwned, error) in }
+ }
+
+ A session that acquires a lock will remain its owner until it is unlocked or
+ the session closes. The variant of this methods that takes a scope parameter
+ provides the further option of releasing the lock when the session loses its
+ connection to the server.
+
+ ### Access control
+
+ To allow fine-grained access control, lock names are interpreted as path names,
+ controlled with the `PTDiffusionPathPermission.acquireLock` path permission. This allows permission to
+ be granted to a session to acquire the lock `update-topic/a` while preventing
+ the session from acquiring the lock `update-topic/b`, for example.
+
+ @param name The name of the session lock.
+
+ @param completionHandler Block to be called asynchronously on success or
+ failure. If the operation was successful, the `error` argument passed to the
+ block will be `nil`. The completion handler will be called asynchronously on
+ the main dispatch queue.
+
+ If this session has successfully acquired the session lock, or this session
+ already owns the session lock, the completion handler will be called with the
+ lock instance.
+
+ If the completion handler is called with an error to indicate failure, this
+ session does not own the session lock. Common reasons for failure include:
+
+ - The calling session does not have the `PTDiffusionPathPermission.acquireLock` permission for this lock
+ name.
+ - The session is closed.
+
+ @exception NSInvalidArgumentException Raised if any supplied arguments are <code>nil</code>.
+
+ @return An attempt that can be used to cancel the request to acquire the
+ lock.
+
+ @see #lockWithName:scope:completionHandler:
+
+ @since 6.3
+ */
+-(PTDiffusionSessionLockAttempt *)lockWithName:(NSString *)name
+                             completionHandler:(void (^)(PTDiffusionSessionLock * _Nullable lock, NSError * _Nullable error))completionHandler;
+
+
+/**
+ Variant of #lockWithName:completionHandler: that provides control over when a
+ lock will be released.
+
+ If called with PTDiffusionSessionLockScope#unlockOnSessionLoss, this method
+ behaves exactly like #lockWithName:completionHandler:.
+
+ If called with PTDiffusionSessionLockScope#unlockOnConnectionLoss, any lock
+ that is returned will be unlocked if the session loses its connection to the
+ server. This is useful to allow another session to take ownership of the lock
+ while this session is reconnecting.
+
+ @param name The name of the session lock
+
+ @param scope Preferred scope. The scope of a lock controls when it will be
+ released automatically. If a session makes multiple requests for a lock using
+ different scopes, and the server assigns the lock to the session fulfilling the
+ requests, the lock will be given the weakest scope
+ (PTDiffusionSessionLockScope#unlockOnConnectionLoss).
+
+ @param completionHandler Block to be called asynchronously on success or
+ failure. If the operation was successful, the `error` argument passed to the
+ block will be `nil`. The completion handler will be called asynchronously on
+ the main dispatch queue.
+
+ @return An attempt that can be used to cancel the request to acquire the
+ lock.
+
+ @see #lockWithName:completionHandler:
+
+ @since 6.3
+ */
+-(PTDiffusionSessionLockAttempt *)lockWithName:(NSString *)name
+                                         scope:(PTDiffusionSessionLockScope *)scope
+                             completionHandler:(void (^)(PTDiffusionSessionLock * _Nullable lock, NSError * _Nullable error))completionHandler;
+
+
+/**
+ Returns the last HTTP response received from the server.
+
+ @return The last HTTP response received from the server, or `nil` if none
+ has been received.
+
+ @since 6.3.6
+ */
+-(PTDiffusionHTTPResponse * _Nullable)websocketHTTPResponse;
+
+
+
+/**
+ Returns the values of the session's fixed session properties.
+
+ All current fixed property values are returned, except the value of the `ROLES` property.
+
+ @param completionHandler Block to be called asynchronously on success or
+ failure. If the operation was successful, the `error` argument passed to the
+ block will be `nil`. The completion handler will be called asynchronously on
+ the main dispatch queue.
+
+ @since 6.12
+ */
+-(void)getSessionProperties:(void (^)(PTDiffusionGetSessionPropertiesResult * _Nullable result, NSError * _Nullable error)) completionHandler;
+
+
+
+#pragma mark - Features
+
+/**
+ The Client control feature provides the capability to listen and set session properties
+
+ @since 6.5
+ */
+@property(nonatomic, readonly) PTDiffusionClientControlFeature *clientControl;
+
+
+/**
+ The Topics feature provides the capability to receive streamed topic updates and/or
+ fetch the state of topics.
+
+ @since 5.6
+ */
+@property(nonatomic, readonly) PTDiffusionTopicsFeature* topics;
+
+
+/**
+ The Topic Control features provides the capability to manage topics.
+
+ @since 5.7
+ */
+@property(nonatomic, readonly) PTDiffusionTopicControlFeature* topicControl;
+
+
+/**
+ The Topic Update feature provides a client session with the ability to update
+ topics.
+
+ @since 6.3
+ */
+@property(nonatomic, readonly) PTDiffusionTopicUpdateFeature* topicUpdate;
+
+
+/**
+ The Messaging feature provides messaging capabilities.
+
+ @since 5.6
+ */
+@property(nonatomic, readonly) PTDiffusionMessagingFeature* messaging;
+
+
+/**
+ The Security feature provides a client session with the ability to change
+ the associated principal.
+
+ @since 5.6
+ */
+@property(nonatomic, readonly) PTDiffusionSecurityFeature* security;
+
+
+/**
+ The Pings feature provides a client session with the ability to test the
+ roundtrip time associated with sending a request to the server and receiving
+ the associated response.
+
+ @since 5.7
+ */
+@property(nonatomic, readonly) PTDiffusionPingsFeature* pings;
+
+
+/**
+ The Time Series feature provides a client session with the ability to update
+ and query time series topics.
+
+ @since 6.0
+ */
+@property(nonatomic, readonly) PTDiffusionTimeSeriesFeature* timeSeries;
+
+
+/**
+ The Topic Notifications feature allows a client session to receive
+ notifications about changes to selected topics.
+
+ @since 6.1
+ */
+@property(nonatomic, readonly) PTDiffusionTopicNotificationsFeature* topicNotifications;
+
+
+/**
+ The Subscription Control feature allows a client session to subscribe or
+ unsubscribe other sessions to topics.
+
+ @since 6.1
+ */
+@property(nonatomic, readonly) PTDiffusionSubscriptionControlFeature* subscriptionControl;
+
+
+/**
+ The Topic Views feature allows a client session to manage topic views.
+
+ @since 6.3
+ */
+@property(nonatomic, readonly) PTDiffusionTopicViewsFeature* topicViews;
+
+
+/**
+ The Remote Servers feature allows a client session to create, remove, list
+ and check remote servers.
+
+ @since 6.5
+ */
+@property(nonatomic, readonly) PTDiffusionRemoteServersFeature* remoteServers;
+
+
+/**
+ The Session Trees feature allows the creation and alteration of branch mapping tables.
+
+ @see PTDiffusionSessionTreesFeature
+
+ @since 6.7
+ */
+@property(nonatomic, readonly) PTDiffusionSessionTreesFeature* sessionTrees;
+
+
+/**
+ The Metrics feature allows a client to configure metric collectors.
+
+ @see PTDiffusionMetricsFeature
+
+ @since 6.7
+ */
+@property(nonatomic, readonly) PTDiffusionMetricsFeature* metrics;
+
+
+
+
+#pragma mark - Session properties
+
+/**
+ Value assigned to the principal property if this is an anonymous session.
+
+ @return The value assigned to the principal property if this is an
+ anonymous session.
+
+ @since 6.0
+ */
++(NSString *)anonymousPrincipal;
+
+
+/**
+ This constant can be used instead of a property key in requests for session
+ property values to indicate that all fixed session properties are required.
+
+ @return The constant used to indicate that all fixed session properties are
+ required.
+
+ @since 6.0
+ */
++(NSString *)allFixedProperties;
+
+
+/**
+ This constant can be used instead of a property key in requests for session
+ property values to indicate that all user defined session properties are
+ required.
+
+ @return The constant used to indicate that all user defined session
+ properties are required.
+
+ @since 6.0
+ */
++(NSString *)allUserProperties;
+
+
+/**
+ Session property key for session roles.
+
+ @return The key for the `$Roles` session property.
+
+ @since 6.2
+ */
++(NSString *)rolesPropertyKey;
+
+
+/**
+ Session property key for session identifier.
+
+ @return The key for the `$SessionId` session property.
+
+ @see PTDiffusionSessionId
+
+ @since 6.2
+ */
++(NSString *)sessionIdPropertyKey;
+
+
+/**
+ Session property key for principal.
+
+ @return The key for the `$Principal` session property.
+
+ @since 6.2
+ */
++(NSString *)principalPropertyKey;
+
+
+/**
+ Session property key for connector name.
+
+ @return The key for the `$Connector` session property.
+
+ @since 6.2
+ */
++(NSString *)connectorPropertyKey;
+
+
+/**
+ Session property key for transport.
+
+ @return The key for the `$Transport` session property.
+
+ @since 6.2
+ */
++(NSString *)transportPropertyKey;
+
+
+/**
+ Session property key for client type.
+
+ @return The key for the `$ClientType` session property.
+
+ @since 6.2
+ */
++(NSString *)clientTypePropertyKey;
+
+
+/**
+ Session property key for country code.
+
+ @return The key for the `$Country` session property.
+
+ @since 6.2
+ */
++(NSString *)countryPropertyKey;
+
+
+/**
+ Session property key for language code.
+
+ @return The key for the `$Language` session property.
+
+ @since 6.2
+ */
++(NSString *)languagePropertyKey;
+
+
+/**
+ Session property key for server name.
+
+ @return The key for the `$ServerName` session property.
+
+ @since 6.2
+ */
++(NSString *)serverNamePropertyKey;
+
+
+/**
+ Session property key for client IP address.
+
+ @return The key for the `$ClientIP` session property.
+
+ @since 6.2
+ */
++(NSString *)clientIPPropertyKey;
+
+
+/**
+ Session property key for client latitude.
+
+ @return The key for the `$Latitude` session property.
+
+ @since 6.2
+ */
++(NSString *)latitudePropertyKey;
+
+
+/**
+ Session property key for client longitude.
+
+ @return The key for the `$Longitude` session property.
+
+ @since 6.2
+ */
++(NSString *)longitudePropertyKey;
+
+
+/**
+ Session property key for client start time.
+
+ @return The key for the `$StartTime` session property.
+
+ @since 6.2
+ */
++(NSString *)startTimePropertyKey;
+
+/**
+ Session property key for gateway client type.
+
+ @return The key for the `$GatewayType` session property.
+
+ @since 6.6
+ */
++(NSString *)gatewayTypePropertyKey;
+
+/**
+ Session property key for gateway client id.
+
+ @return The key for the `$GatewayId` session property.
+
+ @since 6.6
+ */
++(NSString *)gatewayIdPropertyKey;
+
+/**
+ Session property key for environment.
+
+ @return The key for the `$Environment` session property.
+
+ @since 6.11
+ */
++(NSString *)environmentPropertyKey;
+
+/**
+ Session property key for expiry time.
+
+ @return The key for the `$ExpiryTime` session property.
+
+ @since 6.12
+ */
++(NSString *)expiryTimePropertyKey;
+
+
+@end
+
+NS_ASSUME_NONNULL_END

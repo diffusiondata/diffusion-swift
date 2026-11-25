@@ -1,22 +1,24 @@
-//  Diffusion Client Library for iOS, tvOS and OS X / macOS
+//  Diffusion Client Library for iOS and OS X / macOS
 //
-//  Copyright (c) 2018, 2020 Push Technology Ltd., All Rights Reserved.
+//  Copyright (c) 2018 - 2026 DiffusionData Ltd., All Rights Reserved.
 //
-//  Use is subject to license terms.
+//  Use is subject to licence terms.
 //
 //  NOTICE: All information contained herein is, and remains the
-//  property of Push Technology. The intellectual and technical
-//  concepts contained herein are proprietary to Push Technology and
+//  property of DiffusionData. The intellectual and technical
+//  concepts contained herein are proprietary to DiffusionData and
 //  may be covered by U.S. and Foreign Patents, patents in process, and
 //  are protected by trade secret or copyright law.
 
-@import Foundation;
+#import <Foundation/Foundation.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
 @class PTDiffusionFetchTopicResult;
 
 /**
+ @ingroup PublicAPI_FetchRequest
+
  @brief Base class for results from fetch operations issued to the server.
 
  A fetch operation is issued using a PTDiffusionFetchRequest.
@@ -53,9 +55,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  The number of elements in the fetch result
- 
+
  @return the size of the results list
- 
+
  @since 6.5
  */
 -(NSUInteger)size;
@@ -63,9 +65,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  Return `YES` if the result contains zero elements
- 
+
  @return `YES` if result list is empty
- 
+
  @since 6.5
  */
 -(BOOL)isEmpty;

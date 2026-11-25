@@ -1,22 +1,208 @@
-//  Diffusion Client Library for iOS, tvOS and OS X / macOS
+//  Diffusion Client Library for iOS and OS X / macOS
 //
-//  Copyright (c) 2015, 2021 Push Technology Ltd., All Rights Reserved.
+//  Copyright (c) 2015 - 2026 DiffusionData Ltd., All Rights Reserved.
 //
-//  Use is subject to license terms.
+//  Use is subject to licence terms.
 //
 //  NOTICE: All information contained herein is, and remains the
-//  property of Push Technology. The intellectual and technical
-//  concepts contained herein are proprietary to Push Technology and
+//  property of DiffusionData. The intellectual and technical
+//  concepts contained herein are proprietary to DiffusionData and
 //  may be covered by U.S. and Foreign Patents, patents in process, and
 //  are protected by trade secret or copyright law.
 
 /**
  @file Diffusion.h
- 
+
  Framework umbrella header file.
+
+ @defgroup PublicAPI_Session Session management
+ Establishing sessions with the Diffusion Server.
+
+
+ @defgroup PublicAPI_PubSub Publishing and Subscribing
+ Features responsible for subscribing to topics, their datatypes and updating them.
+
+ @defgroup PublicAPI_Topics Topics
+ @ingroup PublicAPI_PubSub
+
+ @defgroup PublicAPI_TopicUpdate Topic Update
+ @ingroup PublicAPI_PubSub
+
+ @defgroup PublicAPI_TimeSeries Time Series
+ @ingroup PublicAPI_PubSub
+
+ @defgroup PublicAPI_FetchRequest Fetch Request
+ @ingroup PublicAPI_PubSub
+
+
+ @defgroup PublicAPI_TopicDatatypes Topic Datatypes
+ @ingroup PublicAPI_PubSub
+
+ @defgroup PublicAPI_TopicDatatypes_Binary Binary
+ @ingroup PublicAPI_TopicDatatypes
+
+ @defgroup PublicAPI_TopicDatatypes_Number Number
+ @ingroup PublicAPI_TopicDatatypes
+
+ @defgroup PublicAPI_TopicDatatypes_JSON JSON
+ @ingroup PublicAPI_TopicDatatypes
+
+ @defgroup PublicAPI_TopicDatatypes_RecordV2 RecordV2
+ @ingroup PublicAPI_TopicDatatypes
+
+ @defgroup PublicAPI_TopicDatatypes_String String
+ @ingroup PublicAPI_TopicDatatypes
+
+
+ @defgroup PublicAPI_Messaging Messaging
+
+
+ @defgroup PublicAPI_TopicManagement Topic Management
+ Topic creation and monitoring topic tree related events.
+
+ @defgroup PublicAPI_TopicControl Topic Control
+ @ingroup PublicAPI_TopicManagement
+
+ @defgroup PublicAPI_TopicNotifications Topic Notifications
+ @ingroup PublicAPI_TopicManagement
+
+
+ @defgroup PublicAPI_Wrangling Wrangling
+ Management of topic wrangling capabilities.
+
+ @defgroup PublicAPI_TopicViews Topic Views
+ @ingroup PublicAPI_Wrangling
+
+ @defgroup PublicAPI_SessionTrees Session Trees
+ @ingroup PublicAPI_Wrangling
+
+
+ @defgroup PublicAPI_SessionManagement Session Management
+ Management of other client sessions.
+
+ @defgroup PublicAPI_Security Security
+ @ingroup PublicAPI_SessionManagement
+
+ @defgroup PublicAPI_SubscriptionControl Subscription Control
+ @ingroup PublicAPI_SessionManagement
+
+ @defgroup PublicAPI_ClientControl Client Control
+ @ingroup PublicAPI_SessionManagement
+
+
+ @defgroup PublicAPI_ServerConfiguration Server Configuration
+ Management of server configuration.
+
+ @defgroup PublicAPI_RemoteServers Remote Servers
+ @ingroup PublicAPI_ServerConfiguration
+
+ @defgroup PublicAPI_Metrics Metrics
+ @ingroup PublicAPI_ServerConfiguration
+
+
+ @defgroup PublicAPI_Ping Ping
+
+
+
+
+ @mainpage
+
+ # Introduction
+
+ The Diffusion Apple Unified client library enables interaction with a Diffusion server
+ from iOS and OS X / macOS applications.
+
+ The library has been developed against Apple's Foundation Framework (a.k.a. Cocoa),
+ providing support for developers targetting both desktop and mobile-derived platforms.
+ The API is the same for all platforms, there are no platform-specific interfaces.
+
+ For each platform, the library is supplied as a universal (multi-architecture) framework encapsulating API headers and dynamic library binary:
+
+ - **iOS** (iphoneos)
+ - **OS X / macOS** (macosx)
+
+ # Getting Started
+
+ For basic instructions on how to get connected to a Diffusion server see [Quickstart Guide](https://docs.diffusiondata.com/docs/quickstartguide/onprem/index-on-prem.html).
+
+
+ ---
+
+ ## Development Environment
+
+ We recommend using **Xcode 26.5**, against which this library was built. It includes:
+    - iOS 18.6 SDK
+    - macOS 11.5 SDK
+
+ A minimum of **Xcode 26.5** is required.
+
+ ---
+
+ ## Runtime Support
+
+ Diffusion Protocols:
+
+ URL Scheme | Protocol         | Default TCP Port
+ ---------- | ---------------- | ----------------
+ ws         | WebSocket        | 80
+ wss        | Secure WebSocket | 443
+
+
+ Minimum deployment targets:
+
+ Operating System | Version
+ ---------------- | -------
+ iOS              | 18.6
+ OS X / macOS     | 11.5
+
+
+ Processor Architectures:
+
+ Apple SDK                         | Included arch_type slices
+ --------------------------------- | -------------------------
+ OS X / macOS (macosx)             | aarch64, x86_64
+ iOS (iphoneos)                    | arm64
+ iOS Simulator (iphonesimulator)   | x86_64
+
+ ---
+
+ # Index
+
+ ## Core functionality
+ - @ref PublicAPI_Session
+ - @ref PublicAPI_PubSub
+ - @ref PublicAPI_Messaging
+ - @ref PublicAPI_Ping
+ - @ref PublicAPI_TopicDatatypes
+
+
+ ## Advanced functionality
+ - @ref PublicAPI_Wrangling
+ - @ref PublicAPI_TopicManagement
+
+
+ ## Client control functionality
+ - @ref PublicAPI_SessionManagement
+ - @ref PublicAPI_ServerConfiguration
+
+ ---
+
+ # Links
+
+ ### Additional Documentation
+ - [Quickstart Guide](https://docs.diffusiondata.com/docs/quickstartguide/onprem/index-on-prem.html)
+ - [Latest Diffusion Release Notes](https://docs.diffusiondata.com/docs/latest/ReleaseNotice.html)
+ - [Diffusion User Manual](https://docs.diffusiondata.com/docs/latest/manual/html/index.html)
+
+
+ ### Support Links
+ - [Download Diffusion Apple SDK](https://www.diffusiondata.com/diffusion-on-premise/#apple)
+ - [DiffusionData Developer Hub](https://docs.diffusiondata.com/)
+ - [DiffusionData Homepage](https://www.diffusiondata.com/)
+
  */
 
-@import Foundation;
+#import <Foundation/Foundation.h>
 
 #import <Diffusion/PTDiffusion.h>
 #import <Diffusion/PTDiffusionAddTopicResult.h>
@@ -68,6 +254,8 @@
 #import <Diffusion/PTDiffusionHTTPProxyConfiguration.h>
 #import <Diffusion/PTDiffusionHTTPResponse.h>
 #import <Diffusion/PTDiffusionJSON.h>
+#import <Diffusion/PTDiffusionJSONDelta.h>
+#import <Diffusion/PTDiffusionJSONDeltaChangeMap.h>
 #import <Diffusion/PTDiffusionJSONFetchResult.h>
 #import <Diffusion/PTDiffusionJSONFetchTopicResult.h>
 #import <Diffusion/PTDiffusionJSONRequestDelegate.h>
@@ -132,17 +320,20 @@
 #import <Diffusion/PTDiffusionRemoteServerConnectionOption.h>
 #import <Diffusion/PTDiffusionRemoteServerConnectionState.h>
 #import <Diffusion/PTDiffusionRemoteServersFeature.h>
+#import <Diffusion/PTDiffusionPrimaryInitiatorRemoteServer.h>
+#import <Diffusion/PTDiffusionSecondaryInitiatorRemoteServer.h>
+#import <Diffusion/PTDiffusionSecondaryAcceptorRemoteServer.h>
 #import <Diffusion/PTDiffusionRequest.h>
 #import <Diffusion/PTDiffusionRequestContext.h>
 #import <Diffusion/PTDiffusionRequestHandler.h>
 #import <Diffusion/PTDiffusionRequestStream.h>
 #import <Diffusion/PTDiffusionResponder.h>
 #import <Diffusion/PTDiffusionResponse.h>
+#import <Diffusion/PTDiffusionRetryStrategy.h>
 #import <Diffusion/PTDiffusionSecurityFeature.h>
 #import <Diffusion/PTDiffusionSendDeliveryPriority.h>
 #import <Diffusion/PTDiffusionSession.h>
 #import <Diffusion/PTDiffusionSessionConfiguration.h>
-#import <Diffusion/PTDiffusionSessionError.h>
 #import <Diffusion/PTDiffusionSessionId.h>
 #import <Diffusion/PTDiffusionSessionLock.h>
 #import <Diffusion/PTDiffusionSessionLockAttempt.h>
@@ -158,6 +349,7 @@
 #import <Diffusion/PTDiffusionSessionResponseStreamDelegate.h>
 #import <Diffusion/PTDiffusionSessionState.h>
 #import <Diffusion/PTDiffusionSessionStateChange.h>
+#import <Diffusion/PTDiffusionSessionStateChangeDelegate.h>
 #import <Diffusion/PTDiffusionSessionTreesFeature.h>
 #import <Diffusion/PTDiffusionSetSessionPropertiesResult.h>
 #import <Diffusion/PTDiffusionStream.h>
@@ -174,8 +366,6 @@
 #import <Diffusion/PTDiffusionStringValueStreamDelegate.h>
 #import <Diffusion/PTDiffusionSubscriberStreamDelegate.h>
 #import <Diffusion/PTDiffusionSubscriptionControlFeature.h>
-#import <Diffusion/PTDiffusionSubscriptionRoutingRequest.h>
-#import <Diffusion/PTDiffusionSubscriptionRoutingRequestHandler.h>
 #import <Diffusion/PTDiffusionTimeSeriesEvent.h>
 #import <Diffusion/PTDiffusionTimeSeriesEventMetadata.h>
 #import <Diffusion/PTDiffusionTimeSeriesFeature.h>
@@ -192,7 +382,7 @@
 #import <Diffusion/PTDiffusionTopicNotificationRegistration.h>
 #import <Diffusion/PTDiffusionTopicNotificationsFeature.h>
 #import <Diffusion/PTDiffusionTopicNotificationType.h>
-#import <Diffusion/PTDiffusionTopicPermission.h>
+#import <Diffusion/PTDiffusionTopicSelection.h>
 #import <Diffusion/PTDiffusionTopicSelector.h>
 #import <Diffusion/PTDiffusionTopicsFeature.h>
 #import <Diffusion/PTDiffusionTopicRemovalResult.h>
@@ -205,6 +395,9 @@
 #import <Diffusion/PTDiffusionTopicView.h>
 #import <Diffusion/PTDiffusionTopicViewsFeature.h>
 #import <Diffusion/PTDiffusionUpdateConstraint.h>
+#import <Diffusion/PTDiffusionUpdateConstraintOperator.h>
 #import <Diffusion/PTDiffusionUpdateStream.h>
+#import <Diffusion/PTDiffusionRecoverableUpdateStream.h>
+#import <Diffusion/PTDiffusionUpdateStreamBuilder.h>
 #import <Diffusion/PTDiffusionValueStream.h>
 #import <Diffusion/PTDiffusionVersion.h>

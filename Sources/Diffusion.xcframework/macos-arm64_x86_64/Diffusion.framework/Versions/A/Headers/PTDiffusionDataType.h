@@ -1,22 +1,22 @@
-//  Diffusion Client Library for iOS, tvOS and OS X / macOS
+//  Diffusion Client Library for iOS and OS X / macOS
 //
-//  Copyright (c) 2017 Push Technology Ltd., All Rights Reserved.
+//  Copyright (c) 2017 - 2026 DiffusionData Ltd., All Rights Reserved.
 //
-//  Use is subject to license terms.
+//  Use is subject to licence terms.
 //
 //  NOTICE: All information contained herein is, and remains the
-//  property of Push Technology. The intellectual and technical
-//  concepts contained herein are proprietary to Push Technology and
+//  property of DiffusionData. The intellectual and technical
+//  concepts contained herein are proprietary to DiffusionData and
 //  may be covered by U.S. and Foreign Patents, patents in process, and
 //  are protected by trade secret or copyright law.
 
-@import Foundation;
+#import <Foundation/Foundation.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
 /**
  @brief Methods implemented by classes providing data type implementations.
- 
+
  A data type is specified for a particular class (its value class). It provides
  methods to convert values of the value class to and from binary. Diffusion
  provides several data type implementations.
@@ -25,7 +25,7 @@ NS_ASSUME_NONNULL_BEGIN
  by one or more types of delta.
 
  @see PTDiffusionDataTypes
- 
+
  @since 6.0
  */
 @protocol PTDiffusionDataType

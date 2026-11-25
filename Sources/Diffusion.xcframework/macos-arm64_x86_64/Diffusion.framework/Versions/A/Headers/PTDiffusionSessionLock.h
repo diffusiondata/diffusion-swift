@@ -1,22 +1,24 @@
-//  Diffusion Client Library for iOS, tvOS and OS X / macOS
+//  Diffusion Client Library for iOS and OS X / macOS
 //
-//  Copyright (c) 2019 Push Technology Ltd., All Rights Reserved.
+//  Copyright (c) 2019 - 2026 DiffusionData Ltd., All Rights Reserved.
 //
-//  Use is subject to license terms.
+//  Use is subject to licence terms.
 //
 //  NOTICE: All information contained herein is, and remains the
-//  property of Push Technology. The intellectual and technical
-//  concepts contained herein are proprietary to Push Technology and
+//  property of DiffusionData. The intellectual and technical
+//  concepts contained herein are proprietary to DiffusionData and
 //  may be covered by U.S. and Foreign Patents, patents in process, and
 //  are protected by trade secret or copyright law.
 
-@import Foundation;
+#import <Foundation/Foundation.h>
 
 @class PTDiffusionSessionLockScope;
 
 NS_ASSUME_NONNULL_BEGIN
 
 /**
+ @ingroup PublicAPI_TopicUpdate
+
  @brief A server-managed resource that can be used to coordinate exclusive
  access to shared resources across sessions.
 
@@ -143,7 +145,7 @@ NS_ASSUME_NONNULL_BEGIN
  common reason for failure, indicated by the error reported, is that the session
  is closed.
 
- @exception NSInvalidArgumentException Raised if completionHandler is `nil`.
+ @exception NSInvalidArgumentException Raised if completionHandler is <code>nil</code>.
 
  @since 6.3
  */

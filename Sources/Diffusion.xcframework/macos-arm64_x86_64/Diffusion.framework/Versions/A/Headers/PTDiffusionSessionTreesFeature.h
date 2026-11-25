@@ -1,16 +1,16 @@
-//  Diffusion Client Library for iOS, tvOS and OS X / macOS
+//  Diffusion Client Library for iOS and OS X / macOS
 //
-//  Copyright (c) 2021 Push Technology Ltd., All Rights Reserved.
+//  Copyright (c) 2021 - 2026 DiffusionData Ltd., All Rights Reserved.
 //
-//  Use is subject to license terms.
+//  Use is subject to licence terms.
 //
 //  NOTICE: All information contained herein is, and remains the
-//  property of Push Technology. The intellectual and technical
-//  concepts contained herein are proprietary to Push Technology and
+//  property of DiffusionData. The intellectual and technical
+//  concepts contained herein are proprietary to DiffusionData and
 //  may be covered by U.S. and Foreign Patents, patents in process, and
 //  are protected by trade secret or copyright law.
 
-@import Foundation;
+#import <Foundation/Foundation.h>
 #import <Diffusion/PTDiffusionFeature.h>
 
 @class PTDiffusionBranchMappingTable;
@@ -18,6 +18,8 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /**
+ @ingroup PublicAPI_SessionTrees
+
  @brief This feature allows a client session to configure session trees.
 
  A session tree is a virtual view of the topic tree presented to a session by
@@ -106,9 +108,9 @@ NS_ASSUME_NONNULL_BEGIN
  ### Accessing the feature
 
  This feature may be obtained from a {@link PTDiffusionSession session} as follows:
- <pre>
+ @code{.m}
  PTDiffusionSessionTreesFeature *const sessionTrees = session.sessionTrees;
- </pre>
+ @endcode
 
  @see PTDiffusionSession
 
